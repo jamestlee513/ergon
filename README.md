@@ -50,9 +50,59 @@ Ergon (greek for 'work') is an all-in-one productivity web app that allows you t
 
 # Database Models/Schema
 
+![alt text](https://user-images.githubusercontent.com/19562787/103700557-8101e200-4f59-11eb-96b6-587e47879ab1.png)
+
+# Tech Used
+
+* Node.js
+* React.js
+* Flask
+* Vanilla JS
+* Vanilla CSS
+
+# Routes
+
+## Backend
+
+### User routes
+
+* GET /users/ -> Authenticates a user
+* POST /users/login -> Logs a user in
+* GET /users/logout -> Logs out a user
+* POST /users/signup -> Creates a new user and logs them in
+* GET /users/<user_id> -> Returns user information by id
+* POST /users/settings/<user_id> -> Creates a new setting item for the user
+* GET /users/settings/<user_id> -> Returns a user's settings
+* PUT /users/settings/<user_id> -> Edits a user's settings
+
+
+### Day Plans routes
+
+* POST /dayplans/new -> Creates a new day plan
+* GET /dayplan/<user_id> -> Returns the day plan for today if it exists
+* PUT /dayplans/<user_id> -> Edits the day plan for today if it exists
+* DELETE /dayplans/<user_id> -> Deletes the day plan for today
+
+### Events routes
+
+* POST /dayplan/<user_id>/new -> Creates a new event for the user's day plan
+* GET /dayplan/<user_id> -> Returns all events for a user's day plan
+* PUT /dayplan/ -> Edits an event based on the sent data
+
+### Memos routes
+
+* POST /memos/new -> Creates a new memo in the database
+* GET /memos/<user_id> -> Returns the user's saved memo if it exists
+* PUT /memos/<user_id> -> Edits the user's saved memo
+
+### Friends routes
+
+* POST /friends/new -> Adds a new friend to the user's friends list
+* GET /friends/<user_id> -> Returns a user's friends list
+* DELETE /friends/delete -> Removes a friend from a user's friends list
+
 ## Planning to do:
 
-* Database Models/Schema
 * Tech Used
 * Routes
 * Components List
