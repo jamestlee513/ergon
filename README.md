@@ -86,8 +86,9 @@ Ergon (greek for 'work') is an all-in-one productivity web app that allows you t
 ### Events routes
 
 * POST /dayplan/<user_id>/new -> Creates a new event for the user's day plan
-* GET /dayplan/<user_id> -> Returns all events for a user's day plan
-* PUT /dayplan/ -> Edits an event based on the sent data
+* GET /dayplans/<user_id> -> Returns all events for a user's day plan
+* PUT /dayplans/ -> Edits an event based on the sent data
+* DELETE /dayplans/ -> Deletes an event from the user's day plan
 
 ### Memos routes
 
@@ -101,9 +102,20 @@ Ergon (greek for 'work') is an all-in-one productivity web app that allows you t
 * GET /friends/<user_id> -> Returns a user's friends list
 * DELETE /friends/delete -> Removes a friend from a user's friends list
 
-## Planning to do:
 
-* Tech Used
-* Routes
-* Components List
-* Wireframes
+# Components
+
+* LoginPage
+* SignupPage
+* HomePage
+* NavBar
+* Footer
+* NewDayPlanForm
+* DayPlan
+* NewEventForm
+* Event
+* Memo
+* PomodoroTimer
+* Playbar
+* FriendList
+* FriendCard
