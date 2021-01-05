@@ -50,7 +50,7 @@ Ergon (greek for 'work') is an all-in-one productivity web app that allows you t
 
 # Database Models/Schema
 
-![alt text](https://user-images.githubusercontent.com/19562787/103700557-8101e200-4f59-11eb-96b6-587e47879ab1.png)
+![alt text](https://user-images.githubusercontent.com/19562787/103712018-997bf780-4f6d-11eb-8a74-1924f5d50a1e.png)
 
 # Tech Used
 
