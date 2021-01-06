@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+click = "*"
+gunicorn = "*"
+itsdangerous = "*"
+python-dotenv = "*"
+six = "*"
+flask = "*"
+flask-cors = "*"
+flask-sqlalchemy = "*"
+flask-wtf = "*"
+markupsafe = "*"
+sqlalchemy = "*"
+werkzeug = "*"
+wtforms = "*"
+flask-jwt-extended = "*"
+flask-migrate = "*"
+email-validator = "*"
+flask-login = "*"
+
+[dev-packages]
+psycopg2-binary = "*"
+autopep8 = "*"
+
+[requires]
+python_version = "3.8"
