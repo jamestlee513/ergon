@@ -109,7 +109,6 @@ Ergon (greek for 'work') is an all-in-one productivity web app that allows you t
 * SignupPage
 * HomePage
 * NavBar
-* Footer
 * NewDayPlanForm
 * DayPlan
 * NewEventForm
@@ -119,3 +118,11 @@ Ergon (greek for 'work') is an all-in-one productivity web app that allows you t
 * Playbar
 * FriendList
 * FriendCard
+
+# Wireframe
+
+A general schema of how the page layout will look.
+
+![alt text](https://user-images.githubusercontent.com/19562787/103804566-2fb02c00-5007-11eb-8d09-d16893e8b870.png)
+
+
