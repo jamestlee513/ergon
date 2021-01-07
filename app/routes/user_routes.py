@@ -85,3 +85,23 @@ def unauthorized():
     Returns unauthorized JSON when flask-login authentication fails
     '''
     return {"errors": ["Unauthorized"]}, 401
+
+
+@user_routes.route("/<user_id>")
+def getUserInfo(user_id):
+    user = User.query.get(int(user_id))
+    if user:
+        return user.to_dict()
+    return {"errors": [f"User of id {user_id} could not be found"]}, 404
+
+
+'''
+--------------------- User setting routes ---------------------
+'''
+
+
+# Instances a new setting item for the user, returns user settings, and edits
+# depending on the method
+@user_routes.route("/settings/<user_id>", methods=["GET", "POST", "PUT"])
+def createNewSetting(user_id):
+    pass
