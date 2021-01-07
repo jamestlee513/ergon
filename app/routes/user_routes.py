@@ -3,7 +3,7 @@ from app.models import User, db
 from app.forms import LoginForm, SignupForm
 from flask_login import current_user, login_user, logout_user, login_required
 
-userroutes = Blueprint("users", __name__)
+user_routes = Blueprint("users", __name__)
 
 
 def validation_errors_to_error_messages(validation_errors):
@@ -96,7 +96,7 @@ def getUserInfo(user_id):
 
 
 '''
---------------------- User setting routes ---------------------
+----------------------------- User setting routes -----------------------------
 '''
 
 
@@ -104,4 +104,6 @@ def getUserInfo(user_id):
 # depending on the method
 @user_routes.route("/settings/<user_id>", methods=["GET", "POST", "PUT"])
 def createNewSetting(user_id):
-    pass
+    return {
+        "test": f"You have reached {request.method} /users/settings/{user_id}"
+    }

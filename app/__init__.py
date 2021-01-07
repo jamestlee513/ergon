@@ -5,8 +5,8 @@ from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
 
-from .models import db, user
-
+from .models import db, User
+from .routes.user_routes import user_routes
 from .config import Config
 
 app = Flask(__name__)
@@ -25,7 +25,7 @@ def load_user(id):
 
 
 app.config.from_object(Config)
-# app.register_blueprint(pledge_routes, url_prefix='/api/pledges')
+app.register_blueprint(user_routes, url_prefix='/users')
 
 db.init_app(app)
 Migrate(app, db)
