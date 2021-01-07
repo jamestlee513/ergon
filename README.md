@@ -29,6 +29,13 @@ Ergon (greek for 'work') is an all-in-one productivity web app that allows you t
 * Memos will be displayed when the user is planning out their day on the day planner in case they need to reference for what they need to get done
 * Memos will be able to be hidden or shown to the user
 
+### 5. Todo List
+
+* Users will be able to have a personal todo list they can add to
+* Users will be able to customize the priority level of their todo items
+* Todo lists will be saved to the user account
+* The Todo List can be hidden or shown to the user
+
 ### 5. Pomodoro Timer
 
 * Users will be able to start a pomodoro timer during their work sessions
@@ -50,7 +57,7 @@ Ergon (greek for 'work') is an all-in-one productivity web app that allows you t
 
 # Database Models/Schema
 
-![alt text](https://user-images.githubusercontent.com/19562787/103712018-997bf780-4f6d-11eb-8a74-1924f5d50a1e.png)
+![alt text](https://user-images.githubusercontent.com/19562787/103806373-c5e55180-5009-11eb-9a1d-7ce354c8c631.png)
 
 # Tech Used
 
@@ -75,20 +82,12 @@ Ergon (greek for 'work') is an all-in-one productivity web app that allows you t
 * GET /users/settings/<user_id> -> Returns a user's settings
 * PUT /users/settings/<user_id> -> Edits a user's settings
 
-
-### Day Plans routes
-
-* POST /dayplans/new -> Creates a new day plan
-* GET /dayplan/<user_id> -> Returns the day plan for today if it exists
-* PUT /dayplans/<user_id> -> Edits the day plan for today if it exists
-* DELETE /dayplans/<user_id> -> Deletes the day plan for today
-
 ### Events routes
 
-* POST /dayplan/<user_id>/new -> Creates a new event for the user's day plan
-* GET /dayplans/<user_id> -> Returns all events for a user's day plan
-* PUT /dayplans/ -> Edits an event based on the sent data
-* DELETE /dayplans/ -> Deletes an event from the user's day plan
+* POST /new -> Creates a new event for the user's 
+* GET /<user_id> -> Returns all events for the current day for the user
+* PUT / -> Edits an event based on the sent data
+* DELETE / -> Deletes an event
 
 ### Memos routes
 
@@ -109,13 +108,19 @@ Ergon (greek for 'work') is an all-in-one productivity web app that allows you t
 * SignupPage
 * HomePage
 * NavBar
-* Footer
-* NewDayPlanForm
 * DayPlan
 * NewEventForm
 * Event
 * Memo
 * PomodoroTimer
 * Playbar
-* FriendList
-* FriendCard
+* (Bonus) FriendList
+* (Bonus) FriendCard
+
+# Wireframe
+
+A general schema of how the page layout will look.
+
+![alt text](https://user-images.githubusercontent.com/19562787/103804566-2fb02c00-5007-11eb-8d09-d16893e8b870.png)
+
+
