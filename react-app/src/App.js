@@ -5,6 +5,8 @@ import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import { ThemeProvider } from "@emotion/react";
 import { ColorModeProvider, CSSReset, Flex } from "@chakra-ui/react";
+import NavBar from "./components/NavBar";
+import LoginSigninPage from "./components/auth/LoginSigninPage";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -22,24 +24,27 @@ function App() {
   }, []);
 
   return loaded && (
-        <Flex direction="column" align="center" justify="center">
-          {/*  */}
-          <Flex justify="center" align="center" w="100%" h="93vh">
-            <BrowserRouter>
-              <Switch>
-                <Route exact path="/" authenticated={authenticated}>
-                  {/* Home */}
-                </Route>
-                <Route path="/login">
-                  <LoginForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
-                </Route>
-                <Route path="/signup">
-                  <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
-                </Route>
-              </Switch>
-            </BrowserRouter>
-          </Flex>
-        </Flex>
+    <Flex direction="column" align="center" justify="center">
+      <NavBar />
+      <Flex justify="center" align="center" w="100%" h="93vh">
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" authenticated={authenticated}>
+              {/* Home */}
+            </Route>
+            <Route path="/signin">
+              <LoginSigninPage />
+            </Route>
+            <Route path="/login">
+              <LoginForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
+            </Route>
+            <Route path="/signup">
+              <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </Flex>
+    </Flex>
   );
 }
 
