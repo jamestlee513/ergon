@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { Box, Button, Divider, Flex, FormControl, Input, InputGroup, InputLeftElement, ListItem, Stack, UnorderedList, useToast } from '@chakra-ui/react'
+import { Box, Button, Container, Divider, Flex, FormControl, Input, InputGroup, InputLeftElement, ListItem, Stack, UnorderedList, useToast } from '@chakra-ui/react'
 import { EmailIcon, InfoIcon, LockIcon } from '@chakra-ui/icons';
 import { signUp } from "../../services/auth";
 
-function SignUpForm({ authenticated, setAuthenticated }) {
+function SignUpForm({ setAuthenticated }) {
 
     const toast = useToast();
     const [errors, setErrors] = useState([]);
@@ -14,10 +14,6 @@ function SignUpForm({ authenticated, setAuthenticated }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [signupLoading, setSignupLoading] = useState(false);
-
-    if (authenticated) {
-        return <Redirect to="/" />
-    }
 
     const signUpUser = async e => {
         e.preventDefault();
@@ -45,7 +41,7 @@ function SignUpForm({ authenticated, setAuthenticated }) {
     }
 
     return (
-        <Box bg='gray.50' w='300px' h='400px' p={3} rounded='md'>
+        <Box w='300px' h='400px' p={3} rounded='md'>
             <Flex justify="center" align="center">
                 <Stack spacing={4}>
                     {errors.length > 0 && (
@@ -116,13 +112,15 @@ function SignUpForm({ authenticated, setAuthenticated }) {
                                     />
                                 </InputGroup>
                             </FormControl>
+                        </Stack>
+                        <Container>
                             <Button
                                 type="submit"
                                 isLoading={signupLoading}
                             >
                                 Sign up
                         </Button>
-                        </Stack>
+                        </Container>
                     </form>
                 </Stack>
             </Flex>

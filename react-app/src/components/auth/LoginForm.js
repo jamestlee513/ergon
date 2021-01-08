@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Redirect } from "react-router-dom";
 import { Box, Button, Divider, Flex, FormControl, Input, InputGroup, InputLeftElement, ListItem, Stack, toast, UnorderedList, useToast } from '@chakra-ui/react'
 import { EmailIcon, LockIcon } from '@chakra-ui/icons';
 import { login } from "../../services/auth";
 
-function LoginForm({ authenticated, setAuthenticated }) {
+function LoginForm({ setAuthenticated }) {
 
     const toast = useToast();
     const [errors, setErrors] = useState([]);
@@ -13,9 +12,6 @@ function LoginForm({ authenticated, setAuthenticated }) {
     const [loginLoading, setLoginLoading] = useState(false);
     const [demoLoading, setDemoLoading] = useState(false);
 
-    if (authenticated) {
-        return <Redirect to="/" />
-    }
     const loginUser = async e => {
         e.preventDefault();
         setLoginLoading(true);
@@ -49,7 +45,7 @@ function LoginForm({ authenticated, setAuthenticated }) {
 
 
     return (
-        <Box bg='gray.50' w='300px' h='400px' p={3} rounded='md'>
+        <Box w='300px' h='400px' p={3} rounded='md'>
             <Flex justify="center" align="center">
 
                 <Stack spacing={4}>
