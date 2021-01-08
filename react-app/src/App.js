@@ -13,13 +13,13 @@ function App() {
       const user = await authenticate();
       console.log(user.errors);
       if (!user.error) {
-        setAuthenticated(false);
+        setAuthenticated(true);
       }
       setLoaded(true);
     })();
   }, []);
 
-  return loaded === true && (
+  return loaded && (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" authenticated={authenticated}>
