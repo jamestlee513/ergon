@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 import { authenticate } from "./services/auth";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
+import { ThemeProvider } from "@emotion/react";
+import { ColorModeProvider, CSSReset, Flex } from "@chakra-ui/react";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -20,19 +22,24 @@ function App() {
   }, []);
 
   return loaded && (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" authenticated={authenticated}>
-          {/* Home */}
-        </Route>
-        <Route path="/login">
-          <LoginForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
-        </Route>
-        <Route path="/signup">
-          <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+        <Flex direction="column" align="center" justify="center">
+          {/*  */}
+          <Flex justify="center" align="center" w="100%" h="93vh">
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/" authenticated={authenticated}>
+                  {/* Home */}
+                </Route>
+                <Route path="/login">
+                  <LoginForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
+                </Route>
+                <Route path="/signup">
+                  <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
+                </Route>
+              </Switch>
+            </BrowserRouter>
+          </Flex>
+        </Flex>
   );
 }
 
