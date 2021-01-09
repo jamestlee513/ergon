@@ -41,8 +41,8 @@ function SignUpForm({ setAuthenticated }) {
     }
 
     return (
-        <Box w='300px' h='400px' p={3} rounded='md'>
-            <Flex justify="center" align="center">
+        <Box w='300px' h='500px' p={3} rounded='md'>
+            <Flex justify="center" direction="column" h="100%">
                 <Stack spacing={4}>
                     {errors.length > 0 && (
                         <>
@@ -54,7 +54,9 @@ function SignUpForm({ setAuthenticated }) {
                             <Divider />
                         </>
                     )}
-                    <form type="submit" onSubmit={signUpUser}>
+                </Stack>
+                <form type="submit" onSubmit={signUpUser} h="100%">
+                    <Flex direction="column" justify="space-between" h="100%">
                         <Stack spacing={3}>
                             <FormControl isRequired>
                                 <InputGroup>
@@ -112,17 +114,18 @@ function SignUpForm({ setAuthenticated }) {
                                     />
                                 </InputGroup>
                             </FormControl>
-                        </Stack>
-                        <Container>
+                            <Divider />
                             <Button
+                                p={2}
+                                w="100%"
                                 type="submit"
                                 isLoading={signupLoading}
                             >
                                 Sign up
                         </Button>
-                        </Container>
-                    </form>
-                </Stack>
+                        </Stack>
+                    </Flex>
+                </form>
             </Flex>
         </Box>
     )

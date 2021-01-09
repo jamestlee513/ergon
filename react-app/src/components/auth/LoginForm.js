@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, Divider, Flex, FormControl, Input, InputGroup, InputLeftElement, ListItem, Stack, toast, UnorderedList, useToast } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, Container, Divider, Flex, FormControl, Input, InputGroup, InputLeftElement, ListItem, Stack, toast, UnorderedList, useToast } from '@chakra-ui/react'
 import { EmailIcon, LockIcon } from '@chakra-ui/icons';
 import { login } from "../../services/auth";
 
@@ -37,6 +37,13 @@ function LoginForm({ setAuthenticated }) {
         const user = await login("demo@demo.com", "password");
         if (!user.errors) {
             setAuthenticated(true);
+            toast({
+                title: "Login success.",
+                description: "Logged in as demo user!",
+                status: "success",
+                duration: "5000",
+                isClosable: true
+            })
         } else {
             setErrors(user.errors);
         }
@@ -45,9 +52,8 @@ function LoginForm({ setAuthenticated }) {
 
 
     return (
-        <Box w='300px' h='400px' p={3} rounded='md'>
-            <Flex justify="center" align="center">
-
+        <Box w='300px' h='500px' p={3} rounded='md'>
+            <Flex justify="center" direction="column" h="100%">
                 <Stack spacing={4}>
                     {errors.length > 0 && (
                         <>
@@ -59,7 +65,9 @@ function LoginForm({ setAuthenticated }) {
                             <Divider />
                         </>
                     )}
-                    <form type="submit" onSubmit={loginUser}>
+                </Stack>
+                <form type="submit" onSubmit={loginUser}>
+                    <Flex direction="column" justify="space-between" h="100%">
                         <Stack spacing={3}>
                             <FormControl isRequired>
                                 <InputGroup>
@@ -83,22 +91,25 @@ function LoginForm({ setAuthenticated }) {
                                     />
                                 </InputGroup>
                             </FormControl>
+                            <Divider />
                             <Button
+                                m={2}
                                 type="submit"
                                 isLoading={loginLoading}
                             >
                                 Log in
-                        </Button>
+                            </Button>
                             <Button
+                                m={2}
                                 type="submit"
                                 isLoading={demoLoading}
                                 onClick={loginDemo}
                             >
                                 Log in as demo user
-                        </Button>
+                            </Button>
                         </Stack>
-                    </form>
-                </Stack>
+                    </Flex>
+                </form>
             </Flex>
         </Box>
     )
