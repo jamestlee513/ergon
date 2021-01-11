@@ -10,6 +10,7 @@ import { AuthProvider } from "./services/AuthProvider";
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [isFirstVisit, setIsFistVisit] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -29,7 +30,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Flex justify="center" align="center" w="100%" h="93vh">
-              <HomePage />
+              <HomePage isFirstVisit={isFirstVisit} setIsFirstVisit={setIsFistVisit} />
             </Flex>
           </Route>
           <Route path="/signin">
