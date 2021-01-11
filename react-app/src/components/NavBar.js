@@ -1,17 +1,19 @@
-import { Box, Flex, Heading, MenuItem, MenuList, useToast } from '@chakra-ui/react';
-import React from 'react';
+import { Box, Flex, Heading, useToast } from '@chakra-ui/react';
+import React, { useContext } from 'react';
 import { logout } from '../services/auth';
-import { NavLink, Router, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
+import AuthContext from '../services/AuthProvider';
 
-function NavBar({ authenticated, setAuthenticated }) {
+function NavBar() {
 
     const history = useHistory();
     const toast = useToast();
+    const auth = useContext(AuthContext);
 
     const handleLogOut = e => {
         e.preventDefault();
         logout();
-        setAuthenticated(false);
+        auth.setAuthenticated(false);
         toast({
             title: "Logged out",
             duration: "5000",
@@ -25,7 +27,7 @@ function NavBar({ authenticated, setAuthenticated }) {
             justify="space-between"
             align="center"
             padding="1.5rem"
-            bg="blue.100"
+            bg="blue.200"
             color="white"
             w="100%"
             h="70px"
@@ -41,8 +43,8 @@ function NavBar({ authenticated, setAuthenticated }) {
                 w="40%"
             >
                 <NavLink exact to='/'>Home</NavLink>
-                <NavLink exact to='/signin'>Sign In</NavLink>
-                {authenticated && <NavLink to='/logout' onClick={handleLogOut}>Logout</NavLink>}
+                {!auth.authenticated && <NavLink exact to='/signin'>Sign In</NavLink>}
+                {auth.authenticated && <NavLink to='/logout' onClick={handleLogOut}>Logout</NavLink>}
                 <NavLink to='/'>About</NavLink>
                 <NavLink to='/'>Settings</NavLink>
             </Flex>

@@ -1,14 +1,15 @@
 import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { Redirect } from "react-router-dom";
-import React from 'react';
+import React, { useContext } from 'react';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
+import AuthContext from '../../services/AuthProvider';
 
-const LoginSigninPage = ({ authenticated, setAuthenticated }) => {
+const LoginSigninPage = () => {
 
-    console.log("Authenicated = ", authenticated);
+    const auth = useContext(AuthContext);
 
-    if (authenticated) {
+    if (auth.authenticated) {
         return <Redirect to="/" />
     }
 
@@ -23,12 +24,12 @@ const LoginSigninPage = ({ authenticated, setAuthenticated }) => {
                 <TabPanels>
                     <TabPanel bg="white">
                         <Flex justify='center'>
-                            <SignUpForm setAuthenticated={setAuthenticated} />
+                            <SignUpForm />
                         </Flex>
                     </TabPanel>
                     <TabPanel bg="white">
                         <Flex justify='center'>
-                            <LoginForm setAuthenticated={setAuthenticated} />
+                            <LoginForm />
                         </Flex>
                     </TabPanel>
                 </TabPanels>

@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
-import { Box, Button, Container, Divider, Flex, FormControl, Input, InputGroup, InputLeftElement, ListItem, Stack, UnorderedList, useToast } from '@chakra-ui/react'
+import React, { useContext, useState } from "react";
+import { Box, Button, Divider, Flex, FormControl, Input, InputGroup, InputLeftElement, ListItem, Stack, UnorderedList, useToast } from '@chakra-ui/react'
 import { EmailIcon, InfoIcon, LockIcon } from '@chakra-ui/icons';
 import { signUp } from "../../services/auth";
+import AuthContext from '../../services/AuthProvider';
 
-function SignUpForm({ setAuthenticated }) {
+function SignUpForm() {
 
     const toast = useToast();
+    const auth = useContext(AuthContext);
     const [errors, setErrors] = useState([]);
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
@@ -14,6 +15,8 @@ function SignUpForm({ setAuthenticated }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [signupLoading, setSignupLoading] = useState(false);
+
+
 
     const signUpUser = async e => {
         e.preventDefault();
@@ -26,7 +29,7 @@ function SignUpForm({ setAuthenticated }) {
             password
         );
         if (!user.errors) {
-            setAuthenticated(true);
+            auth.setAuthenticated(true);
             toast({
                 title: "Account created.",
                 description: "Account signup was successful!",
@@ -43,18 +46,23 @@ function SignUpForm({ setAuthenticated }) {
     return (
         <Box w='300px' h='500px' p={3} rounded='md'>
             <Flex justify="center" direction="column" h="100%">
-                <Stack spacing={4}>
-                    {errors.length > 0 && (
-                        <>
-                            <UnorderedList>
-                                {errors.map((error, idx) =>
-                                    <ListItem key={idx}>{error}</ListItem>
-                                )}
-                            </UnorderedList>
-                            <Divider />
-                        </>
-                    )}
-                </Stack>
+                {errors.length > 0 && (
+                    <Stack
+                        spacing={4}
+                        bg='gray.50'
+                        p={3}
+                        mb={4}
+                        rounded='sm'
+                        border='1px'
+                        borderColor='gray.100'>
+                        <Box>Sorry! We encountered the following errors:</Box>
+                        <UnorderedList listStyleType='none'>
+                            {errors.map((error, idx) =>
+                                <ListItem key={idx} color='red.500'>{error}</ListItem>
+                            )}
+                        </UnorderedList>
+                    </Stack>
+                )}
                 <form type="submit" onSubmit={signUpUser} h="100%">
                     <Flex direction="column" justify="space-between" h="100%">
                         <Stack spacing={3}>
