@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { secondsToTime } from '../services/util';
 function PomodoroTimer() {
@@ -21,16 +21,22 @@ function PomodoroTimer() {
     }, [isTimerOn])
 
     return (
-        <>
-            <div>{secondsToTime(timer)}</div>
-            <Button onClick={() => setIsTimerOn(true)}>Start</Button>
-            <Button onClick={() => setIsTimerOn(false)}>Stop</Button>
-            <Button onClick={() => {
-                setIsTimerOn(false)
-                setTimer(1500)
-            }
-            }>Reset</Button>
-        </>
+        <Flex direction="column" align="center" justify="space-around" h="100%">
+            <Box
+                h="40%"
+                p={4}
+                fontSize="60pt"
+            >{secondsToTime(timer)}</Box>
+            <ButtonGroup>
+                <Button onClick={() => setIsTimerOn(true)}>Start</Button>
+                <Button onClick={() => setIsTimerOn(false)}>Stop</Button>
+                <Button onClick={() => {
+                    setIsTimerOn(false)
+                    setTimer(1500)
+                }
+                }>Reset</Button>
+            </ButtonGroup>
+        </Flex>
     )
 }
 

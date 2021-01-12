@@ -121,36 +121,6 @@ function LoginForm() {
         </Box>
     )
 
-    // return (
-    //     <>
-    //         {errors.length > 0 && (
-    //             <div>
-    //                 <div>We encoutered the following errors:</div>
-    //                 {errors.map((error, idx) =>
-    //                     <div key={idx}>
-    //                         {error}
-    //                     </div>
-    //                 )}
-    //             </div>
-    //         )}
-    //         <form>
-    //             <input
-    //                 type="email"
-    //                 placeholder="example@gmail.com"
-    //                 value={email}
-    //                 onChange={e => setEmail(e.target.value)}
-    //             />
-    //             <input
-    //                 type="password"
-    //                 placeholder="password"
-    //                 value={password}
-    //                 onChange={e => setPassword(e.target.value)}
-    //             />
-    //             <button type="submit" onClick={loginUser}>Log In</button>
-    //             <button type="submit" onClick={loginDemo}>Log in as Demo User</button>
-    //         </form>
-    //     </>
-    // )
 }
 
 export default LoginForm;
