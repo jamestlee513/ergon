@@ -6,3 +6,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SQLALCHEMY_ECHO = True
+    JWT_TOKEN_LOCATION = ['cookies']
+    JWT_ACCESS_COOKIE_PATH = '/users'
+    JWT_REFRESH_COOKIE_PATH = '/token/refresh'
+    JWT_SECRET_KEY = os.environ.get('JWT_SECRET')

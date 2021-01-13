@@ -4,6 +4,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager
+from flask_jwt_extended import JWTManager
 
 from .models import db, User
 from .routes.user_routes import user_routes
@@ -12,11 +13,12 @@ from .config import Config
 app = Flask(__name__)
 
 # Setup login manager
-login = LoginManager(app)
-login.login_view = 'auth.unauthorized'
+login_manager = LoginManager(app)
+login_manager.login_view = 'auth.unauthorized'
+jwt = JWTManager(app)
 
 
-@login.user_loader
+@login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
 

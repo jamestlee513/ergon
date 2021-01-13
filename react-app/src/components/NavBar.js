@@ -46,7 +46,7 @@ function NavBar() {
                 {!auth.authenticated && <NavLink exact to='/signin'>Sign In</NavLink>}
                 {auth.authenticated && <NavLink to='/logout' onClick={handleLogOut}>Logout</NavLink>}
                 <NavLink to='/'>About</NavLink>
-                <NavLink to='/'>Settings</NavLink>
+                <NavLink to='/settings'>Settings</NavLink>
             </Flex>
 
         </Flex>

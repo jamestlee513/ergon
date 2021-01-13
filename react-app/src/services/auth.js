@@ -1,5 +1,16 @@
+import Cookies from 'js-cookie';
+
 export const authenticate = async () => {
-    const res = await fetch("/users");
+    console.log(typeof Cookies.get("csrf_access_token"));
+    const res = await fetch("/users/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            token: Cookies.get("csrf_access_token")
+        })
+    });
     return await res.json();
 };
 

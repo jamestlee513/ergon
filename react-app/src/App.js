@@ -11,13 +11,16 @@ function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [isFirstVisit, setIsFistVisit] = useState(true);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     (async () => {
       const user = await authenticate();
-      console.log(user.errors);
       if (!user.errors) {
         setAuthenticated(true);
+        setUser(user);
+      } else {
+        setUser({});
       }
       setLoaded(true);
     })();
@@ -38,12 +41,9 @@ function App() {
               <LoginSigninPage />
             </Flex>
           </Route>
-          {/* <Route path="/login">
-              <LoginForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
-            </Route>
-            <Route path="/signup">
-              <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
-            </Route> */}
+          <Route path='/settings'>
+            <div>Test route here</div>
+          </Route>
         </Switch>
       </Flex>
     </AuthProvider>

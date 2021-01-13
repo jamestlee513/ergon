@@ -3,6 +3,7 @@ import { Box, Button, Divider, Flex, FormControl, Input, InputGroup, InputLeftEl
 import { EmailIcon, LockIcon } from '@chakra-ui/icons';
 import { login } from "../../services/auth";
 import AuthContext from "../../services/AuthProvider";
+import Cookies from 'js-cookie';
 
 function LoginForm() {
 
@@ -17,8 +18,10 @@ function LoginForm() {
     const loginUser = async e => {
         e.preventDefault();
         setLoginLoading(true);
-        const user = await login(email, password);
-        if (!user.errors) {
+        const res = await login(email, password);
+        console.log(res)
+        const user = res.user;
+        if (res.login) {
             auth.setAuthenticated(true);
             toast({
                 title: "Login success.",
@@ -28,7 +31,7 @@ function LoginForm() {
                 isClosable: true
             })
         } else {
-            setErrors(user.errors);
+            setErrors(res.errors);
         }
         setLoginLoading(false);
     }
@@ -36,8 +39,10 @@ function LoginForm() {
     const loginDemo = async e => {
         e.preventDefault();
         setDemoLoading(true);
-        const user = await login("demo@demo.com", "password");
-        if (!user.errors) {
+        const res = await login("demo@demo.com", "password");
+        const user = res.user;
+        console.log(res);
+        if (res.login) {
             auth.setAuthenticated(true);
             toast({
                 title: "Login success.",
@@ -47,7 +52,7 @@ function LoginForm() {
                 isClosable: true
             })
         } else {
-            setErrors(user.errors);
+            setErrors(res.errors);
         }
         setDemoLoading(false);
     }

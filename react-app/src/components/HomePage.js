@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Grid, GridItem, useToast } from '@chakra-ui/react';
 import AuthContext from '../services/AuthProvider';
 import PomodoroTimer from './PomodoroTimer';
+import TodoList from './TodoList';
 
 
 function HomePage({ isFirstVisit, setIsFirstVisit }) {
@@ -40,7 +41,9 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
                 <PomodoroTimer />
             </GridItem>
             <GridItem border="1px" rowSpan={3}>Calendar Component</GridItem>
-            <GridItem border="1px" >TodoList Component</GridItem>
+            <GridItem border="1px" >
+                <TodoList />
+            </GridItem>
             <GridItem border="1px" >Memo Component</GridItem>
             <GridItem border="1px" >Friends Component (Optional)</GridItem>
             <GridItem border="1px" colSpan={3}>Playbar Component</GridItem>
