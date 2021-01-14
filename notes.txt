@@ -1,4 +1,0 @@
-Chakra (for functional components)
-react-beautiful-dnd
-material-ui (for cards for the functionality)
-ant (css & html library)
