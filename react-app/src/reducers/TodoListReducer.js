@@ -7,26 +7,18 @@ export const addTodo = todo => {
     }
 }
 
-export const postTodo = ({ todo, priorityLevel }) => async dispatch => {
-    // const res = await fetch('/api/todoItems', {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //         credential,
-    //         password
-    //     })
-    // });
-    // dispatch(addTodo(res.data.todo));
-    console.log("postTodo fired.")
-    dispatch(addTodo("worked?"));
+export const testTodo = (test) => async dispatch => {
+    dispatch(addTodo(test));
 }
 
-const ToDoListReducer = (state, action) => {
+const todoListReducer = (state = [], action) => {
     switch (action.type) {
-        case "ADD":
-            return [...state, action.payload]
+        case ADD_TODO:
+            return [...state, action.payload];
         default:
             return state;
     }
 }
 
-export default ToDoListReducer;
+
+export default todoListReducer;

@@ -2,13 +2,11 @@ import { Checkbox, Flex, Icon, IconButton, ListItem } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import React, { useContext, useState } from 'react';
 import { priorityLevelToColor } from '../services/util';
-import { ToDoListContext } from '../context/TodoListContext';
 
 function TodoItem({ title, priority_level, isDone }) {
 
     const [isEditHidden, setIsEditHidden] = useState(true);
     const [priorityColor, setPriorityColor] = useState(priorityLevelToColor(priority_level));
-    const todos = useContext(ToDoListContext);
     
     return (
         <ListItem
