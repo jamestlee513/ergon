@@ -5,7 +5,6 @@ import { Flex } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import LoginSigninPage from "./components/auth/LoginSigninPage";
 import HomePage from "./components/HomePage";
-import { AuthProvider } from "./services/AuthProvider";
 import { addUser } from "./reducers/userReducer";
 import { useDispatch } from "react-redux";
 

@@ -13,9 +13,6 @@ function TodoItemForm() {
 
     const createNewTodo = e => {
         if (e.key === 'Enter') {
-            console.log("new todo has been made woohooo!");
-            console.log(newTodo);
-
             dispatch(postNewTodo({
                 userId: currentUser.id,
                 todo: newTodo,

@@ -8,16 +8,20 @@ export const addTodo = todo => {
 }
 
 export const postNewTodo = ({ userId, todo, priorityLevel }) => async dispatch => {
-    const res = await fetch('/api/todo', {
+    const res = await fetch('/api/todo/', {
         method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
-            userId,
+            user_id: userId,
             todo,
-            priorityLevel
+            priority_level: priorityLevel
         })
-    })
-    // console.log(res.data);
-    // return res;
+    });
+    const data = await res.json();
+    dispatch(addTodo(data))
+    return data;
 }
 
 const todoListReducer = (state = [], action) => {
