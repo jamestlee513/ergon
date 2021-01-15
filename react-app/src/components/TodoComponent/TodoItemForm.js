@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
 import { ListItem, Flex, IconButton, Checkbox, Input, Select, background, Box, Container } from '@chakra-ui/react';
 import { priorityLevelToColor } from '../../services/util';
+import { useDispatch } from 'react-redux';
 
 function TodoItemForm() {
 
     const [newTodo, setNewTodo] = useState('');
     const [priorityLevel, setPriorityLevel] = useState(1);
+    const dispatch = useDispatch();
 
     const createNewTodo = e => {
         if (e.key === 'Enter') {
             console.log("new todo has been made woohooo!");
             console.log(newTodo);
+
+            dispatch()
         }
     }
 
-    const toggleColorSelect = e => {
-        console.log("toggle")
+    const toggleColorSelect = () => {
+        setPriorityLevel(prevPriority => {
+            if (prevPriority >= 3) {
+                return 0;
+            }
+            return prevPriority + 1;
+        });
     }
 
     return (

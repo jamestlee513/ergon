@@ -3,17 +3,20 @@ import React, { useContext } from 'react';
 import { logout } from '../services/auth';
 import { NavLink, useHistory } from 'react-router-dom';
 import AuthContext from '../services/AuthProvider';
+import { removeUser } from '../reducers/userReducer';
+import { useDispatch, useSelector } from 'react-redux';
 
 function NavBar() {
 
     const history = useHistory();
     const toast = useToast();
-    const auth = useContext(AuthContext);
+    const dispatch = useDispatch();
+    const currentUser = useSelector(state => state.user);
 
     const handleLogOut = e => {
         e.preventDefault();
         logout();
-        auth.setAuthenticated(false);
+        dispatch(removeUser());
         toast({
             title: "Logged out",
             duration: "5000",
@@ -43,8 +46,8 @@ function NavBar() {
                 w="40%"
             >
                 <NavLink exact to='/'>Home</NavLink>
-                {!auth.authenticated && <NavLink exact to='/signin'>Sign In</NavLink>}
-                {auth.authenticated && <NavLink to='/logout' onClick={handleLogOut}>Logout</NavLink>}
+                {!currentUser.id && <NavLink exact to='/signin'>Sign In</NavLink>}
+                {currentUser.id && <NavLink to='/logout' onClick={handleLogOut}>Logout</NavLink>}
                 <NavLink to='/'>About</NavLink>
                 <NavLink to='/settings'>Settings</NavLink>
             </Flex>

@@ -1,15 +1,15 @@
-import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import { Box, Flex, StatHelpText, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { Redirect } from "react-router-dom";
 import React, { useContext } from 'react';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import AuthContext from '../../services/AuthProvider';
+import { useSelector } from 'react-redux';
 
 const LoginSigninPage = () => {
 
-    const auth = useContext(AuthContext);
-
-    if (auth.authenticated) {
+    const currentUser = useSelector(state => state.user);
+    if (currentUser.id) {
         return <Redirect to="/" />
     }
 

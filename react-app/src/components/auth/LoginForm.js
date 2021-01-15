@@ -2,12 +2,13 @@ import React, { useContext, useState } from 'react';
 import { Box, Button, Divider, Flex, FormControl, Input, InputGroup, InputLeftElement, ListItem, Stack, UnorderedList, useToast } from '@chakra-ui/react'
 import { EmailIcon, LockIcon } from '@chakra-ui/icons';
 import { login } from "../../services/auth";
-import AuthContext from "../../services/AuthProvider";
+import { useDispatch } from 'react-redux';
+import { addUser } from '../../reducers/userReducer';
 
 function LoginForm() {
 
     const toast = useToast();
-    const auth = useContext(AuthContext);
+    const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -19,7 +20,7 @@ function LoginForm() {
         setLoginLoading(true);
         const user = await login(email, password);
         if (!user.errors) {
-            auth.setAuthenticated(true);
+            dispatch(addUser(user));
             toast({
                 title: "Login success.",
                 description: "Welcome back!",
@@ -38,7 +39,7 @@ function LoginForm() {
         setDemoLoading(true);
         const user = await login("demo@demo.com", "password");
         if (!user.errors) {
-            auth.setAuthenticated(true);
+            dispatch(addUser(user));
             toast({
                 title: "Login success.",
                 description: "Logged in as demo user!",

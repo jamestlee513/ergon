@@ -3,22 +3,23 @@ import { Grid, GridItem, useToast } from '@chakra-ui/react';
 import AuthContext from '../services/AuthProvider';
 import PomodoroTimer from './PomodoroTimer';
 import TodoList from './TodoComponent/TodoList';
+import { useSelector } from 'react-redux';
 
 
 function HomePage({ isFirstVisit, setIsFirstVisit }) {
 
-    const auth = useContext(AuthContext);
+    const currentUser = useSelector(state => state.user)
     const toast = useToast();
 
     useEffect(() => {
-        if (!auth.authenticated && isFirstVisit) {
+        if (!currentUser.id && isFirstVisit) {
             toast({
                 title: "Welcome to Ergon!",
                 description: "Feel free to use the website, however your personal settings will not save unless you are logged in!",
                 duration: "10000",
                 isClosable: true
             })
-        } else if (auth.authenticated && isFirstVisit) {
+        } else if (currentUser.id && isFirstVisit) {
             toast({
                 title: "Welcome back to Ergon!",
                 duration: "5000",

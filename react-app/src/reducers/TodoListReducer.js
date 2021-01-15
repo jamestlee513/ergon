@@ -7,8 +7,17 @@ export const addTodo = todo => {
     }
 }
 
-export const testTodo = (test) => async dispatch => {
-    dispatch(addTodo(test));
+export const postNewTodo = ({ userId, todo, priorityLevel }) => async dispatch => {
+    const res = await fetch('/api/todo', {
+        method: "POST",
+        body: JSON.stringify({
+            userId,
+            todo,
+            priorityLevel
+        })
+    })
+    console.log(res.data);
+    // return res;
 }
 
 const todoListReducer = (state = [], action) => {

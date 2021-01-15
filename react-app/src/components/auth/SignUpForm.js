@@ -3,11 +3,13 @@ import { Box, Button, Divider, Flex, FormControl, Input, InputGroup, InputLeftEl
 import { EmailIcon, InfoIcon, LockIcon } from '@chakra-ui/icons';
 import { signUp } from "../../services/auth";
 import AuthContext from '../../services/AuthProvider';
+import { addUser } from "../../reducers/userReducer";
+import { useDispatch } from "react-redux";
 
 function SignUpForm() {
 
     const toast = useToast();
-    const auth = useContext(AuthContext);
+    const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
@@ -29,7 +31,7 @@ function SignUpForm() {
             password
         );
         if (!user.errors) {
-            auth.setAuthenticated(true);
+            dispatch(addUser(user));
             toast({
                 title: "Account created.",
                 description: "Account signup was successful!",
