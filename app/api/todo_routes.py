@@ -7,6 +7,13 @@ from app.util import validation_errors_to_error_messages
 todo_routes = Blueprint('todo', __name__)
 
 
+@todo_routes.route('/<user_id>')
+def getUserTodos(user_id):
+    result = TodoItem.query.filter(TodoItem.user_id == user_id).all()
+    todos = [todo.to_dict() for todo in result]
+    return {"todos": todos}
+
+
 @todo_routes.route('/', methods=['POST'])
 def newTodo():
     form = TodoForm()

@@ -6,10 +6,11 @@ import { postNewTodo } from '../../reducers/todoListReducer';
 
 function TodoItemForm() {
 
-    const [newTodo, setNewTodo] = useState('');
-    const [priorityLevel, setPriorityLevel] = useState(2);
     const currentUser = useSelector(state => state.user);
     const dispatch = useDispatch();
+    const [newTodo, setNewTodo] = useState('');
+    const [priorityLevel, setPriorityLevel] = useState(2);
+    const [isError, setIsError] = useState(false);
 
     const createNewTodo = async e => {
         if (e.key === 'Enter') {
@@ -18,8 +19,10 @@ function TodoItemForm() {
                 todo: newTodo,
                 priorityLevel
             }))
-            if(res.errors) {
-                console.error(res.errors)
+            if (!res.errors) {
+                // handle success
+            } else {
+                setIsError(true);
             }
         }
     }
@@ -76,6 +79,12 @@ function TodoItemForm() {
                     margin={2}
                     onChange={e => setNewTodo(e.target.value)}
                     onKeyDown={createNewTodo}
+                    placeholder="Enter new todo..."
+                    borderColor={isError ? "red.400" : "gray.200"}
+                    focusBorderColor={isError && "red.300"}
+                    _hover={{
+                        borderColor: isError ? "red.400": "gray.200"
+                    }}
                 />
             </Flex>
         </ListItem >

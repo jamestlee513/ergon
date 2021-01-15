@@ -8,7 +8,7 @@ export const addTodo = todo => {
 }
 
 export const postNewTodo = ({ userId, todo, priorityLevel }) => async dispatch => {
-    const res = await fetch('/api/todo/', {
+    const res = await fetch('/api/todos/', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
