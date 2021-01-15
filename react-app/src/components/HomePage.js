@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Grid, GridItem, useToast } from '@chakra-ui/react';
 import AuthContext from '../services/AuthProvider';
 import PomodoroTimer from './PomodoroTimer';
-import TodoList from './TodoList';
+import TodoList from './TodoComponent/TodoList';
 
 
 function HomePage({ isFirstVisit, setIsFirstVisit }) {

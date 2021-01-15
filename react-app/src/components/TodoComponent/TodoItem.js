@@ -1,7 +1,7 @@
 import { Checkbox, Flex, Icon, IconButton, ListItem } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import React, { useContext, useState } from 'react';
-import { priorityLevelToColor } from '../services/util';
+import React, { useState } from 'react';
+import { priorityLevelToColor } from '../../services/util';
 
 function TodoItem({ title, priority_level, isDone }) {
 
@@ -20,8 +20,9 @@ function TodoItem({ title, priority_level, isDone }) {
             bg={priorityColor}
             h="40px"
             border="1px"
-            borderColor="gray.100"
+            borderColor="gray.300"
             boxShadow="sm"
+            borderRadius="md"
         >
             <Flex
                 display="flex"
@@ -38,9 +39,10 @@ function TodoItem({ title, priority_level, isDone }) {
                 <IconButton
                     display={isEditHidden ? 'none' : 'default'}
                     size="sm"
+                    background="transparent"
                     icon={<HamburgerIcon />}
                     _hover={{
-                        background: "transparent"
+                        background: "transparent",
                     }}
                 />
             </Flex>
