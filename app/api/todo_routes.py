@@ -9,7 +9,8 @@ todo_routes = Blueprint('todo', __name__)
 
 @todo_routes.route('/<user_id>')
 def getUserTodos(user_id):
-    result = TodoItem.query.filter(TodoItem.user_id == user_id).all()
+    result = TodoItem.query.filter(TodoItem.user_id == user_id).order_by(
+        TodoItem.priority_level.desc()).all()
     todos = [todo.to_dict() for todo in result]
     return {"todos": todos}
 
@@ -32,14 +33,18 @@ def newTodo():
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
-@todo_routes.route('/<todo_id>')
-def removeTodo(todo_id):
+@todo_routes.route('/', methods=['DELETE'])
+def removeTodo():
+    todo_id = request.json['todo_id']
+    user_id = request.json['user_id']
+
     todo = TodoItem.query.get(todo_id)
     if todo is not None:
         db.session.delete(todo)
         db.session.commit()
 
-        result = TodoItem.query.filter(TodoItem.user_id == user_id).all()
+        result = TodoItem.query.filter(TodoItem.user_id == user_id).order_by(
+            TodoItem.priority_level.desc()).all()
         todos = [todo.to_dict() for todo in result]
         return {"todos": todos}
     else:

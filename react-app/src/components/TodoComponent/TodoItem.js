@@ -2,17 +2,18 @@ import { Box, Checkbox, Flex, Icon, IconButton, ListItem, Menu, MenuButton, Menu
 import { HamburgerIcon } from '@chakra-ui/icons';
 import React, { useState } from 'react';
 import { priorityLevelToColor } from '../../services/util';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeTodo } from '../../reducers/todoListReducer';
 
-function TodoItem({ id, todo, priority_level, isDone }) {
+function TodoItem({ todoId, todo, priority_level, isDone }) {
 
     const dispatch = useDispatch();
+    const currentUser = useSelector(state => state.user);
     const [isEditHidden, setIsEditHidden] = useState(true);
     const [priorityColor, setPriorityColor] = useState(priorityLevelToColor(priority_level));
 
     const deleteTodo = () => {
-        // dispatch(removeTodo(id));
+        dispatch(removeTodo(todoId, currentUser.id));
     }
 
     return (
