@@ -40,7 +40,9 @@ function TodoList() {
                 p={2}
                 m={1}>
                 {todos.map(todoItem => <TodoItem 
-                    title={todoItem.todo}
+                    key={todoItem.id}
+                    id={todoItem.id}
+                    todo={todoItem.todo}
                     priority_level={todoItem.priority_level}
                     isDone={todoItem.is_done}
                 />)}

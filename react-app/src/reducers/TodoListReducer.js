@@ -1,5 +1,6 @@
-export const ADD_TODO = 'addTodo'
-export const LOAD_TODOS = 'loadTodos'
+export const ADD_TODO = 'addTodo';
+export const LOAD_TODOS = 'loadTodos';
+export const DELETE_TODO = 'deleteTodo';
 
 export const addTodo = todo => {
     return {
@@ -37,6 +38,17 @@ export const postNewTodo = ({ userId, todo, priorityLevel }) => async dispatch =
     }
 }
 
+export const removeTodo = todoId => async dispatch => {
+    const res = await fetch(`/api/todos/${todoId}`, { method: "DELETE" });
+    const data = await res.json();
+    if(!data.errors) {
+        dispatch(loadTodos(data.todos))
+        return data.todos
+    } else {
+        return { errors: data.errors }
+    }
+}
+
 export const loadUserTodos = userId => async dispatch => {
     const res = await fetch(`/api/todos/${userId}`);
     const data = await res.json();
@@ -50,6 +62,8 @@ const todoListReducer = (state = [], action) => {
             return [...state, action.payload];
         case LOAD_TODOS:
             return [...action.payload]
+        case DELETE_TODO:
+
         default:
             return state;
     }

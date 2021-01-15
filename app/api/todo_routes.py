@@ -30,3 +30,17 @@ def newTodo():
         db.session.commit()
         return todo.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@todo_routes.route('/<todo_id>')
+def removeTodo(todo_id):
+    todo = TodoItem.query.get(todo_id)
+    if todo is not None:
+        db.session.delete(todo)
+        db.session.commit()
+
+        result = TodoItem.query.filter(TodoItem.user_id == user_id).all()
+        todos = [todo.to_dict() for todo in result]
+        return {"todos": todos}
+    else:
+        return {"errors": f"id {todo_id} not found"}
