@@ -11,3 +11,12 @@ class TodoItem(db.Model):
     is_done = db.Column(db.Boolean, nullable=False)
 
     user = db.relationship("User", back_populates="todo_items")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "todo": self.todo,
+            "priority_level": self.priority_level,
+            "is_done": self.is_done
+        }

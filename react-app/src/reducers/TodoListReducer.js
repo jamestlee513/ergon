@@ -16,7 +16,7 @@ export const postNewTodo = ({ userId, todo, priorityLevel }) => async dispatch =
             priorityLevel
         })
     })
-    console.log(res.data);
+    // console.log(res.data);
     // return res;
 }
 

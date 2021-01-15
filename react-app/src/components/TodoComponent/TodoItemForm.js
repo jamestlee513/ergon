@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { ListItem, Flex, IconButton, Checkbox, Input, Select, background, Box, Container } from '@chakra-ui/react';
 import { priorityLevelToColor } from '../../services/util';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { postNewTodo } from '../../reducers/todoListReducer';
 
 function TodoItemForm() {
 
     const [newTodo, setNewTodo] = useState('');
     const [priorityLevel, setPriorityLevel] = useState(1);
+    const currentUser = useSelector(state => state.user);
     const dispatch = useDispatch();
 
     const createNewTodo = e => {
@@ -14,7 +16,11 @@ function TodoItemForm() {
             console.log("new todo has been made woohooo!");
             console.log(newTodo);
 
-            dispatch()
+            dispatch(postNewTodo({
+                userId: currentUser.id,
+                todo: newTodo,
+                priorityLevel
+            }))
         }
     }
 
