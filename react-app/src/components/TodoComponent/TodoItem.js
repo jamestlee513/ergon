@@ -1,4 +1,4 @@
-import { Checkbox, Flex, Icon, IconButton, ListItem } from '@chakra-ui/react';
+import { Box, Checkbox, Flex, Icon, IconButton, ListItem, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import React, { useState } from 'react';
 import { priorityLevelToColor } from '../../services/util';
@@ -7,7 +7,11 @@ function TodoItem({ title, priority_level, isDone }) {
 
     const [isEditHidden, setIsEditHidden] = useState(true);
     const [priorityColor, setPriorityColor] = useState(priorityLevelToColor(priority_level));
-    
+
+    const deleteTodo = e => {
+
+    }
+
     return (
         <ListItem
             m={1}
@@ -36,15 +40,27 @@ function TodoItem({ title, priority_level, isDone }) {
                 >
                     {title}
                 </Checkbox>
-                <IconButton
-                    display={isEditHidden ? 'none' : 'default'}
-                    size="sm"
-                    background="transparent"
-                    icon={<HamburgerIcon />}
-                    _hover={{
-                        background: "transparent",
-                    }}
-                />
+                <Menu placement="right">
+                    <MenuButton>
+                        <IconButton
+                            display={isEditHidden ? 'none' : 'default'}
+                            size="sm"
+                            background="transparent"
+                            icon={<HamburgerIcon />}
+                            _hover={{
+                                background: "transparent",
+                            }}
+                        />
+                    </MenuButton>
+                    <MenuList>
+                        <MenuItem onClick={deleteTodo}>
+                            Delete
+                        </MenuItem>
+                        <MenuItem onClick={() => console.log("edit!")}>
+                            Edit
+                        </MenuItem>
+                    </MenuList>
+                </Menu>
             </Flex>
         </ListItem>
     )
