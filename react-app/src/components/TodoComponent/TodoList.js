@@ -1,19 +1,22 @@
 import { Box, Button, Flex, IconButton, ListItem, Stack, UnorderedList } from '@chakra-ui/react';
 import { SmallAddIcon } from '@chakra-ui/icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useContext, useEffect } from 'react';
 import TodoItem from './TodoItem';
 import TodoItemForm from './TodoItemForm';
+import { loadUserTodos } from '../../reducers/todoListReducer';
 
 function TodoList() {
 
     const dispatch = useDispatch();
-
+    const currentUser = useSelector(state => state.user);
+    const todos = useSelector(state => state.todos);
     useEffect(() => {
-        console.log("Meep");
+        dispatch(loadUserTodos(currentUser.id));
     }, [])
 
     const addTodoItem = () => {
+        console.log(todos);
         console.log("Hello")
     }
 
@@ -36,7 +39,11 @@ function TodoList() {
                 listStyleType='none'
                 p={2}
                 m={1}>
-                <TodoItem title='Finish Capstone' priority_level={3} isDone={false} />
+                {todos.map(todoItem => <TodoItem 
+                    title={todoItem.todo}
+                    priority_level={todoItem.priority_level}
+                    isDone={todoItem.is_done}
+                />)}
                 <TodoItemForm />
             </UnorderedList>
         </Stack>
