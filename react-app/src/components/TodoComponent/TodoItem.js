@@ -1,4 +1,4 @@
-import { Box, Checkbox, Flex, Icon, IconButton, ListItem, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { Checkbox, Flex, ListItem, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import React, { useState } from 'react';
 import { priorityLevelToColor } from '../../services/util';

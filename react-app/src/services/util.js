@@ -26,6 +26,6 @@ export function priorityLevelToColor(level) {
         case 1:
             return "gray.200"
         default:
-            return new Error;
+            return new Error();
     }
 }

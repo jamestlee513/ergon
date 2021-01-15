@@ -1,6 +1,6 @@
-import { Box, Flex, StatHelpText, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { Redirect } from "react-router-dom";
-import React, { useContext } from 'react';
+import React from 'react';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import { useSelector } from 'react-redux';

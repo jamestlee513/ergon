@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, useToast } from '@chakra-ui/react';
-import React, { useContext } from 'react';
+import React from 'react';
 import { logout } from '../services/auth';
 import { NavLink, useHistory } from 'react-router-dom';
 import { removeUser } from '../reducers/userReducer';

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Box, Button, Divider, Flex, FormControl, Input, InputGroup, InputLeftElement, ListItem, Stack, UnorderedList, useToast } from '@chakra-ui/react'
 import { EmailIcon, InfoIcon, LockIcon } from '@chakra-ui/icons';
 import { signUp } from "../../services/auth";

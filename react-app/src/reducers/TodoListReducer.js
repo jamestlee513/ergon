@@ -72,8 +72,6 @@ const todoListReducer = (state = [], action) => {
             return [...state, action.payload];
         case LOAD_TODOS:
             return [...action.payload]
-        case DELETE_TODO:
-
         default:
             return state;
     }

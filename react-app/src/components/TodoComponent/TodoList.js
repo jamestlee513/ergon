@@ -1,7 +1,7 @@
-import { Box, Button, Flex, IconButton, ListItem, Stack, UnorderedList } from '@chakra-ui/react';
+import { Box, Flex, IconButton, Stack, UnorderedList } from '@chakra-ui/react';
 import { SmallAddIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import TodoItem from './TodoItem';
 import TodoItemForm from './TodoItemForm';
 import { loadUserTodos } from '../../reducers/todoListReducer';
@@ -39,7 +39,7 @@ function TodoList() {
                 listStyleType='none'
                 p={2}
                 m={1}>
-                {todos.map(todoItem => <TodoItem 
+                {todos.map(todoItem => <TodoItem
                     key={todoItem.id}
                     todoId={todoItem.id}
                     todo={todoItem.todo}

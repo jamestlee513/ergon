@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ListItem, Flex, IconButton, Checkbox, Input, Select, background, Box, Container } from '@chakra-ui/react';
+import { ListItem, Flex, Checkbox, Input, Box } from '@chakra-ui/react';
 import { priorityLevelToColor } from '../../services/util';
 import { useDispatch, useSelector } from 'react-redux';
 import { postNewTodo } from '../../reducers/todoListReducer';

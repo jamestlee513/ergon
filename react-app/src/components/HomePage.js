@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Grid, GridItem, useToast } from '@chakra-ui/react';
 import PomodoroTimer from './PomodoroTimer';
 import TodoList from './TodoComponent/TodoList';
