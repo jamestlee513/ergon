@@ -14,16 +14,16 @@ export function secondsToTime(seconds) {
 }
 
 export function priorityLevelToColor(level) {
-    //Priority ranges from 0 - 3
+    // Priority ranges from 1 - 4
 
     switch(level) {
-        case 3:
+        case 4:
             return "red.200"
-        case 2:
+        case 3:
             return "yellow.100"
-        case 1:
+        case 2:
             return "blue.100"
-        case 0:
+        case 1:
             return "gray.200"
         default:
             return new Error;

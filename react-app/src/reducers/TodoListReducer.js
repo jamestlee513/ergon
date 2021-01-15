@@ -20,8 +20,12 @@ export const postNewTodo = ({ userId, todo, priorityLevel }) => async dispatch =
         })
     });
     const data = await res.json();
-    dispatch(addTodo(data))
-    return data;
+    if(!data.errors) {
+        dispatch(addTodo(data))
+        return data;
+    } else {
+        return {errors: data.errors};
+    }
 }
 
 const todoListReducer = (state = [], action) => {

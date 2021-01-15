@@ -7,24 +7,27 @@ import { postNewTodo } from '../../reducers/todoListReducer';
 function TodoItemForm() {
 
     const [newTodo, setNewTodo] = useState('');
-    const [priorityLevel, setPriorityLevel] = useState(1);
+    const [priorityLevel, setPriorityLevel] = useState(2);
     const currentUser = useSelector(state => state.user);
     const dispatch = useDispatch();
 
-    const createNewTodo = e => {
+    const createNewTodo = async e => {
         if (e.key === 'Enter') {
-            dispatch(postNewTodo({
+            const res = await dispatch(postNewTodo({
                 userId: currentUser.id,
                 todo: newTodo,
                 priorityLevel
             }))
+            if(res.errors) {
+                console.error(res.errors)
+            }
         }
     }
 
     const toggleColorSelect = () => {
         setPriorityLevel(prevPriority => {
-            if (prevPriority >= 3) {
-                return 0;
+            if (prevPriority >= 4) {
+                return 1;
             }
             return prevPriority + 1;
         });
