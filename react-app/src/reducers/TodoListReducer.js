@@ -15,7 +15,6 @@ export const loadTodos = todos => {
     }
 }
 
-
 export const postNewTodo = ({ userId, todo, priorityLevel }) => async dispatch => {
     const res = await fetch('/api/todos/', {
         method: "POST",

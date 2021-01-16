@@ -25,9 +25,14 @@ function TodoList() {
             <Flex
                 direction="row"
                 justify="space-between"
+                align="center"
                 p={3}
+                ml={3}
+                mr={3}
             >
-                <Box>Todo List</Box>
+                <Box p={2} fontWeight="bold">
+                    Todo List
+                </Box>
                 <ButtonGroup>
                     <Button
                         size="sm"
