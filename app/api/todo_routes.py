@@ -10,7 +10,7 @@ todo_routes = Blueprint('todo', __name__)
 @todo_routes.route('/<user_id>')
 def getUserTodos(user_id):
     result = TodoItem.query.filter(TodoItem.user_id == user_id).order_by(
-        TodoItem.priority_level.desc()).all()
+        TodoItem.priority_level.desc(), TodoItem.created_at.desc()).all()
     todos = [todo.to_dict() for todo in result]
     return {"todos": todos}
 
@@ -45,7 +45,7 @@ def removeTodo():
         db.session.commit()
         # return redirect(url_for('todo.getUserTodos', user_id=user_id))
         result = TodoItem.query.filter(TodoItem.user_id == user_id).order_by(
-            TodoItem.priority_level.desc()).all()
+            TodoItem.priority_level.desc(), TodoItem.created_at.desc()).all()
         todos = [todo.to_dict() for todo in result]
         return {"todos": todos}
     return {"errors": f"id {todo_id} not found"}
