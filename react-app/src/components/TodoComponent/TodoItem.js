@@ -3,7 +3,7 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import React, { useState } from 'react';
 import { priorityLevelToColor } from '../../services/util';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeTodo, updateTodo } from '../../reducers/todoListReducer';
+import { removeTodo } from '../../reducers/todoListReducer';
 
 function TodoItem({ todoId, todo, priority_level, initialIsDone }) {
 

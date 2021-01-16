@@ -57,23 +57,26 @@ export const removeTodo = (todoId, userId) => async dispatch => {
     }
 }
 
+export const clearCheckedTodos = userId => async dispatch => {
+    const res = await fetch('/api/todos/clear_completed', {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            user_id: userId
+        })
+    })
+    const data = await res.json()
+    dispatch(loadTodos(data.todos))
+    return data.todos
+}
+
 export const loadUserTodos = userId => async dispatch => {
     const res = await fetch(`/api/todos/${userId}`);
     const data = await res.json();
     dispatch(loadTodos(data.todos));
     return data.todos;
-}
-
-export const updateTodo = (todoId, isDone) => async dispatch => {
-    const res = await fetch("/api/todos", {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            is_done: isDone
-        })
-    })
 }
 
 const todoListReducer = (state = [], action) => {

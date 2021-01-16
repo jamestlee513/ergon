@@ -1,10 +1,10 @@
-import { Box, Flex, IconButton, Stack, UnorderedList } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Flex, IconButton, Stack, UnorderedList } from '@chakra-ui/react';
 import { SmallAddIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import TodoItem from './TodoItem';
 import TodoItemForm from './TodoItemForm';
-import { loadUserTodos } from '../../reducers/todoListReducer';
+import { loadUserTodos, clearCheckedTodos } from '../../reducers/todoListReducer';
 
 function TodoList() {
 
@@ -16,7 +16,10 @@ function TodoList() {
         dispatch(loadUserTodos(currentUser.id));
     }, [])
 
-    //Need to get session user and return todos if they exist from the db
+    const handleClear = () => {
+        dispatch(clearCheckedTodos(currentUser.id))
+    }
+
     return (
         <Stack>
             <Flex
@@ -25,11 +28,19 @@ function TodoList() {
                 p={3}
             >
                 <Box>Todo List</Box>
-                <IconButton
-                    onClick={() => setShowTodoForm(prevState => !prevState)}
-                    size="sm"
-                    icon={<SmallAddIcon />}
-                />
+                <ButtonGroup>
+                    <Button
+                        size="sm"
+                        onClick={handleClear}
+                    >
+                        Clear completed
+                    </Button>
+                    <IconButton
+                        onClick={() => setShowTodoForm(prevState => !prevState)}
+                        size="sm"
+                        icon={<SmallAddIcon />}
+                    />
+                </ButtonGroup>
             </Flex>
             <UnorderedList
                 listStyleType='none'
