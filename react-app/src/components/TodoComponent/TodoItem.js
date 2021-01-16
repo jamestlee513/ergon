@@ -3,17 +3,27 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import React, { useState } from 'react';
 import { priorityLevelToColor } from '../../services/util';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeTodo } from '../../reducers/todoListReducer';
+import { removeTodo, updateTodo } from '../../reducers/todoListReducer';
 
-function TodoItem({ todoId, todo, priority_level, isDone }) {
+function TodoItem({ todoId, todo, priority_level, initialIsDone }) {
 
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.user);
     const [isEditHidden, setIsEditHidden] = useState(true);
-    const [priorityColor, setPriorityColor] = useState(priorityLevelToColor(priority_level));
-
+    const [isDone, setIsDone] = useState(initialIsDone)
     const deleteTodo = () => {
         dispatch(removeTodo(todoId, currentUser.id));
+    }
+    const handleCheckoff = async () => {
+        const currentCheckState = isDone;
+        setIsDone(prevState => !prevState)
+        await fetch(`/api/todos/${todoId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ is_done: !currentCheckState })
+        });
     }
 
     return (
@@ -25,7 +35,7 @@ function TodoItem({ todoId, todo, priority_level, isDone }) {
             w="100%"
             onMouseEnter={() => setIsEditHidden(false)}
             onMouseLeave={() => setIsEditHidden(true)}
-            bg={priorityColor}
+            bg={priorityLevelToColor(priority_level)}
             h="40px"
             border="1px"
             borderColor="gray.300"
@@ -40,7 +50,11 @@ function TodoItem({ todoId, todo, priority_level, isDone }) {
                 h="100%"
             >
                 <Checkbox
+                    onChange={handleCheckoff}
+                    isChecked={isDone}
                     borderColor="gray.600"
+                    colorScheme="green"
+                    w="100%"
                 >
                     {todo}
                 </Checkbox>

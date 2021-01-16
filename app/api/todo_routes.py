@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, redirect, url_for
 from flask_login import login_required
 from app.forms import TodoForm
 from app.models import TodoItem, db
@@ -29,7 +29,8 @@ def newTodo():
         )
         db.session.add(todo)
         db.session.commit()
-        return todo.to_dict()
+        return redirect(url_for('todo.getUserTodos',
+                                user_id=form.data['user_id']))
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
@@ -42,10 +43,22 @@ def removeTodo():
     if todo is not None:
         db.session.delete(todo)
         db.session.commit()
-
+        # return redirect(url_for('todo.getUserTodos', user_id=user_id))
         result = TodoItem.query.filter(TodoItem.user_id == user_id).order_by(
             TodoItem.priority_level.desc()).all()
         todos = [todo.to_dict() for todo in result]
         return {"todos": todos}
-    else:
-        return {"errors": f"id {todo_id} not found"}
+    return {"errors": f"id {todo_id} not found"}
+
+
+@todo_routes.route('/<todo_id>', methods=['PUT'])
+def editTodo(todo_id):
+    todo = TodoItem.query.get(todo_id)
+
+    todo.todo = request.json.get('todo', todo.todo)
+    todo.priority_level = request.json.get(
+        'priority_level', todo.priority_level)
+    todo.is_done = request.json.get('is_done', todo.is_done)
+
+    db.session.commit()
+    return todo.to_dict()

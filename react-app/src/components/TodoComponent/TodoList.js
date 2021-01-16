@@ -1,7 +1,7 @@
 import { Box, Flex, IconButton, Stack, UnorderedList } from '@chakra-ui/react';
 import { SmallAddIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TodoItem from './TodoItem';
 import TodoItemForm from './TodoItemForm';
 import { loadUserTodos } from '../../reducers/todoListReducer';
@@ -11,14 +11,10 @@ function TodoList() {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.user);
     const todos = useSelector(state => state.todos);
+    const [showTodoForm, setShowTodoForm] = useState(false);
     useEffect(() => {
         dispatch(loadUserTodos(currentUser.id));
     }, [])
-
-    const addTodoItem = () => {
-        console.log(todos);
-        console.log("Hello")
-    }
 
     //Need to get session user and return todos if they exist from the db
     return (
@@ -30,7 +26,7 @@ function TodoList() {
             >
                 <Box>Todo List</Box>
                 <IconButton
-                    onClick={addTodoItem}
+                    onClick={() => setShowTodoForm(prevState => !prevState)}
                     size="sm"
                     icon={<SmallAddIcon />}
                 />
@@ -38,15 +34,18 @@ function TodoList() {
             <UnorderedList
                 listStyleType='none'
                 p={2}
-                m={1}>
+                m={1}
+                overflow="auto"
+                h="285px"
+            >
+                {showTodoForm && <TodoItemForm setShowTodoForm={setShowTodoForm} />}
                 {todos.map(todoItem => <TodoItem
                     key={todoItem.id}
                     todoId={todoItem.id}
                     todo={todoItem.todo}
                     priority_level={todoItem.priority_level}
-                    isDone={todoItem.is_done}
+                    initialIsDone={todoItem.is_done}
                 />)}
-                <TodoItemForm />
             </UnorderedList>
         </Stack>
     )

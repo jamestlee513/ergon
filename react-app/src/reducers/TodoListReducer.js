@@ -1,6 +1,5 @@
 export const ADD_TODO = 'addTodo';
 export const LOAD_TODOS = 'loadTodos';
-export const DELETE_TODO = 'deleteTodo';
 
 export const addTodo = todo => {
     return {
@@ -31,7 +30,7 @@ export const postNewTodo = ({ userId, todo, priorityLevel }) => async dispatch =
     });
     const data = await res.json();
     if (!data.errors) {
-        dispatch(addTodo(data))
+        dispatch(loadTodos(data.todos))
         return data;
     } else {
         return { errors: data.errors };
@@ -50,7 +49,6 @@ export const removeTodo = (todoId, userId) => async dispatch => {
         })
     });
     const data = await res.json();
-    console.log(data);
     if (!data.errors) {
         dispatch(loadTodos(data.todos))
         return data.todos
@@ -64,6 +62,18 @@ export const loadUserTodos = userId => async dispatch => {
     const data = await res.json();
     dispatch(loadTodos(data.todos));
     return data.todos;
+}
+
+export const updateTodo = (todoId, isDone) => async dispatch => {
+    const res = await fetch("/api/todos", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            is_done: isDone
+        })
+    })
 }
 
 const todoListReducer = (state = [], action) => {

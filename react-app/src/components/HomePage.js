@@ -33,7 +33,7 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
             h="100%"
             w="100%"
             gridTemplateColumns="6fr 4fr 4fr 3fr"
-            gridTemplateRows="5fr 7fr 80px"
+            gridTemplateRows="5fr 7fr 1fr"
             border="1px"
             borderColor="red"
         >

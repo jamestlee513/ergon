@@ -4,7 +4,7 @@ import { priorityLevelToColor } from '../../services/util';
 import { useDispatch, useSelector } from 'react-redux';
 import { postNewTodo } from '../../reducers/todoListReducer';
 
-function TodoItemForm() {
+function TodoItemForm({ setShowTodoForm }) {
 
     const currentUser = useSelector(state => state.user);
     const dispatch = useDispatch();
@@ -20,7 +20,10 @@ function TodoItemForm() {
                 priorityLevel
             }))
             if (!res.errors) {
-                // handle success
+                setNewTodo('');
+                setPriorityLevel(2);
+                setIsError(false);
+                setShowTodoForm(false);
             } else {
                 setIsError(true);
             }
@@ -83,7 +86,7 @@ function TodoItemForm() {
                     borderColor={isError ? "red.400" : "gray.200"}
                     focusBorderColor={isError && "red.300"}
                     _hover={{
-                        borderColor: isError ? "red.400": "gray.200"
+                        borderColor: isError ? "red.400" : "gray.200"
                     }}
                 />
             </Flex>
