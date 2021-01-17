@@ -12,9 +12,10 @@ function TodoList() {
     const currentUser = useSelector(state => state.user);
     const todos = useSelector(state => state.todos);
     const [showTodoForm, setShowTodoForm] = useState(false);
+    
     useEffect(() => {
         dispatch(loadUserTodos(currentUser.id));
-    }, [])
+    }, [currentUser])
 
     const handleClear = () => {
         dispatch(clearCheckedTodos(currentUser.id))

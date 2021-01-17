@@ -1,5 +1,6 @@
 export const ADD_TODO = 'addTodo';
 export const LOAD_TODOS = 'loadTodos';
+export const CLEAR_TODOS = 'clearTodos';
 
 export const addTodo = todo => {
     return {
@@ -12,6 +13,12 @@ export const loadTodos = todos => {
     return {
         type: LOAD_TODOS,
         payload: todos
+    }
+}
+
+export const clearTodos = () => {
+    return {
+        type: CLEAR_TODOS
     }
 }
 
@@ -72,10 +79,14 @@ export const clearCheckedTodos = userId => async dispatch => {
 }
 
 export const loadUserTodos = userId => async dispatch => {
-    const res = await fetch(`/api/todos/${userId}`);
-    const data = await res.json();
-    dispatch(loadTodos(data.todos));
-    return data.todos;
+    if (!userId) {
+        dispatch(clearTodos());
+    } else {
+        const res = await fetch(`/api/todos/${userId}`);
+        const data = await res.json();
+        dispatch(loadTodos(data.todos));
+        return data.todos;
+    }
 }
 
 const todoListReducer = (state = [], action) => {
@@ -83,7 +94,9 @@ const todoListReducer = (state = [], action) => {
         case ADD_TODO:
             return [...state, action.payload];
         case LOAD_TODOS:
-            return [...action.payload]
+            return [...action.payload];
+        case CLEAR_TODOS:
+            return [];
         default:
             return state;
     }

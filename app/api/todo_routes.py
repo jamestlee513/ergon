@@ -43,7 +43,7 @@ def remove_todo():
     if todo is not None:
         db.session.delete(todo)
         db.session.commit()
-        
+
         result = TodoItem.query.filter(TodoItem.user_id == user_id).order_by(
             TodoItem.priority_level.desc(), TodoItem.created_at.desc()).all()
         todos = [todo.to_dict() for todo in result]
