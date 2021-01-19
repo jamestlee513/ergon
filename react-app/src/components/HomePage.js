@@ -36,19 +36,56 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
             w="100%"
             gridTemplateColumns="6fr 4fr 4fr 3fr"
             gridTemplateRows="5fr 7fr 1fr"
-            border="1px"
-            borderColor="red"
         >
-            <GridItem border="1px" colSpan={3}>
+            <GridItem
+                // margin={3}
+                border='1px'
+                borderColor="gray.400"
+                colSpan={3}
+                borderRadius={4}
+                boxShadow="md"
+            >
                 <PomodoroTimer />
             </GridItem>
-            <GridItem border="1px" rowSpan={3}>Calendar Component</GridItem>
-            <GridItem border="1px" >
+            <GridItem
+                // margin={3}
+                border='1px'
+                borderColor="gray.400"
+                borderRadius={4}
+                boxShadow="md"
+                rowSpan={3}
+            >Calendar Component (Coming soon!)</GridItem>
+            <GridItem
+                // margin={3}
+                border='1px'
+                borderColor="gray.400"
+                borderRadius={4}
+                boxShadow="md"
+            >
                 <TodoList />
             </GridItem>
-            <GridItem border="1px" >Memo Component</GridItem>
-            <GridItem border="1px" >Friends Component (Optional)</GridItem>
-            <GridItem border="1px" colSpan={3}>
+            <GridItem
+                // margin={3}
+                border='1px'
+                borderColor="gray.400"
+                borderRadius={4}
+                boxShadow="md"
+            >Memo Component</GridItem>
+            <GridItem
+                // margin={3}
+                border='1px'
+                borderColor="gray.400"
+                borderRadius={4}
+                boxShadow="md"
+            >Friends Component (Optional)</GridItem>
+            <GridItem
+                // margin={3}
+                border='1px'
+                borderColor="gray.400"
+                borderRadius={4}
+                boxShadow="md"
+                colSpan={3}
+            >
                 <PlaybarComponent />
             </GridItem>
         </Grid>
