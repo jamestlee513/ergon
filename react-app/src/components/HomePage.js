@@ -4,6 +4,7 @@ import PomodoroTimer from './PomodoroTimer';
 import TodoList from './TodoComponent/TodoList';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUserTodos } from '../reducers/todoListReducer';
+import PlaybarComponent from './PlaybarComponent';
 
 
 function HomePage({ isFirstVisit, setIsFirstVisit }) {
@@ -47,7 +48,9 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
             </GridItem>
             <GridItem border="1px" >Memo Component</GridItem>
             <GridItem border="1px" >Friends Component (Optional)</GridItem>
-            <GridItem border="1px" colSpan={3}>Playbar Component</GridItem>
+            <GridItem border="1px" colSpan={3}>
+                <PlaybarComponent />
+            </GridItem>
         </Grid>
     )
 }
