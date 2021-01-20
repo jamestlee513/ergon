@@ -41,7 +41,7 @@ function PlaybarComponent() {
                 className="hidden"
                 url={playlist[currentSongIdx].url}
                 playing={isPlaying}
-                volume={1}
+                volume={0.3}
                 muted={isMuted}
                 ref={ref}
             />

@@ -23,7 +23,7 @@ export const clearTodos = () => {
 }
 
 export const postNewTodo = ({ userId, todo, priorityLevel }) => async dispatch => {
-    const res = await fetch('/api/todos/', {
+    const res = await fetch('/api/todos', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -44,7 +44,7 @@ export const postNewTodo = ({ userId, todo, priorityLevel }) => async dispatch =
 }
 
 export const removeTodo = (todoId, userId) => async dispatch => {
-    const res = await fetch(`/api/todos/`, {
+    const res = await fetch(`/api/todos`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
@@ -82,7 +82,7 @@ export const loadUserTodos = userId => async dispatch => {
     if (!userId) {
         dispatch(clearTodos());
     } else {
-        const res = await fetch(`/api/todos/${userId}`);
+        const res = await fetch(`/api/todos/${userId}/`);
         const data = await res.json();
         dispatch(loadTodos(data.todos));
         return data.todos;
