@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { Grid, GridItem, useToast } from '@chakra-ui/react';
 import PomodoroTimer from './PomodoroTimer';
 import TodoList from './TodoComponent/TodoList';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadUserTodos } from '../reducers/todoListReducer';
+import { useSelector } from 'react-redux';
 import PlaybarComponent from './PlaybarComponent';
 
 

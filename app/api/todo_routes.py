@@ -15,7 +15,7 @@ def get_user_todos(user_id):
     return {"todos": todos}
 
 
-@todo_routes.route('/', methods=['POST'])
+@todo_routes.route('', methods=['POST'])
 def new_todo():
     form = TodoForm()
     print(request.get_json())
@@ -34,7 +34,7 @@ def new_todo():
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
-@todo_routes.route('/', methods=['DELETE'])
+@todo_routes.route('', methods=['DELETE'])
 def remove_todo():
     todo_id = request.json['todo_id']
     user_id = request.json['user_id']

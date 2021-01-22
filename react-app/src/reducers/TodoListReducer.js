@@ -82,7 +82,7 @@ export const loadUserTodos = userId => async dispatch => {
     if (!userId) {
         dispatch(clearTodos());
     } else {
-        const res = await fetch(`/api/todos/${userId}/`);
+        const res = await fetch(`/api/todos/${userId}`);
         const data = await res.json();
         dispatch(loadTodos(data.todos));
         return data.todos;
