@@ -13,12 +13,12 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
 
     useEffect(() => {
         if (!currentUser.id && isFirstVisit) {
-            toast({
-                title: "Welcome to Ergon!",
-                description: "Feel free to use the website, however your personal settings will not save unless you are logged in!",
-                duration: "10000",
-                isClosable: true
-            })
+            // toast({
+            //     title: "Welcome to Ergon!",
+            //     description: "Feel free to use the website, however your personal settings will not save unless you are logged in!",
+            //     duration: "10000",
+            //     isClosable: true
+            // })
         } else if (currentUser.id && isFirstVisit) {
             toast({
                 title: "Welcome back to Ergon!",

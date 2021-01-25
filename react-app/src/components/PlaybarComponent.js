@@ -1,6 +1,7 @@
 import { Box, Flex, Image } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
+import { determineMusicBarPercent } from '../services/util';
 function PlaybarComponent() {
 
     const playlist = [
@@ -24,7 +25,22 @@ function PlaybarComponent() {
     const [nextIconSize, setNextIconSize] = useState("40px");
     const [mutedIconSize, setMutedIconSize] = useState("40px");
     const [isMuted, setIsMuted] = useState(false);
+    const [currentTime, setCurrentTime] = useState(0);
+    const [currentSongDuration, setCurrentSongDuration] = useState(0);
     const ref = React.createRef();
+
+
+    useEffect(() => {
+        if(ref.current) {
+            const interval = setInterval(async () => {
+                setCurrentTime(Math.floor(ref.current.getCurrentTime()));
+                // setCurrentSongDuration(Math.floor(ref.current.getDuration()));
+            }, 1000);
+            return () => {
+                clearInterval(interval);
+            }
+        }
+    }, [ref]);
 
     const playNextSong = () => {
         if (currentSongIdx + 1 === playlist.length) {
@@ -44,6 +60,7 @@ function PlaybarComponent() {
                 volume={0.3}
                 muted={isMuted}
                 ref={ref}
+                onDuration={duration => setCurrentSongDuration(duration)}
             />
 
             <Flex
@@ -53,9 +70,28 @@ function PlaybarComponent() {
             >
                 <Box
                     fontSize="20px"
-                    w="80%"
+                    w="20%"
                     textAlign="center"
-                >{playlist[currentSongIdx].title}</Box>
+                >
+                    {playlist[currentSongIdx].title}
+                </Box>
+                <Flex h="30px" w="60%" border="1px" align="center" justify="center" position="relative">
+                    <Box m="10px" h="10px" w="95%" border="1px" borderRadius="md">
+
+                    </Box>
+                    <Box
+                        h="15px"
+                        w="15px"
+                        border="1px"
+                        borderColor="gray.200"
+                        borderRadius="50%"
+                        position="absolute"
+                        left={determineMusicBarPercent(currentTime, currentSongDuration)}
+                        backgroundColor="blue.200"
+                    >
+
+                    </Box>
+                </Flex>
                 <Flex>
                     {isPlaying && <Image
                         src="https://img.icons8.com/carbon-copy/100/000000/pause.png"
@@ -66,7 +102,7 @@ function PlaybarComponent() {
                         onMouseLeave={() => setPausePlayIconSize("40px")}
                         onMouseEnter={() => setPausePlayIconSize("42px")}
                         onClick={() => setIsPlaying(false)}
-                        />}
+                    />}
                     {!isPlaying && <Image
                         src="https://img.icons8.com/carbon-copy/100/000000/play.png"
                         h={pausePlayIconSize}
@@ -76,7 +112,7 @@ function PlaybarComponent() {
                         onMouseLeave={() => setPausePlayIconSize("40px")}
                         onMouseEnter={() => setPausePlayIconSize("42px")}
                         onClick={() => setIsPlaying(true)}
-                        />}
+                    />}
                     <Image
                         src="https://img.icons8.com/dotty/80/000000/fast-forward.png"
                         h={nextIconSize}
@@ -86,7 +122,7 @@ function PlaybarComponent() {
                         onMouseLeave={() => setNextIconSize("40px")}
                         onMouseEnter={() => setNextIconSize("42px")}
                         onClick={playNextSong}
-                        />
+                    />
                     {isMuted && <Image
                         h={mutedIconSize}
                         w={mutedIconSize}
@@ -96,7 +132,7 @@ function PlaybarComponent() {
                         onMouseLeave={() => setMutedIconSize("40px")}
                         onMouseEnter={() => setMutedIconSize("42px")}
                         onClick={() => setIsMuted(false)}
-                        />}
+                    />}
                     {!isMuted && <Image
                         src="https://img.icons8.com/dotty/80/000000/room-sound.png"
                         h={mutedIconSize}
