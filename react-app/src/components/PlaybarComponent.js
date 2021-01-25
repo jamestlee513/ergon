@@ -20,6 +20,7 @@ function PlaybarComponent() {
     ]
 
     const [currentSongIdx, setCurrentSongIdx] = useState(0);
+    const [songUrl, setSongUrl] = useState('');
     const [isPlaying, setIsPlaying] = useState(true);
     const [pausePlayIconSize, setPausePlayIconSize] = useState("40px");
     const [nextIconSize, setNextIconSize] = useState("40px");
@@ -27,20 +28,28 @@ function PlaybarComponent() {
     const [isMuted, setIsMuted] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [currentSongDuration, setCurrentSongDuration] = useState(0);
+    const [isLoadSuccess, setIsLoadSuccess] = useState(false);
     const ref = React.createRef();
 
 
     useEffect(() => {
-        if(ref.current) {
+        setSongUrl(playlist[currentSongIdx].url);
+    }, [])
+
+    useEffect(() => {
+        if (ref.current) {
             const interval = setInterval(async () => {
                 setCurrentTime(Math.floor(ref.current.getCurrentTime()));
-                // setCurrentSongDuration(Math.floor(ref.current.getDuration()));
             }, 1000);
             return () => {
                 clearInterval(interval);
             }
         }
     }, [ref]);
+
+    useEffect(() => {
+        console.log("url has changed!")
+    }, [songUrl])
 
     const playNextSong = () => {
         if (currentSongIdx + 1 === playlist.length) {
@@ -55,29 +64,51 @@ function PlaybarComponent() {
         <>
             <ReactPlayer
                 className="hidden"
-                url={playlist[currentSongIdx].url}
+                url={songUrl}
                 playing={isPlaying}
                 volume={0.3}
                 muted={isMuted}
                 ref={ref}
                 onDuration={duration => setCurrentSongDuration(duration)}
+                onReady={() => {
+                    setIsLoadSuccess(true)
+                }}
+                onError={() => setIsLoadSuccess(false)}
             />
 
-            <Flex
+            {isLoadSuccess ? <Flex
                 direction="row"
                 align="center"
                 justify="space-between"
             >
                 <Box
-                    fontSize="20px"
+                    fontSize="14px"
                     w="20%"
                     textAlign="center"
+                    fontFamily={"Roboto Mono, monospace"}
+                    overflow="scroll"
                 >
                     {playlist[currentSongIdx].title}
                 </Box>
-                <Flex h="30px" w="60%" border="1px" align="center" justify="center" position="relative">
-                    <Box m="10px" h="10px" w="95%" border="1px" borderRadius="md">
-
+                <Flex
+                    h="30px"
+                    w="60%"
+                    border="2px"
+                    align="center"
+                    justify="center"
+                    position="relative"
+                    borderColor="gray.200"
+                    boxShadow="sm"
+                    borderRadius="lg"
+                    >
+                    <Box
+                        m="10px"
+                        h="10px"
+                        w="95%"
+                        border="1px"
+                        borderRadius="md"
+                        backgroundColor="gray.200"
+                        borderColor="gray.300">
                     </Box>
                     <Box
                         h="15px"
@@ -144,7 +175,11 @@ function PlaybarComponent() {
                         onClick={() => setIsMuted(true)}
                     />}
                 </Flex>
-            </Flex>
+            </Flex> : (
+                <Box>
+                    Loading...
+                </Box>
+            )}
         </>
     )
 }
