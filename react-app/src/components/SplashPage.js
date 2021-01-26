@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Box, Flex, Image } from '@chakra-ui/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -13,7 +13,10 @@ function SplashPage() {
 
     return (
         <Flex align="center">
-            <div>Hi, i'll contain the splash welcome msg and fancy stuff</div>
+            <Flex align="center">
+                <Image h="200px" w="200px" src="https://i.ibb.co/RQ9wbWm/ergon-logo.png"/>
+                <Box fontSize="80px" fontFamily="Roboto Mono">ergon</Box>
+            </Flex>
             <LoginSigninPage />
         </Flex>
     )
