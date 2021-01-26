@@ -30,7 +30,7 @@ function App() {
   }
 
   return (
-    <Flex direction="column" align="center" justify="center" h="100vh">
+    <Flex direction="column" align="center" justify="center" w="100%" h="100vh">
       <Switch>
         <Route exact path="/">
           <SplashPage />
