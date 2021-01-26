@@ -21,7 +21,7 @@ function PlaybarComponent() {
 
     const [currentSongIdx, setCurrentSongIdx] = useState(0);
     const [songUrl, setSongUrl] = useState('');
-    const [isPlaying, setIsPlaying] = useState(true);
+    const [isPlaying, setIsPlaying] = useState(false);
     const [pausePlayIconSize, setPausePlayIconSize] = useState("40px");
     const [nextIconSize, setNextIconSize] = useState("40px");
     const [mutedIconSize, setMutedIconSize] = useState("40px");
@@ -47,17 +47,14 @@ function PlaybarComponent() {
         }
     }, [ref]);
 
-    useEffect(() => {
-        console.log("url has changed!")
-    }, [songUrl])
-
-    const playNextSong = () => {
+    const playNextSong = async () => {
         if (currentSongIdx + 1 === playlist.length) {
             setCurrentSongIdx(0);
+            setSongUrl(playlist[0].url);
         } else {
             setCurrentSongIdx(currentSongIdx + 1);
+            setSongUrl(playlist[currentSongIdx + 1].url);
         }
-        ref.current.seekTo(0, "seconds");
     }
 
     return (
@@ -71,9 +68,11 @@ function PlaybarComponent() {
                 ref={ref}
                 onDuration={duration => setCurrentSongDuration(duration)}
                 onReady={() => {
-                    setIsLoadSuccess(true)
+                    setIsLoadSuccess(true);
+                    setIsPlaying(true);
                 }}
                 onError={() => setIsLoadSuccess(false)}
+                onEnded={playNextSong}
             />
 
             {isLoadSuccess ? <Flex
@@ -86,7 +85,7 @@ function PlaybarComponent() {
                     w="20%"
                     textAlign="center"
                     fontFamily={"Roboto Mono, monospace"}
-                    overflow="scroll"
+                    
                 >
                     {playlist[currentSongIdx].title}
                 </Box>
@@ -100,7 +99,7 @@ function PlaybarComponent() {
                     borderColor="gray.200"
                     boxShadow="sm"
                     borderRadius="lg"
-                    >
+                >
                     <Box
                         m="10px"
                         h="10px"
@@ -176,10 +175,10 @@ function PlaybarComponent() {
                     />}
                 </Flex>
             </Flex> : (
-                <Box>
-                    Loading...
-                </Box>
-            )}
+                    <Box>
+                        Loading...
+                    </Box>
+                )}
         </>
     )
 }

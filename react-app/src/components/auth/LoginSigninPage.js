@@ -7,11 +7,6 @@ import { useSelector } from 'react-redux';
 
 const LoginSigninPage = () => {
 
-    const currentUser = useSelector(state => state.user);
-    if (currentUser.id) {
-        return <Redirect to="/" />
-    }
-
     return (
         <Box bg='blue.100' w='400px' p={6} boxShadow='md' rounded='lg'>
             {/* Image */}
