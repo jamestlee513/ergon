@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, useToast } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, useColorMode, useToast } from '@chakra-ui/react';
 import React from 'react';
 import { logout } from '../services/auth';
 import { NavLink, useHistory } from 'react-router-dom';
@@ -11,6 +11,7 @@ function NavBar() {
     const toast = useToast();
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.user);
+    const { colorMode, toggleColorMode } = useColorMode();
 
     const handleLogOut = e => {
         e.preventDefault();
@@ -36,12 +37,13 @@ function NavBar() {
         >
             <Box>
                 <Heading>
-                    Ergon
+                    Ergon {colorMode}
                 </Heading>
             </Box>
 
             <Flex
                 justify="space-between"
+                align="center"
                 w="40%"
             >
                 <NavLink exact to='/'>Home</NavLink>
@@ -49,6 +51,14 @@ function NavBar() {
                 {currentUser.id && <NavLink to='/logout' onClick={handleLogOut}>Logout</NavLink>}
                 <NavLink to='/'>About</NavLink>
                 <NavLink to='/settings'>Settings</NavLink>
+                <Button
+                    bg="gray.400"
+                    color="gray.100"
+                    _hover={{
+                        background: "gray.600"
+                    }}
+                    onClick={toggleColorMode}
+                > Night mode</Button>
             </Flex>
 
         </Flex>

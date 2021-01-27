@@ -41,12 +41,6 @@ function App() {
             <HomePage isFirstVisit={isFirstVisit} setIsFirstVisit={setIsFistVisit} />
           </Flex>
         </Route>
-        <Route path="/signin">
-          <NavBar />
-          <Flex justify="center" align="center" w="100%" h="100%">
-            <LoginSigninPage />
-          </Flex>
-        </Route>
         <Route path='/settings'>
           <div>Test route here</div>
         </Route>
