@@ -13,6 +13,7 @@ function NavBar() {
     const currentUser = useSelector(state => state.user);
     const { colorMode, toggleColorMode } = useColorMode();
 
+    
     const handleLogOut = e => {
         e.preventDefault();
         logout();
@@ -58,7 +59,7 @@ function NavBar() {
                         background: "gray.600"
                     }}
                     onClick={toggleColorMode}
-                > Night mode</Button>
+                > {colorMode === 'light' ? "Dark" : "Light"} mode</Button>
             </Flex>
 
         </Flex>

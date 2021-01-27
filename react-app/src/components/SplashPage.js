@@ -1,5 +1,5 @@
-import { Box, Fade, Flex, Image } from '@chakra-ui/react';
-import React from 'react';
+import { Box, Fade, Flex, Image, useColorMode } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import LoginSigninPage from './auth/LoginSigninPage';
@@ -9,9 +9,16 @@ import FadeIn from 'react-fade-in';
 function SplashPage() {
 
     const currentUser = useSelector(state => state.user);
+    const { colorMode, toggleColorMode } = useColorMode();
+    useEffect(() => {
+        if (colorMode === 'dark') {
+            toggleColorMode()
+        }
+    }, [])
     if (currentUser.id) {
         return <Redirect to="/home" />
     }
+
 
     return (
         <>
