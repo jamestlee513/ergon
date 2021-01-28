@@ -13,9 +13,9 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
     const { colorMode, toggleColorMode } = useColorMode();
 
     useEffect(() => {
-        if (colorMode === 'light') {
-            toggleColorMode()
-        } 
+        // if (colorMode === 'light') {
+        //     toggleColorMode()
+        // } 
         if (currentUser.id && isFirstVisit) {
             toast({
                 title: "Welcome back to Ergon!",

@@ -1,9 +1,11 @@
-import { Box, Button, Flex, Heading, useColorMode, useToast } from '@chakra-ui/react';
+import { Box, ButtonGroup, Flex, Heading, Icon, IconButton, Image, useColorMode, useToast } from '@chakra-ui/react';
 import React from 'react';
 import { logout } from '../services/auth';
 import { NavLink, useHistory } from 'react-router-dom';
 import { removeUser } from '../reducers/userReducer';
 import { useDispatch, useSelector } from 'react-redux';
+import { MoonIcon } from '@chakra-ui/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function NavBar() {
 
@@ -13,7 +15,7 @@ function NavBar() {
     const currentUser = useSelector(state => state.user);
     const { colorMode, toggleColorMode } = useColorMode();
 
-    
+
     const handleLogOut = e => {
         e.preventDefault();
         logout();
@@ -31,35 +33,39 @@ function NavBar() {
             justify="space-between"
             align="center"
             padding="1.5rem"
-            bg={colorMode === 'light' ? "blue.200" : "linear-gradient(45deg, rgb(52, 91, 153) 0%, rgb(37, 45, 63) 100%)"}
+            bg={colorMode === 'light' ? "linear-gradient(45deg, rgb(96, 147, 230) 0%, rgb(153, 192, 255) 100%)" : "linear-gradient(45deg, rgb(52, 91, 153) 0%, rgb(37, 45, 63) 100%)"}
             color="white"
             w="100%"
             h="70px"
+            color={colorMode === 'light' ? 'gray.800' : 'white'}
         >
             <Box>
-                <Heading>
-                    Ergon {colorMode}
-                </Heading>
+                <Flex align="center" justify="center">
+                    <Image h="40px" w="40px" src="https://i.ibb.co/RQ9wbWm/ergon-logo.png" />
+                    <Heading ml="15px">ergon</Heading>
+                </Flex>
             </Box>
 
             <Flex
                 justify="space-between"
                 align="center"
-                w="40%"
+                w="20%"
             >
-                <NavLink exact to='/'>Home</NavLink>
-                {!currentUser.id && <NavLink exact to='/signin'>Sign In</NavLink>}
                 {currentUser.id && <NavLink to='/logout' onClick={handleLogOut}>Logout</NavLink>}
-                <NavLink to='/'>About</NavLink>
                 {/* <NavLink to='/settings'>Settings</NavLink> */}
-                <Button
-                    bg="gray.400"
-                    color="gray.100"
+                <IconButton
+                    onClick={toggleColorMode}
+                    icon={<MoonIcon />}
+                    bg=""
                     _hover={{
                         background: "gray.600"
                     }}
-                    onClick={toggleColorMode}
-                > {colorMode === 'light' ? "Dark" : "Light"} mode</Button>
+                />
+                <Flex w="20%" justify="space-between">
+                    <a href="https://github.com/jamestlee513/ergon" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/jameslee97/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://angel.co/u/james-lee-146" target="_blank" rel="noopener noreferrer"><i class="fab fa-angellist"></i></a>
+                </Flex>
             </Flex>
 
         </Flex>
