@@ -126,7 +126,7 @@ function PlaybarComponent() {
                 </Flex>
                 <Flex>
                     {isPlaying && <Image
-                        src="https://img.icons8.com/carbon-copy/100/000000/pause.png"
+                        src={colorMode === 'light' ? "https://img.icons8.com/carbon-copy/100/000000/pause.png" : "https://img.icons8.com/wired/64/ffffff/play.png"}
                         h={pausePlayIconSize}
                         w={pausePlayIconSize}
                         onMouseDown={() => setPausePlayIconSize("38px")}
@@ -136,7 +136,7 @@ function PlaybarComponent() {
                         onClick={() => setIsPlaying(false)}
                     />}
                     {!isPlaying && <Image
-                        src="https://img.icons8.com/carbon-copy/100/000000/play.png"
+                        src={colorMode === 'light' ? "https://img.icons8.com/carbon-copy/100/000000/play.png" : "https://img.icons8.com/dotty/80/ffffff/pause.png"}
                         h={pausePlayIconSize}
                         w={pausePlayIconSize}
                         onMouseDown={() => setPausePlayIconSize("38px")}
@@ -146,7 +146,7 @@ function PlaybarComponent() {
                         onClick={() => setIsPlaying(true)}
                     />}
                     <Image
-                        src="https://img.icons8.com/dotty/80/000000/fast-forward.png"
+                        src={colorMode === 'light' ? "https://img.icons8.com/dotty/80/000000/fast-forward.png" : "https://img.icons8.com/wired/64/ffffff/fast-forward.png"}
                         h={nextIconSize}
                         w={nextIconSize}
                         onMouseDown={() => setNextIconSize("38px")}
@@ -158,7 +158,7 @@ function PlaybarComponent() {
                     {isMuted && <Image
                         h={mutedIconSize}
                         w={mutedIconSize}
-                        src="https://img.icons8.com/dotty/80/000000/mute.png"
+                        src={colorMode === 'light' ? "https://img.icons8.com/dotty/80/000000/mute.png" : "https://img.icons8.com/dotty/80/ffffff/mute.png"}
                         onMouseDown={() => setMutedIconSize("38px")}
                         onMouseUp={() => setMutedIconSize("40px")}
                         onMouseLeave={() => setMutedIconSize("40px")}
@@ -166,7 +166,7 @@ function PlaybarComponent() {
                         onClick={() => setIsMuted(false)}
                     />}
                     {!isMuted && <Image
-                        src="https://img.icons8.com/dotty/80/000000/room-sound.png"
+                        src={colorMode === 'light' ? "https://img.icons8.com/dotty/80/000000/room-sound.png" : "https://img.icons8.com/dotty/80/ffffff/room-sound.png"}
                         h={mutedIconSize}
                         w={mutedIconSize}
                         onMouseDown={() => setMutedIconSize("38px")}

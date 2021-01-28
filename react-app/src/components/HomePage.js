@@ -10,12 +10,8 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
 
     const currentUser = useSelector(state => state.user)
     const toast = useToast();
-    const { colorMode, toggleColorMode } = useColorMode();
 
     useEffect(() => {
-        // if (colorMode === 'light') {
-        //     toggleColorMode()
-        // } 
         if (currentUser.id && isFirstVisit) {
             toast({
                 title: "Welcome back to Ergon!",
