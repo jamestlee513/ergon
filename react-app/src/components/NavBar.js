@@ -31,7 +31,7 @@ function NavBar() {
             justify="space-between"
             align="center"
             padding="1.5rem"
-            bg="blue.200"
+            bg={colorMode === 'light' ? "blue.200" : "linear-gradient(45deg, rgb(52, 91, 153) 0%, rgb(37, 45, 63) 100%)"}
             color="white"
             w="100%"
             h="70px"
@@ -51,7 +51,7 @@ function NavBar() {
                 {!currentUser.id && <NavLink exact to='/signin'>Sign In</NavLink>}
                 {currentUser.id && <NavLink to='/logout' onClick={handleLogOut}>Logout</NavLink>}
                 <NavLink to='/'>About</NavLink>
-                <NavLink to='/settings'>Settings</NavLink>
+                {/* <NavLink to='/settings'>Settings</NavLink> */}
                 <Button
                     bg="gray.400"
                     color="gray.100"

@@ -1,4 +1,4 @@
-import { Box, Flex, Image } from '@chakra-ui/react';
+import { Box, Flex, Image, useColorMode } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { determineMusicBarPercent } from '../services/util';
@@ -29,6 +29,8 @@ function PlaybarComponent() {
     const [currentTime, setCurrentTime] = useState(0);
     const [currentSongDuration, setCurrentSongDuration] = useState(0);
     const [isLoadSuccess, setIsLoadSuccess] = useState(false);
+    const { colorMode } = useColorMode();
+
     const ref = React.createRef();
 
 
@@ -85,18 +87,18 @@ function PlaybarComponent() {
                     w="20%"
                     textAlign="center"
                     fontFamily={"Roboto Mono, monospace"}
-                    
+
                 >
                     {playlist[currentSongIdx].title}
                 </Box>
                 <Flex
                     h="30px"
                     w="60%"
-                    border="2px"
+                    border="1px"
                     align="center"
                     justify="center"
                     position="relative"
-                    borderColor="gray.200"
+                    borderColor={colorMode === 'light' ? "gray.200" : "gray.600"}
                     boxShadow="sm"
                     borderRadius="lg"
                 >
@@ -106,18 +108,18 @@ function PlaybarComponent() {
                         w="95%"
                         border="1px"
                         borderRadius="md"
-                        backgroundColor="gray.200"
+                        backgroundColor={colorMode === 'light' ? "gray.200" : "gray.600"}
                         borderColor="gray.300">
                     </Box>
                     <Box
                         h="15px"
                         w="15px"
                         border="1px"
-                        borderColor="gray.200"
+                        borderColor={colorMode === 'light' ? "gray.200" : "gray.800"}
                         borderRadius="50%"
                         position="absolute"
                         left={determineMusicBarPercent(currentTime, currentSongDuration)}
-                        backgroundColor="blue.200"
+                        backgroundColor={colorMode === 'light' ? "blue.200" : "blue.400"}
                     >
 
                     </Box>

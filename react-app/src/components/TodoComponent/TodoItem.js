@@ -1,4 +1,4 @@
-import { Checkbox, Flex, ListItem, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { Checkbox, Flex, ListItem, Menu, MenuButton, MenuItem, MenuList, useColorMode } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import React, { useState } from 'react';
 import { priorityLevelToColor } from '../../services/util';
@@ -11,6 +11,7 @@ function TodoItem({ todoId, todo, priority_level, initialIsDone }) {
     const currentUser = useSelector(state => state.user);
     const [isEditHidden, setIsEditHidden] = useState(true);
     const [isDone, setIsDone] = useState(initialIsDone)
+    const { colorMode } = useColorMode();
     const deleteTodo = () => {
         dispatch(removeTodo(todoId, currentUser.id));
     }
@@ -35,7 +36,7 @@ function TodoItem({ todoId, todo, priority_level, initialIsDone }) {
             w="100%"
             onMouseEnter={() => setIsEditHidden(false)}
             onMouseLeave={() => setIsEditHidden(true)}
-            bg={priorityLevelToColor(priority_level)}
+            bg={colorMode === 'light' ? priorityLevelToColor(priority_level) : priorityLevelToColor(priority_level + 4)}
             h="40px"
             border="1px"
             borderColor="gray.300"
@@ -52,7 +53,7 @@ function TodoItem({ todoId, todo, priority_level, initialIsDone }) {
                 <Checkbox
                     onChange={handleCheckoff}
                     isChecked={isDone}
-                    borderColor="gray.600"
+                    borderColor={colorMode === 'light' ? "gray.600" : "gray.200"}
                     colorScheme="green"
                     w="100%"
                 >

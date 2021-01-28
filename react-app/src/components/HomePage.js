@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Grid, GridItem, useToast } from '@chakra-ui/react';
+import { Grid, GridItem, useColorMode, useToast } from '@chakra-ui/react';
 import PomodoroTimer from './PomodoroTimer';
 import TodoList from './TodoComponent/TodoList';
 import { useSelector } from 'react-redux';
@@ -10,16 +10,13 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
 
     const currentUser = useSelector(state => state.user)
     const toast = useToast();
+    const { colorMode, toggleColorMode } = useColorMode();
 
     useEffect(() => {
-        if (!currentUser.id && isFirstVisit) {
-            // toast({
-            //     title: "Welcome to Ergon!",
-            //     description: "Feel free to use the website, however your personal settings will not save unless you are logged in!",
-            //     duration: "10000",
-            //     isClosable: true
-            // })
-        } else if (currentUser.id && isFirstVisit) {
+        if (colorMode === 'light') {
+            toggleColorMode()
+        } 
+        if (currentUser.id && isFirstVisit) {
             toast({
                 title: "Welcome back to Ergon!",
                 duration: "5000",

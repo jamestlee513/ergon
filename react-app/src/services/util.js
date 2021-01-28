@@ -14,9 +14,17 @@ export function secondsToTime(seconds) {
 }
 
 export function priorityLevelToColor(level) {
-    // Priority ranges from 1 - 4
+    // Priority ranges from 1 - 4. 5-8 are for dark mode
 
     switch(level) {
+        case 8:
+            return "red.500"
+        case 7:
+            return "yellow.500"
+        case 6:
+            return "blue.500"
+        case 5:
+            return "gray.600"
         case 4:
             return "red.200"
         case 3:
