@@ -126,7 +126,7 @@ function PlaybarComponent() {
                 </Flex>
                 <Flex>
                     {isPlaying && <Image
-                        src={colorMode === 'light' ? "https://img.icons8.com/carbon-copy/100/000000/pause.png" : "https://img.icons8.com/wired/64/ffffff/play.png"}
+                        src={colorMode === 'light' ? "https://img.icons8.com/carbon-copy/100/000000/pause.png" : "https://img.icons8.com/dotty/80/ffffff/pause.png"}
                         h={pausePlayIconSize}
                         w={pausePlayIconSize}
                         onMouseDown={() => setPausePlayIconSize("38px")}
@@ -136,7 +136,7 @@ function PlaybarComponent() {
                         onClick={() => setIsPlaying(false)}
                     />}
                     {!isPlaying && <Image
-                        src={colorMode === 'light' ? "https://img.icons8.com/carbon-copy/100/000000/play.png" : "https://img.icons8.com/dotty/80/ffffff/pause.png"}
+                        src={colorMode === 'light' ? "https://img.icons8.com/carbon-copy/100/000000/play.png" : "https://img.icons8.com/wired/64/ffffff/play.png"}
                         h={pausePlayIconSize}
                         w={pausePlayIconSize}
                         onMouseDown={() => setPausePlayIconSize("38px")}

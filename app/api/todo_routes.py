@@ -29,8 +29,12 @@ def new_todo():
         )
         db.session.add(todo)
         db.session.commit()
-        return redirect(url_for('todo.get_user_todos',
-                                user_id=form.data['user_id']))
+        # return redirect(url_for('todo.get_user_todos',
+        #                         user_id=form.data['user_id']))
+        result = TodoItem.query.filter(TodoItem.user_id == user_id).order_by(
+            TodoItem.priority_level.desc(), TodoItem.created_at.desc()).all()
+        todos = [todo.to_dict() for todo in result]
+        return {"todos": todos}
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
