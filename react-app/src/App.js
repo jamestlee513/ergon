@@ -3,7 +3,6 @@ import { Route, Switch } from "react-router-dom"
 import { authenticate } from "./services/auth";
 import { Flex } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-import LoginSigninPage from "./components/auth/LoginSigninPage";
 import HomePage from "./components/HomePage";
 import { addUser } from "./reducers/userReducer";
 import { useDispatch } from "react-redux";
@@ -36,7 +35,6 @@ function App() {
           <SplashPage />
         </Route>
         <Route path="/home">
-          <NavBar />
           <Flex justify="center" align="center" w="100%" h="100%">
             <HomePage isFirstVisit={isFirstVisit} setIsFirstVisit={setIsFistVisit} />
           </Flex>

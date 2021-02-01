@@ -60,7 +60,7 @@ function PlaybarComponent() {
     }
 
     return (
-        <>
+        <Flex h="100%" w="100%" align="center">
             <ReactPlayer
                 className="hidden"
                 url={songUrl}
@@ -77,111 +77,109 @@ function PlaybarComponent() {
                 onEnded={playNextSong}
             />
 
-            {isLoadSuccess ? <Flex
-                direction="row"
-                align="center"
-                justify="space-between"
-            >
-                <Box
-                    fontSize="14px"
-                    w="20%"
-                    textAlign="center"
-                    fontFamily={"Roboto Mono, monospace"}
-
-                >
-                    {playlist[currentSongIdx].title}
-                </Box>
+            {isLoadSuccess ?
                 <Flex
-                    h="30px"
-                    w="60%"
-                    border="1px"
+                    direction="row"
                     align="center"
-                    justify="center"
-                    position="relative"
-                    borderColor={colorMode === 'light' ? "gray.200" : "gray.600"}
-                    boxShadow="sm"
-                    borderRadius="lg"
+                    justify="space-between"
+                    w="100%"
+                    h="100%"
                 >
                     <Box
-                        m="10px"
-                        h="10px"
-                        w="95%"
-                        border="1px"
-                        borderRadius="md"
-                        backgroundColor={colorMode === 'light' ? "gray.200" : "gray.600"}
-                        borderColor="gray.300">
-                    </Box>
-                    <Box
-                        h="15px"
-                        w="15px"
-                        border="1px"
-                        borderColor={colorMode === 'light' ? "gray.200" : "gray.800"}
-                        borderRadius="50%"
-                        position="absolute"
-                        left={determineMusicBarPercent(currentTime, currentSongDuration)}
-                        backgroundColor={colorMode === 'light' ? "blue.200" : "blue.400"}
-                    >
+                        fontSize="14px"
+                        w="20%"
+                        textAlign="center"
+                        fontFamily={"Roboto Mono, monospace"}
 
+                    >
+                        {playlist[currentSongIdx].title}
                     </Box>
-                </Flex>
-                <Flex>
-                    {isPlaying && <Image
-                        src={colorMode === 'light' ? "https://img.icons8.com/carbon-copy/100/000000/pause.png" : "https://img.icons8.com/dotty/80/ffffff/pause.png"}
-                        h={pausePlayIconSize}
-                        w={pausePlayIconSize}
-                        onMouseDown={() => setPausePlayIconSize("38px")}
-                        onMouseUp={() => setPausePlayIconSize("40px")}
-                        onMouseLeave={() => setPausePlayIconSize("40px")}
-                        onMouseEnter={() => setPausePlayIconSize("42px")}
-                        onClick={() => setIsPlaying(false)}
-                    />}
-                    {!isPlaying && <Image
-                        src={colorMode === 'light' ? "https://img.icons8.com/carbon-copy/100/000000/play.png" : "https://img.icons8.com/wired/64/ffffff/play.png"}
-                        h={pausePlayIconSize}
-                        w={pausePlayIconSize}
-                        onMouseDown={() => setPausePlayIconSize("38px")}
-                        onMouseUp={() => setPausePlayIconSize("40px")}
-                        onMouseLeave={() => setPausePlayIconSize("40px")}
-                        onMouseEnter={() => setPausePlayIconSize("42px")}
-                        onClick={() => setIsPlaying(true)}
-                    />}
-                    <Image
-                        src={colorMode === 'light' ? "https://img.icons8.com/dotty/80/000000/fast-forward.png" : "https://img.icons8.com/wired/64/ffffff/fast-forward.png"}
-                        h={nextIconSize}
-                        w={nextIconSize}
-                        onMouseDown={() => setNextIconSize("38px")}
-                        onMouseUp={() => setNextIconSize("40px")}
-                        onMouseLeave={() => setNextIconSize("40px")}
-                        onMouseEnter={() => setNextIconSize("42px")}
-                        onClick={playNextSong}
-                    />
-                    {isMuted && <Image
-                        h={mutedIconSize}
-                        w={mutedIconSize}
-                        src={colorMode === 'light' ? "https://img.icons8.com/dotty/80/000000/mute.png" : "https://img.icons8.com/dotty/80/ffffff/mute.png"}
-                        onMouseDown={() => setMutedIconSize("38px")}
-                        onMouseUp={() => setMutedIconSize("40px")}
-                        onMouseLeave={() => setMutedIconSize("40px")}
-                        onMouseEnter={() => setMutedIconSize("42px")}
-                        onClick={() => setIsMuted(false)}
-                    />}
-                    {!isMuted && <Image
-                        src={colorMode === 'light' ? "https://img.icons8.com/dotty/80/000000/room-sound.png" : "https://img.icons8.com/dotty/80/ffffff/room-sound.png"}
-                        h={mutedIconSize}
-                        w={mutedIconSize}
-                        onMouseDown={() => setMutedIconSize("38px")}
-                        onMouseUp={() => setMutedIconSize("40px")}
-                        onMouseLeave={() => setMutedIconSize("40px")}
-                        onMouseEnter={() => setMutedIconSize("42px")}
-                        onClick={() => setIsMuted(true)}
-                    />}
-                </Flex>
-            </Flex> : (
+                    <Flex
+                        h="30px"
+                        w="60%"
+                        border="1px"
+                        align="center"
+                        justify="center"
+                        position="relative"
+                        borderColor={colorMode === 'light' ? "gray.200" : "gray.600"}
+                        boxShadow="sm"
+                        borderRadius="lg"
+                    >
+                        <Box
+                            m="10px"
+                            h="10px"
+                            w="95%"
+                            border="1px"
+                            borderRadius="md"
+                            backgroundColor={colorMode === 'light' ? "gray.200" : "gray.600"}
+                            borderColor="gray.300">
+                        </Box>
+                        <Box
+                            h="15px"
+                            w="15px"
+                            border="1px"
+                            borderColor={colorMode === 'light' ? "gray.200" : "gray.800"}
+                            borderRadius="50%"
+                            position="absolute"
+                            left={determineMusicBarPercent(currentTime, currentSongDuration)}
+                            backgroundColor={colorMode === 'light' ? "blue.200" : "blue.400"}
+                        >
+
+                        </Box>
+                    </Flex>
+                    <Flex>
+                        {isPlaying && <Image
+                            src={colorMode === 'light' ? "https://img.icons8.com/carbon-copy/100/000000/pause.png" : "https://img.icons8.com/dotty/80/ffffff/pause.png"}
+                            h={pausePlayIconSize}
+                            w={pausePlayIconSize}
+                            onClick={() => setIsPlaying(false)}
+                            _hover={{
+                                cursor: "pointer"
+                            }}
+                        />}
+                        {!isPlaying && <Image
+                            src={colorMode === 'light' ? "https://img.icons8.com/carbon-copy/100/000000/play.png" : "https://img.icons8.com/wired/64/ffffff/play.png"}
+                            h={pausePlayIconSize}
+                            w={pausePlayIconSize}
+                            onClick={() => setIsPlaying(true)}
+                            _hover={{
+                                cursor: "pointer"
+                            }}
+                        />}
+                        <Image
+                            src={colorMode === 'light' ? "https://img.icons8.com/dotty/80/000000/fast-forward.png" : "https://img.icons8.com/wired/64/ffffff/fast-forward.png"}
+                            h={nextIconSize}
+                            w={nextIconSize}
+                            onClick={playNextSong}
+                            _hover={{
+                                cursor: "pointer"
+                            }}
+                        />
+                        {isMuted && <Image
+                            h={mutedIconSize}
+                            w={mutedIconSize}
+                            src={colorMode === 'light' ? "https://img.icons8.com/dotty/80/000000/mute.png" : "https://img.icons8.com/dotty/80/ffffff/mute.png"}
+                            onClick={() => setIsMuted(false)}
+                            _hover={{
+                                cursor: "pointer"
+                            }}
+                        />}
+                        {!isMuted && <Image
+                            src={colorMode === 'light' ? "https://img.icons8.com/dotty/80/000000/room-sound.png" : "https://img.icons8.com/dotty/80/ffffff/room-sound.png"}
+                            h={mutedIconSize}
+                            w={mutedIconSize}
+                            onClick={() => setIsMuted(true)}
+                            _hover={{
+                                cursor: "pointer"
+                            }}
+                        />}
+                    </Flex>
+                </Flex> : (
                     <Box>
                         Loading...
                     </Box>
                 )}
-        </>
+        </Flex>
     )
 }
 

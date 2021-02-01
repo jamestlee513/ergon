@@ -4,6 +4,7 @@ import PomodoroTimer from './PomodoroTimer';
 import TodoList from './TodoComponent/TodoList';
 import { useSelector } from 'react-redux';
 import PlaybarComponent from './PlaybarComponent';
+import NavBar from './NavBar';
 
 
 function HomePage({ isFirstVisit, setIsFirstVisit }) {
@@ -27,8 +28,11 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
             h="100%"
             w="100%"
             gridTemplateColumns="6fr 4fr 4fr 3fr"
-            gridTemplateRows="5fr 7fr 1fr"
+            gridTemplateRows="70px 5fr 400px 1fr"
         >
+            <GridItem colSpan={4}>
+                <NavBar />
+            </GridItem>
             <GridItem
                 // margin={3}
                 border='1px'

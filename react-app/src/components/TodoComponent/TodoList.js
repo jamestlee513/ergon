@@ -22,7 +22,7 @@ function TodoList() {
     }
 
     return (
-        <Stack>
+        <Stack h="100%">
             <Flex
                 direction="row"
                 justify="space-between"
@@ -53,7 +53,7 @@ function TodoList() {
                 p={2}
                 m={1}
                 overflow="auto"
-                h="285px"
+                h="100%"
             >
                 {showTodoForm && <TodoItemForm setShowTodoForm={setShowTodoForm} />}
                 {todos.map(todoItem => <TodoItem
