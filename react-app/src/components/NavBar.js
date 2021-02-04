@@ -5,7 +5,6 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { removeUser } from '../reducers/userReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { MoonIcon } from '@chakra-ui/icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function NavBar() {
 
@@ -42,7 +41,7 @@ function NavBar() {
             <Box>
                 <Flex align="center" justify="center">
                     <Image h="40px" w="40px" src="https://i.ibb.co/RQ9wbWm/ergon-logo.png" />
-                    <Heading ml="15px">ergon</Heading>
+                    <Heading ml="15px">Ergon</Heading>
                 </Flex>
             </Box>
 

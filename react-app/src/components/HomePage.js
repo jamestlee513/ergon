@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { Grid, GridItem, useColorMode, useToast } from '@chakra-ui/react';
-import PomodoroTimer from './PomodoroTimer';
+import PomodoroTimer from './HomePageComponents/PomodoroTimer';
 import TodoList from './TodoComponent/TodoList';
 import { useSelector } from 'react-redux';
-import PlaybarComponent from './PlaybarComponent';
+import PlaybarComponent from './HomePageComponents/PlaybarComponent';
 import NavBar from './NavBar';
+import MemoComponent from './HomePageComponents/MemoComponent';
 
 
 function HomePage({ isFirstVisit, setIsFirstVisit }) {
@@ -66,7 +67,9 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
                 borderColor="gray.400"
                 borderRadius={4}
                 boxShadow="md"
-            >Memo Component</GridItem>
+            >
+                <MemoComponent />
+            </GridItem>
             <GridItem
                 // margin={3}
                 border='1px'

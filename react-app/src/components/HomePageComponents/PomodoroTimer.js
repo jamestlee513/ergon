@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { secondsToTime } from '../services/util';
+import { secondsToTime } from '../../services/util';
 function PomodoroTimer() {
     const WORKTIME = 1500;
     const BREAKTIME = 300;

@@ -73,7 +73,7 @@ function SplashPage() {
                     <FadeIn transitionDuration="2000">
                         <Flex align="center">
                             <Image h="200px" w="200px" src="https://i.ibb.co/RQ9wbWm/ergon-logo.png" />
-                            <Box fontSize="80px" color="white" fontFamily="Roboto Mono">ergon</Box>
+                            <Box fontSize="80px" color="white" fontFamily="Roboto Mono">Ergon</Box>
                         </Flex>
                     </FadeIn>
                     <FadeIn delay="1000" transitionDuration="2000">
