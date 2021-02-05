@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { Grid, GridItem, useColorMode, useToast } from '@chakra-ui/react';
+import { Grid, GridItem, useToast } from '@chakra-ui/react';
 import PomodoroTimer from './HomePageComponents/PomodoroTimer';
-import TodoList from './TodoComponent/TodoList';
+import TodoList from './HomePageComponents/TodoComponent/TodoList';
 import { useSelector } from 'react-redux';
 import PlaybarComponent from './HomePageComponents/PlaybarComponent';
 import NavBar from './NavBar';

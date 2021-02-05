@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import TodoItem from './TodoItem';
 import TodoItemForm from './TodoItemForm';
-import { loadUserTodos, clearCheckedTodos } from '../../reducers/todoListReducer';
+import { loadUserTodos, clearCheckedTodos } from '../../../reducers/todoListReducer';
 
 function TodoList() {
 
@@ -31,7 +31,7 @@ function TodoList() {
                 ml={3}
                 mr={3}
             >
-                <Box p={2} fontWeight="bold">
+                <Box p={2} fontWeight="bold" fontFamily={"Roboto, monospace"}>
                     Todo List
                 </Box>
                 <ButtonGroup>

@@ -9,3 +9,6 @@ class Memo(db.Model):
     text = db.Column(db.Text, nullable=True)
 
     user = db.relationship("User", back_populates="memo")
+
+    def to_text(self):
+        return self.text

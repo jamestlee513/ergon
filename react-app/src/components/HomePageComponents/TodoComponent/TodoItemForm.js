@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { ListItem, Flex, Checkbox, Input, Box, useColorMode } from '@chakra-ui/react';
-import { priorityLevelToColor } from '../../services/util';
+import { priorityLevelToColor } from '../../../services/util';
 import { useDispatch, useSelector } from 'react-redux';
-import { postNewTodo } from '../../reducers/todoListReducer';
+import { postNewTodo } from '../../../reducers/todoListReducer';
 
 function TodoItemForm({ setShowTodoForm }) {
 
