@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Textarea } from '@chakra-ui/react';
+import { Box, Flex, Image, Textarea, useColorMode } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMemo, createMemo, editMemo } from '../../reducers/memoReducer';
@@ -9,6 +9,7 @@ function MemoComponent() {
     const [isChanging, setIsChanging] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
     const dispatch = useDispatch();
+    const { colorMode } = useColorMode();
     const currentUser = useSelector(state => state.user);
 
     useEffect(() => {
@@ -68,7 +69,7 @@ function MemoComponent() {
                 </Flex>
                 <Box p={2} m={1} mt={0} h="83%">
                     <Textarea h="100%"
-                        backgroundColor="#fffca1"
+                        backgroundColor={colorMode === 'light' ? "#fffca1" : "#157ac2"}
                         // placeholder="Write your memos here!"
                         resize="none"
                         value={memo}
