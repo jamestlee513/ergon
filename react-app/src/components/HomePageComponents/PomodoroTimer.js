@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { secondsToTime } from '../../services/util';
 function PomodoroTimer() {
     const WORKTIME = 1500;
-    const BREAKTIME = 300;
+    const BREAKTIME = 5;
 
     const [timer, setTimer] = useState(WORKTIME);
     const [breakTimer, setBreakTimer] = useState(BREAKTIME);
@@ -14,8 +14,25 @@ function PomodoroTimer() {
     useEffect(() => {
         if (isTimerOn) {
             const interval = setInterval(() => {
-                !isBreak ? setTimer(prevTime => prevTime - 1) :
-                    setBreakTimer(prevTime => prevTime - 1)
+                if (!isBreak) {
+                    let time = WORKTIME;
+                    setTimer(prevTime => {
+                        time = prevTime - 1;
+                        return time;
+                    });
+                    if (time === 0) {
+                        setIsTimerOn(false);
+                    }
+                } else {
+                    let time = BREAKTIME;
+                    setBreakTimer(prevTime => {
+                        time = prevTime - 1;
+                        return time;
+                    });
+                    if (time === 0) {
+                        setIsTimerOn(false);
+                    }
+                }
             }, 1000)
             setTimerInterval(interval);
             return () => {
@@ -51,7 +68,7 @@ function PomodoroTimer() {
             >{isBreak ? secondsToTime(breakTimer) : secondsToTime(timer)}</Box>
             <ButtonGroup>
                 <Button onClick={() => setIsTimerOn(true)}>Start</Button>
-                <Button onClick={() => setIsTimerOn(false)}>Stop</Button>
+                <Button onClick={() => setIsTimerOn(false)}>Pause</Button>
                 <Button onClick={handleReset}>Reset</Button>
                 <Button onClick={() => setIsBreak(prevState => !prevState)}>
                     {isBreak ? "Work" : "Break"}
