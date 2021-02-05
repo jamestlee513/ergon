@@ -1,11 +1,13 @@
-import { Box, Flex, Stack, Textarea } from '@chakra-ui/react';
+import { Box, Flex, Image, Textarea } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMemo, createMemo, editMemo } from '../../reducers/memoReducer';
 
 function MemoComponent() {
 
-    const [memo, setMemo] = useState('');
+    const [memo, setMemo] = useState(null);
+    const [isChanging, setIsChanging] = useState(false);
+    const [isTyping, setIsTyping] = useState(false);
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.user);
 
@@ -18,39 +20,64 @@ function MemoComponent() {
             } else {
                 setMemo(res.memo);
             }
-    })();
-}, [currentUser])
+        })();
+    }, [currentUser])
 
-const handleChange = e => {
-    setMemo(e.target.value);
-    dispatch(editMemo(currentUser.id, e.target.value));
-}
+    useEffect(() => {
+        const interval = setTimeout(async () => {
+            if (memo) await dispatch(editMemo(currentUser.id, memo));
+            setIsChanging(false);
+        }, 2000)
+        return () => {
+            setIsTyping(false);
+            clearInterval(interval);
+        }
+    }, [isTyping])
 
-return (
-    <Stack direction="column" h="100%">
-        <Flex
-            direction="row"
-            justify="space-between"
-            align="center"
-            h="15%"
-            p={3}
-            ml={3}
-            mr={3}
-        >
-            <Box p={2} fontWeight="bold" fontFamily={"Roboto, monospace"}>
-                Memos
+
+    const handleChange = e => {
+        setMemo(e.target.value);
+        setIsChanging(true);
+        setIsTyping(true);
+    }
+
+    return (
+        <>
+            <Flex h="100%" direction="column">
+                <Flex
+                    direction="row"
+                    justify="space-between"
+                    align="center"
+                    h="13%"
+                    p={3}
+                    ml={3}
+                    mr={3}
+                >
+                    <Flex
+                        p={2}
+                        fontWeight="bold"
+                        fontFamily={"Roboto, monospace"}
+                        direction="row"
+                        justify="space-between"
+                        align="center"
+                    >
+                        <Box>Memos</Box>
+                        {isChanging && <Image src="https://i.ibb.co/dDD36tB/Spinner.gif" h="20px" w="20px" ml={2} />}
+
+                    </Flex>
+                </Flex>
+                <Box p={2} m={1} mt={0} h="83%">
+                    <Textarea h="100%"
+                        backgroundColor="#fffca1"
+                        // placeholder="Write your memos here!"
+                        resize="none"
+                        value={memo}
+                        onChange={handleChange}
+                    />
                 </Box>
-        </Flex>
-        <Box p={2} m={1} h="80%">
-            <Textarea h="100%"
-                placeholder="Write your memos here!"
-                resize="none"
-                value={memo}
-                onChange={handleChange}
-            />
-        </Box>
-    </Stack>
-)
+            </Flex >
+        </>
+    )
 }
 
 export default MemoComponent;
