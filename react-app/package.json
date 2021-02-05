@@ -22,6 +22,7 @@
     "react-fade-in": "^2.0.0",
     "react-particles-js": "^3.4.1",
     "react-player": "^2.7.2",
+    "react-preload-image": "^1.0.7",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",

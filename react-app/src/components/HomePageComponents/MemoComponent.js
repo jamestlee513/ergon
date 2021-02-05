@@ -1,16 +1,22 @@
-import { Box, Flex, Image, Textarea, useColorMode } from '@chakra-ui/react';
+import { Box, Flex, Image as ChakraImage, Textarea, useColorMode } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PreloadImage from 'react-preload-image';
 import { getMemo, createMemo, editMemo } from '../../reducers/memoReducer';
 
 function MemoComponent() {
 
-    const [memo, setMemo] = useState(null);
+    const [memo, setMemo] = useState(undefined);
     const [isChanging, setIsChanging] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
     const dispatch = useDispatch();
     const { colorMode } = useColorMode();
     const currentUser = useSelector(state => state.user);
+
+    useEffect(() => {
+        (async () => {
+        })();
+    }, [])
 
     useEffect(() => {
         (async () => {
@@ -63,7 +69,14 @@ function MemoComponent() {
                         align="center"
                     >
                         <Box>Memos</Box>
-                        {isChanging && <Image src="https://i.ibb.co/dDD36tB/Spinner.gif" h="20px" w="20px" ml={2} />}
+                        {isChanging && <PreloadImage src="https://i.ibb.co/dDD36tB/Spinner.gif"
+                            style={{
+                                position: "relative",
+                                width: "20px",
+                                height: "20px"
+                            }}
+                            ease="none"
+                            ml={2} />}
 
                     </Flex>
                 </Flex>

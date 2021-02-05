@@ -1,15 +1,17 @@
 import { Box, Button, ButtonGroup, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+import ReactPlayer from 'react-player';
 import { secondsToTime } from '../../services/util';
 function PomodoroTimer() {
     const WORKTIME = 1500;
-    const BREAKTIME = 5;
+    const BREAKTIME = 2;
 
     const [timer, setTimer] = useState(WORKTIME);
     const [breakTimer, setBreakTimer] = useState(BREAKTIME);
     const [isBreak, setIsBreak] = useState(false);
     const [isTimerOn, setIsTimerOn] = useState(false);
     const [timerInterval, setTimerInterval] = useState(null);
+    const [isAlarm, setIsAlarm] = useState(false);
 
     useEffect(() => {
         if (isTimerOn) {
@@ -22,6 +24,7 @@ function PomodoroTimer() {
                     });
                     if (time === 0) {
                         setIsTimerOn(false);
+                        setIsAlarm(true);
                     }
                 } else {
                     let time = BREAKTIME;
@@ -31,6 +34,7 @@ function PomodoroTimer() {
                     });
                     if (time === 0) {
                         setIsTimerOn(false);
+                        setIsAlarm(true);
                     }
                 }
             }, 1000)
@@ -66,6 +70,14 @@ function PomodoroTimer() {
                 p={4}
                 fontSize="60pt"
             >{isBreak ? secondsToTime(breakTimer) : secondsToTime(timer)}</Box>
+            <ReactPlayer
+                style={{ display: "none" }}
+                url="https://onlineclock.net/audio/options/default.mp3"
+                playing={isAlarm}
+                volume={0.035}
+                onEnded={() => setIsAlarm(false)}
+            >
+            </ReactPlayer>
             <ButtonGroup>
                 <Button onClick={() => setIsTimerOn(true)}>Start</Button>
                 <Button onClick={() => setIsTimerOn(false)}>Pause</Button>
