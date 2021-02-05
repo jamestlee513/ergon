@@ -11,17 +11,17 @@ export const getMemo = (userId) => async dispatch => {
     const res = await fetch(`/api/memos/${userId}`)
     const memo = await res.json();
     if (!memo.error) {
-        dispatch(setMemo(memo.text));
-        return memo.text;
-    } else {
-        const newMemo = createMemo(userId);
-        return newMemo;
+        console.log("nooo....")
+        dispatch(setMemo(memo));
+        return memo;
     }
+    console.log("ERROR!")
+    return memo;
 
 }
 
 export const createMemo = (userId) => async dispatch => {
-    const res = await fetch('/api/memos', {
+    const res = await fetch('/api/memos/', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -32,15 +32,15 @@ export const createMemo = (userId) => async dispatch => {
     });
     const memo = await res.json();
     if (!memo.error) {
-        dispatch(setMemo(memo.text))
-        return memo.text;
+        dispatch(setMemo(memo))
+        return memo;
     } else {
-        return { errors: memo.error }
+        return memo;
     }
 }
 
 export const editMemo = (userId, text) => async dispatch => {
-    const res = await fetch('/api/memos', {
+    const res = await fetch('/api/memos/', {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -52,8 +52,8 @@ export const editMemo = (userId, text) => async dispatch => {
     });
     const memo = await res.json();
     if (!memo.error) {
-        dispatch(setMemo(memo.text));
-        return memo.text;
+        dispatch(setMemo(memo));
+        return memo;
     } else {
         return { error: memo.error }
     }
