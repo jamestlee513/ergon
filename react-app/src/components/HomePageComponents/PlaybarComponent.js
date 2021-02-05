@@ -1,8 +1,9 @@
-import { Box, Flex, useColorMode } from '@chakra-ui/react';
+import { Box, color, Flex, useColorMode } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { determineMusicBarPercent } from '../../services/util';
 import PreloadImage from 'react-preload-image';
+import PlaybarButton from './PlaybarButton';
 
 function PlaybarComponent() {
 
@@ -47,6 +48,10 @@ function PlaybarComponent() {
             }
         }
     }, [ref]);
+
+    useEffect(() => {
+        // console.log(colorMode);
+    }, [colorMode])
 
     const playNextSong = async () => {
         if (currentSongIdx + 1 === playlist.length) {
@@ -131,135 +136,37 @@ function PlaybarComponent() {
                     {/* Playbar controls */}
                     <Flex>
                         {/* Pause */}
-                        {isPlaying && <Box
-                            h="40px"
-                            w="40px"
-                            onClick={() => setIsPlaying(false)}
-                            _hover={{
-                                cursor: "pointer",
-                                borderRadius: "sm",
-                                background: "gray.200",
-                                transition: "background .25s"
-                            }}
-                            _active={{
-                                border: "2px solid transparent",
-                                background: "gray.400"
-                            }}
-                        >
-                            <PreloadImage
-                                src={colorMode === 'light' ? "https://img.icons8.com/carbon-copy/100/000000/pause.png" : "https://img.icons8.com/dotty/80/ffffff/pause.png"}
-                                style={{
-                                    height: "100%",
-                                    width: "100%",
-                                    position: "relative"
-                                }}
-                            />
-                        </Box>}
+                        {isPlaying &&
+                            <PlaybarButton
+                                toggleFunction={() => setIsPlaying(false)}
+                                lightSrc="https://img.icons8.com/carbon-copy/100/000000/pause.png"
+                                darkSrc="https://img.icons8.com/dotty/80/ffffff/pause.png" />}
 
-                        {/* Play */}
-                        {!isPlaying && <Box
-                            h="40px"
-                            w="40px"
-                            onClick={() => setIsPlaying(true)}
-                            _hover={{
-                                cursor: "pointer",
-                                borderRadius: "sm",
-                                background: "gray.200",
-                                transition: "background .25s"
-                            }}
-                            _active={{
-                                border: "2px solid transparent",
-                                background: "gray.400"
-                            }}
-                        >
-                            <PreloadImage
-                                style={{
-                                    height: "100%",
-                                    width: "100%",
-                                    position: "relative"
-                                }}
-                                src={colorMode === 'light' ? "https://img.icons8.com/carbon-copy/100/000000/play.png" : "https://img.icons8.com/wired/64/ffffff/play.png"}
+                        {!isPlaying &&
+                            <PlaybarButton
+                                toggleFunction={() => setIsPlaying(true)}
+                                lightSrc="https://img.icons8.com/carbon-copy/100/000000/play.png"
+                                darkSrc="https://img.icons8.com/dotty/80/ffffff/play.png"
                             />
-                        </Box>}
-
-                        {/* Next song */}
-                        <Box
-                            h="40px"
-                            w="40px"
-                            onClick={playNextSong}
-                            _hover={{
-                                cursor: "pointer",
-                                borderRadius: "sm",
-                                background: "gray.200",
-                                transition: "background .25s"
-                            }}
-                            _active={{
-                                border: "2px solid transparent",
-                                background: "gray.400"
-                            }}
-                        >
-                            <PreloadImage
-                                style={{
-                                    height: "100%",
-                                    width: "100%",
-                                    position: "relative"
-                                }}
-                                src={colorMode === 'light' ? "https://img.icons8.com/dotty/80/000000/fast-forward.png" : "https://img.icons8.com/wired/64/ffffff/fast-forward.png"}
+                        }
+                        <PlaybarButton
+                            toggleFunction={playNextSong}
+                            lightSrc="https://img.icons8.com/dotty/80/000000/fast-forward.png"
+                            darkSrc="https://img.icons8.com/wired/64/ffffff/fast-forward.png"
+                        />
+                        {isMuted &&
+                            <PlaybarButton
+                                toggleFunction={() => setIsMuted(false)}
+                                lightSrc="https://img.icons8.com/dotty/80/000000/mute.png"
+                                darkSrc="https://img.icons8.com/dotty/80/ffffff/mute.png"
                             />
-                        </Box>
-
-                        {/* Muted */}
-                        {isMuted && <Box
-                            h="40px"
-                            w="40px"
-                            onClick={() => setIsMuted(false)}
-                            _hover={{
-                                cursor: "pointer",
-                                borderRadius: "sm",
-                                background: "gray.200",
-                                transition: "background .25s"
-                            }}
-                            _active={{
-                                border: "2px solid transparent",
-                                background: "gray.400"
-                            }}
-                        >
-                            <PreloadImage
-                                style={{
-                                    height: "100%",
-                                    width: "100%",
-                                    position: "relative"
-                                }}
-                                src={colorMode === 'light' ? "https://img.icons8.com/dotty/80/000000/mute.png" : "https://img.icons8.com/dotty/80/ ffffff/mute.png"}
-                            />
-                        </Box>}
-
-                        {/* Unmuted */}
-                        {!isMuted && <Box
-                            h="40px"
-                            w="40px"
-                            onClick={() => setIsMuted(true)}
-                            _hover={{
-                                cursor: "pointer",
-                                borderRadius: "sm",
-                                background: "gray.200",
-                                transition: "background .25s"
-                            }}
-                            _active={{
-                                border: "2px solid transparent",
-                                background: "gray.400"
-                            }}
-
-                        >
-                            <PreloadImage
-                                style={{
-                                    height: "100%",
-                                    width: "100%",
-                                    position: "relative"
-                                }}
-                                src={colorMode === 'light' ? "https://img.icons8.com/dotty/80/000000/room-sound.png" : "https://img.icons8.com/dotty/80/ffffff/room-sound.png"}
-                            />
-                        </Box>}
+                        }
+                        {!isMuted &&
+                            <PlaybarButton
+                                toggleFunction={() => setIsMuted(true)}
+                                lightSrc="https://img.icons8.com/dotty/80/000000/room-sound.png"
+                                darkSrc="https://img.icons8.com/dotty/80/ffffff/room-sound.png"
+                            />}
                     </Flex>
                 </Flex> : (
                     <Box>
