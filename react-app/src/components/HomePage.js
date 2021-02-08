@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import PlaybarComponent from './HomePageComponents/PlaybarComponent';
 import NavBar from './NavBar';
 import MemoComponent from './HomePageComponents/MemoComponent';
+import CalendarFrame from './HomePageComponents/CalendarComponent/CalendarFrame';
 
 
 function HomePage({ isFirstVisit, setIsFirstVisit }) {
@@ -51,7 +52,7 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
                 borderRadius={4}
                 boxShadow="md"
                 rowSpan={3}
-            >Calendar Component (Coming soon!)</GridItem>
+            ><CalendarFrame /></GridItem>
             <GridItem
                 // margin={3}
                 border='1px'

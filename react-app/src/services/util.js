@@ -43,3 +43,26 @@ export function determineMusicBarPercent(currentTime, songDuration) {
     const cssPercent = Math.floor(percent * .95) + 2
     return cssPercent + "%";
 }
+
+export function digitHourToString(digitHour) {
+    if(typeof digitHour !== 'number' || digitHour > 24 || digitHour < 0) {
+        throw new Error('Invalid digitHour!');
+    }
+    let meridiem = "AM";
+    if(digitHour > 11) {
+        meridiem = "PM";
+        digitHour -= 12;
+    }
+    if(digitHour === 0) {
+        return "12" + meridiem;
+    } else {
+        return digitHour + meridiem;
+    }
+}
+
+export function timeStringToNumber(timeString) {
+    const timeComponents = timeString.split(' ');
+    let timeNumber = parseInt(timeComponents[0], 10);
+    if(timeComponents[1] === "PM") timeNumber += 12;
+    return timeNumber;
+}

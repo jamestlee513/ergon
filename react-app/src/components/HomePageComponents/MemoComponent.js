@@ -1,4 +1,4 @@
-import { Box, Flex, Image as ChakraImage, Textarea, useColorMode } from '@chakra-ui/react';
+import { Box, Flex, Textarea, useColorMode } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PreloadImage from 'react-preload-image';
