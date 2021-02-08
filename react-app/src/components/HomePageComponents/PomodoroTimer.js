@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player';
 import { secondsToTime } from '../../services/util';
 function PomodoroTimer() {
     const WORKTIME = 1500;
-    const BREAKTIME = 2;
+    const BREAKTIME = 300;
 
     const [timer, setTimer] = useState(WORKTIME);
     const [breakTimer, setBreakTimer] = useState(BREAKTIME);

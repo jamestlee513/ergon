@@ -9,6 +9,7 @@ function MemoComponent() {
     const [memo, setMemo] = useState(undefined);
     const [isChanging, setIsChanging] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
+    const [displaySaved, setDisplaySaved] = useState(false);
     const dispatch = useDispatch();
     const { colorMode } = useColorMode();
     const currentUser = useSelector(state => state.user);
@@ -31,6 +32,7 @@ function MemoComponent() {
     }, [currentUser])
 
     useEffect(() => {
+        setDisplaySaved(false);
         const interval = setTimeout(async () => {
             if (memo) await dispatch(editMemo(currentUser.id, memo));
             setIsChanging(false);
@@ -40,6 +42,18 @@ function MemoComponent() {
             clearInterval(interval);
         }
     }, [isTyping])
+
+    useEffect(() => {
+        if (!isChanging) {
+            setDisplaySaved(true);
+            const interval = setTimeout(() => {
+                setDisplaySaved(false);
+            }, 1500);
+            return () => {
+                clearInterval(interval);
+            }
+        }
+    }, [isChanging])
 
 
     const handleChange = e => {
@@ -69,14 +83,22 @@ function MemoComponent() {
                         align="center"
                     >
                         <Box>Memos</Box>
-                        {isChanging && <PreloadImage src="https://i.ibb.co/dDD36tB/Spinner.gif"
-                            style={{
-                                position: "relative",
-                                width: "20px",
-                                height: "20px"
-                            }}
-                            ease="none"
-                            ml={2} />}
+                        {isChanging &&
+                            <Box ml={2}>
+                                <PreloadImage src="https://i.ibb.co/dDD36tB/Spinner.gif"
+                                    style={{
+                                        position: "relative",
+                                        width: "20px",
+                                        height: "20px"
+                                    }}
+                                    ease="none" />
+                            </Box>}
+                        {displaySaved &&
+                            <Box ml={2} style={{
+                                color: "green"
+                            }}>
+                                <i class="fas fa-check"></i>
+                            </Box>}
 
                     </Flex>
                 </Flex>

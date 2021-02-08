@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ListItem, Flex, Checkbox, Input, Box, useColorMode } from '@chakra-ui/react';
 import { priorityLevelToColor } from '../../../services/util';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,13 @@ function TodoItemForm({ setShowTodoForm }) {
     const [priorityLevel, setPriorityLevel] = useState(2);
     const [isError, setIsError] = useState(false);
     const { colorMode } = useColorMode();
+    const todoInput = React.createRef();
+
+    useEffect(()=> {
+        if(setShowTodoForm) {
+            todoInput.current.focus();
+        }
+    }, [setShowTodoForm])
 
     const createNewTodo = async e => {
         if (e.key === 'Enter') {
@@ -79,6 +86,7 @@ function TodoItemForm({ setShowTodoForm }) {
                     />
                 </Flex>
                 <Input
+                    ref={todoInput}
                     h="25px"
                     margin={2}
                     onChange={e => setNewTodo(e.target.value)}
