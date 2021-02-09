@@ -60,9 +60,21 @@ export function digitHourToString(digitHour) {
     }
 }
 
-export function timeStringToNumber(timeString) {
+export function getCurrentTimeNumber() {
+    const timeString = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     const timeComponents = timeString.split(' ');
-    let timeNumber = parseInt(timeComponents[0], 10);
+    const hourAndMin = timeComponents[0].split(':');
+    const hour = parseInt(hourAndMin[0], 10);
+    const min = parseInt(hourAndMin[1], 10);
+    let timeNumber = hour + (min / 60);
     if(timeComponents[1] === "PM") timeNumber += 12;
     return timeNumber;
+}
+
+export function calculateTimePercent(start, end, currentTimeNumber) {
+    // 13.666
+    const range = end - start;
+    const fraction = (currentTimeNumber - start) / range;
+    const percent = (fraction * 100).toFixed(2);
+    return percent + "%";
 }

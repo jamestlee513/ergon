@@ -1,14 +1,29 @@
 import { Box, Flex, Stack } from '@chakra-ui/react';
-import React from 'react';
-import { digitHourToString } from '../../../services/util';
+import React, { useEffect, useState } from 'react';
+import { calculateTimePercent, digitHourToString, getCurrentTimeNumber } from '../../../services/util';
 
 
 // Bounds of the calendar. Currently 7am to midnight
 
 function CalendarFrame() {
 
+    const START_TIME = 7; // 7am
+    const END_TIME = 24;  // 12am
+
+    const [timePercent, setTimePercent] = useState(calculateTimePercent(START_TIME, END_TIME, getCurrentTimeNumber()));
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTimePercent(calculateTimePercent(START_TIME, END_TIME, getCurrentTimeNumber()));
+        }, 1000)
+        return () => {
+            clearInterval(interval);
+        }
+    }, []);
+
+
     let times = [];
-    for (let i = 7; i <= 24; i++) {
+    for (let i = START_TIME; i <= END_TIME; i++) {
         times.push(i);
     }
 
@@ -26,6 +41,10 @@ function CalendarFrame() {
                     </Flex>
                 )}
             </Flex>
+            <Flex position="absolute" width="100%" height="100%" direction="row" justify="flex-end">
+                    <Box position="absolute" w="87%" borderBottom="1px red solid" top={timePercent} />
+            </Flex>
+
         </Flex>
     )
 }
