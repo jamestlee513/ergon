@@ -39,8 +39,8 @@ export function priorityLevelToColor(level) {
 }
 
 export function determineMusicBarPercent(currentTime, songDuration) {
-    const percent = Math.floor(currentTime/songDuration * 100);
-    const cssPercent = Math.floor(percent * .95) + 2
+    const percent = (currentTime/songDuration * 100);
+    const cssPercent = ((percent * .95) + 2).toFixed(2);
     return cssPercent + "%";
 }
 

@@ -1,8 +1,7 @@
-import { Box, color, Flex, useColorMode } from '@chakra-ui/react';
+import { Box, Flex, useColorMode } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { determineMusicBarPercent } from '../../services/util';
-import PreloadImage from 'react-preload-image';
 import PlaybarButton from './PlaybarButton';
 
 function PlaybarComponent() {
@@ -26,8 +25,8 @@ function PlaybarComponent() {
     const [songUrl, setSongUrl] = useState('');
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
-    const [currentTime, setCurrentTime] = useState(0);
-    const [currentSongDuration, setCurrentSongDuration] = useState(0);
+    const [currentTime, setCurrentTime] = useState(null);
+    const [currentSongDuration, setCurrentSongDuration] = useState(null);
     const [isLoadSuccess, setIsLoadSuccess] = useState(false);
     const { colorMode } = useColorMode();
 
@@ -119,7 +118,7 @@ function PlaybarComponent() {
                             backgroundColor={colorMode === 'light' ? "gray.200" : "gray.600"}
                             borderColor="gray.300">
                         </Box>
-                        <Box
+                        {(currentTime !== null && currentSongDuration !== null) && <Box
                             h="15px"
                             w="15px"
                             border="1px"
@@ -129,8 +128,7 @@ function PlaybarComponent() {
                             left={determineMusicBarPercent(currentTime, currentSongDuration)}
                             backgroundColor={colorMode === 'light' ? "blue.200" : "blue.400"}
                         >
-
-                        </Box>
+                        </Box>}
                     </Flex>
 
                     {/* Playbar controls */}
