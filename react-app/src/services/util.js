@@ -72,9 +72,10 @@ export function getCurrentTimeNumber() {
 }
 
 export function calculateTimePercent(start, end, currentTimeNumber) {
-    // 13.666
     const range = end - start;
-    const fraction = (currentTimeNumber - start) / range;
+    const relativeNumber = currentTimeNumber - start;
+    const fraction = relativeNumber / range;
+    if (fraction > 1 || fraction < 0) return null;
     const percent = (fraction * 100).toFixed(2);
     return percent + "%";
 }
