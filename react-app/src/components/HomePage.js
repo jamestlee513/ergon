@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Grid, GridItem, useToast } from '@chakra-ui/react';
+import { Box, Grid, GridItem, useToast } from '@chakra-ui/react';
 import PomodoroTimer from './HomePageComponents/PomodoroTimer';
 import TodoList from './HomePageComponents/TodoComponent/TodoList';
 import { useSelector } from 'react-redux';
@@ -77,7 +77,11 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
                 borderColor="gray.400"
                 borderRadius={4}
                 boxShadow="md"
-            >Friends Component (Optional)</GridItem>
+            >
+                <Box p={2} ml={2} fontFamily={"Roboto, monospace"}>
+                    Friends (Coming soon!!!)
+                </Box>
+            </GridItem>
             <GridItem
                 // margin={3}
                 border='1px'
