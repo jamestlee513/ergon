@@ -97,7 +97,7 @@ function MemoComponent() {
                             <Box ml={2} style={{
                                 color: "green"
                             }}>
-                                <i class="fas fa-check"></i>
+                                <i className="fas fa-check"></i>
                             </Box>}
 
                     </Flex>
