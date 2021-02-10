@@ -11,7 +11,6 @@ export const getMemo = (userId) => async dispatch => {
     const res = await fetch(`/api/memos/${userId}`)
     const memo = await res.json();
     if (!memo.error) {
-        console.log("nooo....")
         dispatch(setMemo(memo));
         return memo;
     }
