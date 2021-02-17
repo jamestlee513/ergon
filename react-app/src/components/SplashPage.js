@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import LoginSigninPage from './auth/LoginSigninPage';
 import Particles from 'react-particles-js';
 import FadeIn from 'react-fade-in';
+import PreloadImage from 'react-preload-image';
 
 function SplashPage() {
 
@@ -86,7 +87,12 @@ function SplashPage() {
             <Flex justify="space-around" align="center" w="90%">
                 <FadeIn transitionDuration="2000">
                     <Flex align="center">
-                        <Image h="200px" w="200px" src="https://i.ibb.co/RQ9wbWm/ergon-logo.png" />
+                        <PreloadImage style={{
+                            height: "200px",
+                            width: "200px",
+                            position: "relative"
+                        }} 
+                        src="https://i.ibb.co/RQ9wbWm/ergon-logo.png" />
                         <Box fontSize="80px" color="white" fontFamily="Roboto Mono">Ergon</Box>
                     </Flex>
                 </FadeIn>

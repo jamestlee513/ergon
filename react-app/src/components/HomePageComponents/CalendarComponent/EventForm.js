@@ -1,10 +1,14 @@
 import { InfoIcon, TimeIcon } from '@chakra-ui/icons';
 import { Box, Button, Container, Divider, Flex, FormControl, Input, InputGroup, InputLeftElement, List, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Stack, UnorderedList } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { postEvent } from '../../../reducers/eventReducer';
 
 
 function EventForm({ isOpen, onOpen, onClose }) {
 
+    const currentUser = useSelector(state => state.user);
+    const dispatch = useDispatch();
     const [title, setTitle] = useState('');
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
@@ -18,16 +22,16 @@ function EventForm({ isOpen, onOpen, onClose }) {
         setEndTime('');
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
-
         // Front-end error handling
         if (endTime <= startTime) {
             setErrors(['End time cannot be before start time!']);
             return;
         }
 
-
+        const res = await dispatch(postEvent(currentUser.id, title, startTime, endTime, 'dummy description', color));
+        console.log(res);
 
     }
 
