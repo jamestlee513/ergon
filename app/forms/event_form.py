@@ -13,5 +13,5 @@ class EventForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     description = TextField('description')
     background_color = StringField('background_color')
-    start_time = DateField('start_time', validators=[DataRequired()])
-    end_time = DateField('end_time', validators=[DataRequired()])
+    start_time = StringField('start_time', validators=[DataRequired()])
+    end_time = StringField('end_time', validators=[DataRequired()])

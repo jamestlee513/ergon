@@ -10,6 +10,7 @@ function EventForm({ isOpen, onOpen, onClose }) {
     const currentUser = useSelector(state => state.user);
     const dispatch = useDispatch();
     const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
     const [color, setColor] = useState('blue.400');
@@ -39,7 +40,7 @@ function EventForm({ isOpen, onOpen, onClose }) {
         endDateTime.setHours(endTimeSplit[0]);
         endDateTime.setMinutes(endTimeSplit[1]);
 
-        const res = await dispatch(postEvent(currentUser.id, title, startDateTime, endDateTime, 'dummy description', color));
+        const res = await dispatch(postEvent(currentUser.id, title, startDateTime, endDateTime, description, color));
         console.log(res);
 
     }
@@ -59,11 +60,21 @@ function EventForm({ isOpen, onOpen, onClose }) {
                                 <InputGroup display="flex" justifyContent="space-between" alignItems="center">
                                     <Box w="120px">Event title:</Box>
                                     <Input
-
                                         type="title"
                                         placeholder="Add event title"
                                         value={title}
                                         onChange={e => setTitle(e.target.value)}
+                                    />
+                                </InputGroup>
+                            </FormControl>
+                            <FormControl isRequired mb={2}>
+                                <InputGroup display="flex" justifyContent="space-between" alignItems="center">
+                                    <Box w="120px">Description:</Box>
+                                    <Input
+                                        type="text"
+                                        placeholder="Add event description (optional)"
+                                        value={description}
+                                        onChange={e => setDescription(e.target.value)}
                                     />
                                 </InputGroup>
                             </FormControl>
