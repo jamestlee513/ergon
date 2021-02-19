@@ -29,8 +29,17 @@ function EventForm({ isOpen, onOpen, onClose }) {
             setErrors(['End time cannot be before start time!']);
             return;
         }
+        const startDateTime = new Date();
+        const startTimeSplit = startTime.split(":");
+        startDateTime.setHours(startTimeSplit[0]);
+        startDateTime.setMinutes(startTimeSplit[1]);
 
-        const res = await dispatch(postEvent(currentUser.id, title, startTime, endTime, 'dummy description', color));
+        const endDateTime = new Date();
+        const endTimeSplit = endTime.split(":");
+        endDateTime.setHours(endTimeSplit[0]);
+        endDateTime.setMinutes(endTimeSplit[1]);
+
+        const res = await dispatch(postEvent(currentUser.id, title, startDateTime, endDateTime, 'dummy description', color));
         console.log(res);
 
     }

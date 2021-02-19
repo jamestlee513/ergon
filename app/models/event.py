@@ -13,3 +13,14 @@ class Event(db.Model):
     background_color = db.Column(db.String, nullable=False)
 
     user = db.relationship("User", back_populates="events")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "title": self.title,
+            "start_time": self.start_time,
+            "end_time": self.end_time,
+            "description": self.description,
+            "background_color": self.background_color
+        }

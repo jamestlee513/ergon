@@ -18,7 +18,6 @@ def get_user_todos(user_id):
 @todo_routes.route('', methods=['POST'])
 def new_todo():
     form = TodoForm()
-    print(request.get_json())
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         todo = TodoItem(
