@@ -1,5 +1,7 @@
 import { Box, Flex, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getEvents } from '../../../reducers/eventReducer';
 import { calculateTimePercent, digitHourToString, getCurrentTimeNumber } from '../../../services/util';
 import EventForm from './EventForm';
 
@@ -10,11 +12,23 @@ function CalendarFrame() {
 
     const START_TIME = 7; // 7am
     const END_TIME = 24;  // 12am
-
+    const currentUser = useSelector(state => state.user);
     const [timePercent, setTimePercent] = useState(calculateTimePercent(START_TIME, END_TIME, getCurrentTimeNumber()));
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const dispatch = useDispatch();
 
     useEffect(() => {
+        (async () => {
+            console.log("AHHHH")
+            console.log("AHHHH")
+            console.log("AHHHH")
+            console.log("AHHHH")
+            console.log("AHHHH")
+            console.log("AHHHH")
+            await dispatch(getEvents(currentUser.id));
+            console.log("AHH?")
+        })();
+
         const interval = setInterval(() => {
             setTimePercent(calculateTimePercent(START_TIME, END_TIME, getCurrentTimeNumber()));
         }, 1000)

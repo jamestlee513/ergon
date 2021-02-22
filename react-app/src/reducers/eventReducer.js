@@ -36,8 +36,10 @@ export const postEvent = (userId, title, startTime, endTime, description, backgr
 }
 
 export const getEvents = (userId) => async dispatch => {
-    const res = await fetch(`/api/events/${userId}/`);
-    console.log(res);
+    const res = await fetch(`/api/events/${userId}`);
+    const data = await res.json();
+    dispatch(loadEvents(data.events));
+    return data.events;
 }
 
 const eventReducer = (state = [], action) => {

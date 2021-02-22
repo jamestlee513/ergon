@@ -16,11 +16,6 @@ function EventForm({ isOpen, onOpen, onClose }) {
     const [errors, setErrors] = useState([]);
     const [eventSubmitLoading, setEventSubmitLoading] = useState(false);
 
-
-    useEffect(() => {
-        // Load redux store
-    }, [])
-
     const handleClose = () => {
         onClose();
         setTitle('');
@@ -55,9 +50,9 @@ function EventForm({ isOpen, onOpen, onClose }) {
         setEventSubmitLoading(false);
     }
 
-    const loadEvents = async () => {
-
-    }
+    // const loadEvents = async () => {
+    //     await dispatch(loadEvents(currentUser.id));
+    // }
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>

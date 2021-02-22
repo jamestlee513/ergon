@@ -12,12 +12,13 @@ def get_user_events(user_id):
     today = date.today()
     tomorrow = date.today() + timedelta(days=1)
     result = Event.query.filter(
-        Event.user_id == user_id).filter(Event.end_time >= today, Event.end_time <= tomorrow).first()
+        Event.user_id == user_id).filter(Event.end_time >= today, Event.end_time <= tomorrow).all()
     # print("*********")
     # print(today)
     # print(result)
     # print("*********")
-    return {"result": result.to_dict()}
+    events = [event.to_dict() for event in result]
+    return {"events": events}
 
 
 @ event_routes.route('/', methods=['POST'])
