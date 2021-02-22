@@ -1,6 +1,5 @@
-import { InfoIcon, TimeIcon } from '@chakra-ui/icons';
-import { Box, Button, Container, Divider, Flex, FormControl, Input, InputGroup, InputLeftElement, List, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Stack, UnorderedList } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { Box, Button, Divider, Flex, FormControl, Input, InputGroup, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, UnorderedList } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postEvent } from '../../../reducers/eventReducer';
 
@@ -15,6 +14,12 @@ function EventForm({ isOpen, onOpen, onClose }) {
     const [endTime, setEndTime] = useState('');
     const [color, setColor] = useState('blue.400');
     const [errors, setErrors] = useState([]);
+    const [eventSubmitLoading, setEventSubmitLoading] = useState(false);
+
+
+    useEffect(() => {
+        // Load redux store
+    }, [])
 
     const handleClose = () => {
         onClose();
@@ -30,6 +35,8 @@ function EventForm({ isOpen, onOpen, onClose }) {
             setErrors(['End time cannot be before start time!']);
             return;
         }
+
+        setEventSubmitLoading(true);
         const startDateTime = new Date();
         const startTimeSplit = startTime.split(":");
         startDateTime.setHours(startTimeSplit[0]);
@@ -40,8 +47,15 @@ function EventForm({ isOpen, onOpen, onClose }) {
         endDateTime.setHours(endTimeSplit[0]);
         endDateTime.setMinutes(endTimeSplit[1]);
 
-        const res = await dispatch(postEvent(currentUser.id, title, startDateTime, endDateTime, description, color));
-        console.log(res);
+        console.log(startDateTime);
+        console.log(endDateTime);
+
+        await dispatch(postEvent(currentUser.id, title, startDateTime, endDateTime, description, color));
+        onClose();
+        setEventSubmitLoading(false);
+    }
+
+    const loadEvents = async () => {
 
     }
 
@@ -114,7 +128,7 @@ function EventForm({ isOpen, onOpen, onClose }) {
                             </FormControl>
                             <Divider mt={2} />
                             <Flex width="100%" justifyContent="flex-end">
-                                <Button m={2} type="submit">Create event</Button>
+                                <Button m={2} type="submit" isLoading={eventSubmitLoading}>Create event</Button>
                             </Flex>
                     </form>
                 </ModalBody>

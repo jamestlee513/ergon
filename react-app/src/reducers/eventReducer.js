@@ -1,9 +1,17 @@
 export const NEW_EVENT = 'newEvent';
+export const LOAD_EVENTS = 'loadEvents';
 
 export const newEvent = event => {
     return {
         type: NEW_EVENT,
         payload: event
+    }
+}
+
+export const loadEvents = events => {
+    return {
+        type: LOAD_EVENTS,
+        payload: events
     }
 }
 
@@ -27,10 +35,17 @@ export const postEvent = (userId, title, startTime, endTime, description, backgr
     return data.event;
 }
 
+export const getEvents = (userId) => async dispatch => {
+    const res = await fetch(`/api/events/${userId}/`);
+    console.log(res);
+}
+
 const eventReducer = (state = [], action) => {
     switch (action.type) {
         case NEW_EVENT:
             return [...state, action.payload];
+        case LOAD_EVENTS:
+            return action.payload;
         default:
             return state;
     }

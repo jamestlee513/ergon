@@ -2,11 +2,25 @@ from flask import Blueprint, jsonify, request
 from app.forms import EventForm
 from app.models import Event, db
 from app.util import validation_errors_to_error_messages
+from datetime import date, timedelta
 
 event_routes = Blueprint('event', __name__)
 
 
-@event_routes.route('/', methods=['POST'])
+@event_routes.route('/<user_id>')
+def get_user_events(user_id):
+    today = date.today()
+    tomorrow = date.today() + timedelta(days=1)
+    result = Event.query.filter(
+        Event.user_id == user_id).filter(Event.end_time >= today, Event.end_time <= tomorrow).first()
+    # print("*********")
+    # print(today)
+    # print(result)
+    # print("*********")
+    return {"result": result.to_dict()}
+
+
+@ event_routes.route('/', methods=['POST'])
 def post_user_event():
     form = EventForm()
     form['csrf_token'].data = request.cookies['csrf_token']
