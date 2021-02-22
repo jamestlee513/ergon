@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 import memoReducer from '../reducers/memoReducer';
 import todoListReducer from '../reducers/todoListReducer';
 import userReducer from '../reducers/userReducer';
+import eventReducer from '../reducers/eventReducer';
 const rootReducer = combineReducers({
     todos: todoListReducer,
     user: userReducer,
-    memo: memoReducer
+    memo: memoReducer,
+    events: eventReducer
 });
 
 let enhancer;

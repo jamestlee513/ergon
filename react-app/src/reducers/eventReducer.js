@@ -22,9 +22,9 @@ export const postEvent = (userId, title, startTime, endTime, description, backgr
             background_color: backgroundColor
         })
     });
-    const event = await res.json();
-    // dispatch(newEvent(event));
-    return event;
+    const data = await res.json();
+    dispatch(newEvent(data.event));
+    return data.event;
 }
 
 const eventReducer = (state = [], action) => {

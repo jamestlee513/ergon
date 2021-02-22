@@ -19,5 +19,7 @@ def post_user_event():
             description=form.data['description'],
             background_color=form.data['background_color']
         )
+        db.session.add(event)
+        db.session.commit()
         return {"event": event.to_dict()}
     return {"errors": validation_errors_to_error_messages(form.errors)}
