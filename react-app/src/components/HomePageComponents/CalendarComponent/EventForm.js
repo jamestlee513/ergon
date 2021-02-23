@@ -4,23 +4,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postEvent } from '../../../reducers/eventReducer';
 
 
-function EventForm({ isOpen, onOpen, onClose }) {
+function EventForm({ isOpen, onOpen, onClose, updateEvent }) {
 
     const currentUser = useSelector(state => state.user);
     const dispatch = useDispatch();
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [startTime, setStartTime] = useState('');
-    const [endTime, setEndTime] = useState('');
-    const [color, setColor] = useState('blue.400');
+    const [title, setTitle] = useState(updateEvent ? updateEvent.title : '');
+    const [description, setDescription] = useState(updateEvent ? updateEvent.description : '');
+    const [startTime, setStartTime] = useState(updateEvent ? updateEvent.startTime : '');
+    const [endTime, setEndTime] = useState(updateEvent ? updateEvent.endTime : '');
+    const [color, setColor] = useState(updateEvent ? updateEvent.backgroundColor : 'blue.400');
     const [errors, setErrors] = useState([]);
     const [eventSubmitLoading, setEventSubmitLoading] = useState(false);
 
     const handleClose = () => {
         onClose();
-        setTitle('');
-        setStartTime('');
-        setEndTime('');
+        if(!updateEvent) {
+            setTitle('');
+            setDescription('');
+            setStartTime('');
+            setEndTime('');
+        }
     }
 
     const handleSubmit = async e => {
@@ -46,7 +49,7 @@ function EventForm({ isOpen, onOpen, onClose }) {
         console.log(endDateTime);
 
         await dispatch(postEvent(currentUser.id, title, startDateTime, endDateTime, description, color));
-        onClose();
+        handleClose();
         setEventSubmitLoading(false);
     }
 
@@ -123,7 +126,8 @@ function EventForm({ isOpen, onOpen, onClose }) {
                             </FormControl>
                             <Divider mt={2} />
                             <Flex width="100%" justifyContent="flex-end">
-                                <Button m={2} type="submit" isLoading={eventSubmitLoading}>Create event</Button>
+                                {!updateEvent && <Button m={2} type="submit" isLoading={eventSubmitLoading}>Create event</Button>}
+                                {updateEvent && <Button m={2} type="submit" isLoading={eventSubmitLoading}>Update event</Button>}
                             </Flex>
                     </form>
                 </ModalBody>

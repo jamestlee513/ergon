@@ -57,7 +57,7 @@ function CalendarFrame() {
                     <Box position="absolute" w="87%" borderBottom="1px red solid" top={timePercent} />
                 </Flex>
                 {events.map(event =>
-                    <EventCard key={event.id} event={event} calendarStart={START_TIME} calendarEnd={END_TIME} />
+                    <EventCard isOpen={isOpen} onOpen={onOpen} onClose={onClose} key={event.id} event={event} calendarStart={START_TIME} calendarEnd={END_TIME} />
                 )}
             </Flex>
             <EventForm isOpen={isOpen} onOpen={onOpen} onClose={onClose} />

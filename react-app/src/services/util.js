@@ -60,8 +60,9 @@ export function digitHourToString(digitHour) {
     }
 }
 
-export function getCurrentTimeNumber() {
-    const timeString = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+export function getCurrentTimeNumber(dateTime) {
+    const timeString = dateTime ? new Date(dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) :
+        new Date().toLocaleString([], { hour: '2-digit', minute: '2-digit'});
     const timeComponents = timeString.split(' ');
     const hourAndMin = timeComponents[0].split(':');
     const hour = parseInt(hourAndMin[0], 10);
@@ -80,13 +81,20 @@ export function calculateTimePercent(start, end, currentTimeNumber) {
     return percent + "%";
 }
 
-export function determineEventCardStart(startTime, calendarStart, calendarEnd) {
-    const hours = calendarEnd - calendarStart - 1;
-    const startDate = new Date(startTime);
-    const startTimeHours = startDate.getHours() + (startDate.getMinutes() / 60);
-    return startTime;
+export function determineEventCardTime(calendarStart, calendarEnd, time) {
+    const timeNum = getCurrentTimeNumber(time);
+    const eventTime = calculateTimePercent(calendarStart, calendarEnd, timeNum);
+    return eventTime;
 }
 
-export function determineEventCardEnd() {
-
+export function calculateEventCardHeight(calendarStart, calendarEnd, startTime, endTime) {
+    const range = calendarEnd - calendarStart;
+    const relativeStart = getCurrentTimeNumber(startTime) - calendarStart;
+    const relativeEnd = getCurrentTimeNumber(endTime) - calendarStart;
+    const fractionStart = relativeStart / range;
+    const fractionEnd = relativeEnd / range;
+    const fraction = fractionEnd - fractionStart;
+    // if (fraction > 1 || fraction < 0) return null;
+    const percent = (fraction * 100).toFixed(2);
+    return percent + "%";
 }
