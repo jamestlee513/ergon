@@ -16,7 +16,7 @@ export function secondsToTime(seconds) {
 export function priorityLevelToColor(level) {
     // Priority ranges from 1 - 4. 5-8 are for dark mode
 
-    switch(level) {
+    switch (level) {
         case 8:
             return "red.500"
         case 7:
@@ -39,21 +39,21 @@ export function priorityLevelToColor(level) {
 }
 
 export function determineMusicBarPercent(currentTime, songDuration) {
-    const percent = (currentTime/songDuration * 100);
+    const percent = (currentTime / songDuration * 100);
     const cssPercent = ((percent * .95) + 2).toFixed(2);
     return cssPercent + "%";
 }
 
 export function digitHourToString(digitHour) {
-    if(typeof digitHour !== 'number' || digitHour > 24 || digitHour < 0) {
+    if (typeof digitHour !== 'number' || digitHour > 24 || digitHour < 0) {
         throw new Error('Invalid digitHour!');
     }
     let meridiem = "AM";
-    if(digitHour > 11) {
+    if (digitHour > 11) {
         meridiem = "PM";
         digitHour -= 12;
     }
-    if(digitHour === 0) {
+    if (digitHour === 0) {
         return "12" + meridiem;
     } else {
         return digitHour + meridiem;
@@ -67,7 +67,7 @@ export function getCurrentTimeNumber() {
     const hour = parseInt(hourAndMin[0], 10);
     const min = parseInt(hourAndMin[1], 10);
     let timeNumber = hour + (min / 60);
-    if(timeComponents[1] === "PM") timeNumber += 12;
+    if (timeComponents[1] === "PM") timeNumber += 12;
     return timeNumber;
 }
 
@@ -78,4 +78,15 @@ export function calculateTimePercent(start, end, currentTimeNumber) {
     if (fraction > 1 || fraction < 0) return null;
     const percent = (fraction * 100).toFixed(2);
     return percent + "%";
+}
+
+export function determineEventCardStart(startTime, calendarStart, calendarEnd) {
+    const hours = calendarEnd - calendarStart - 1;
+    const startDate = new Date(startTime);
+    const startTimeHours = startDate.getHours() + (startDate.getMinutes() / 60);
+    return startTime;
+}
+
+export function determineEventCardEnd() {
+
 }
