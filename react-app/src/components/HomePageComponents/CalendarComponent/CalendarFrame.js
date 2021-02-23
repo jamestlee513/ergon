@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEvents } from '../../../reducers/eventReducer';
 import { calculateTimePercent, digitHourToString, getCurrentTimeNumber } from '../../../services/util';
+import EventCard from './EventCard';
 import EventForm from './EventForm';
 
 
@@ -16,17 +17,11 @@ function CalendarFrame() {
     const [timePercent, setTimePercent] = useState(calculateTimePercent(START_TIME, END_TIME, getCurrentTimeNumber()));
     const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch = useDispatch();
+    const events = useSelector(state => state.events);
 
     useEffect(() => {
         (async () => {
-            console.log("AHHHH")
-            console.log("AHHHH")
-            console.log("AHHHH")
-            console.log("AHHHH")
-            console.log("AHHHH")
-            console.log("AHHHH")
             await dispatch(getEvents(currentUser.id));
-            console.log("AHH?")
         })();
 
         const interval = setInterval(() => {
@@ -61,6 +56,9 @@ function CalendarFrame() {
                 <Flex position="absolute" width="100%" height="100%" direction="row" justify="flex-end">
                     <Box position="absolute" w="87%" borderBottom="1px red solid" top={timePercent} />
                 </Flex>
+                {events.map(event =>
+                    <EventCard key={event.id} event={event} />
+                )}
             </Flex>
             <EventForm isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
         </>

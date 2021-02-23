@@ -28,8 +28,6 @@ def new_todo():
         )
         db.session.add(todo)
         db.session.commit()
-        # return redirect(url_for('todo.get_user_todos',
-        #                         user_id=form.data['user_id']))
         user_id = form.data['user_id']
         result = TodoItem.query.filter(TodoItem.user_id == user_id).order_by(
             TodoItem.priority_level.desc(), TodoItem.created_at.desc()).all()

@@ -76,7 +76,7 @@ function EventForm({ isOpen, onOpen, onClose }) {
                                     />
                                 </InputGroup>
                             </FormControl>
-                            <FormControl isRequired mb={2}>
+                            <FormControl mb={2}>
                                 <InputGroup display="flex" justifyContent="space-between" alignItems="center">
                                     <Box w="120px">Description:</Box>
                                     <Input
