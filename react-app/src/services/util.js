@@ -98,3 +98,11 @@ export function calculateEventCardHeight(calendarStart, calendarEnd, startTime, 
     const percent = (fraction * 100).toFixed(2);
     return percent + "%";
 }
+
+export function dateTimeToInputTime(dateTime) {
+    const timeString = new Date(dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    const timeMeridiemSplit = timeString.split(' ');
+    const hourMinuteSplit = timeMeridiemSplit[0].split(':');
+    const [hour, minute, meridiem] = [parseInt(hourMinuteSplit[0], 10), parseInt(hourMinuteSplit[1], 10), timeMeridiemSplit[1]];
+    return "" + hour + minute + meridiem;
+}

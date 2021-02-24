@@ -1,27 +1,25 @@
-import { Box, Button, Divider, Flex, FormControl, Input, InputGroup, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, UnorderedList } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import { Modal, ModalOverlay, ModalHeader, ModalCloseButton, UnorderedList, FormControl, InputGroup, Box, Input, Select, Divider, Flex, ModalContent, ModalBody, ListItem, Button } from '@chakra-ui/react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { postEvent } from '../../../reducers/eventReducer';
+import { dateTimeToInputTime, getCurrentTimeNumber } from '../../../services/util';
 
-
-function EventForm({ isOpen, onOpen, onClose }) {
+function EventUpdateForm({ isOpen, onOpen, onClose, event }) {
 
     const currentUser = useSelector(state => state.user);
     const dispatch = useDispatch();
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [startTime, setStartTime] = useState('');
-    const [endTime, setEndTime] = useState('');
-    const [color, setColor] = useState('blue.400');
+    const [title, setTitle] = useState(event.title);
+    const [description, setDescription] = useState(event.description);
+    const [startTime, setStartTime] = useState(dateTimeToInputTime(event.start_time));
+    // const [startTime, setStartTime] = useState('05:00');
+    const [endTime, setEndTime] = useState(event.end_time);
+    const [color, setColor] = useState(event.background_color);
     const [errors, setErrors] = useState([]);
     const [eventSubmitLoading, setEventSubmitLoading] = useState(false);
 
+    console.log(event);
+
     const handleClose = () => {
         onClose();
-        setTitle('');
-        setDescription('');
-        setStartTime('');
-        setEndTime('');
     }
 
     const handleSubmit = async e => {
@@ -46,20 +44,16 @@ function EventForm({ isOpen, onOpen, onClose }) {
         console.log(startDateTime);
         console.log(endDateTime);
 
-        await dispatch(postEvent(currentUser.id, title, startDateTime, endDateTime, description, color));
+        // await dispatch(postEvent(currentUser.id, title, startDateTime, endDateTime, description, color));
         handleClose();
         setEventSubmitLoading(false);
     }
-
-    // const loadEvents = async () => {
-    //     await dispatch(loadEvents(currentUser.id));
-    // }
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>New Event</ModalHeader>
+                <ModalHeader>{startTime}</ModalHeader>
                 <ModalCloseButton onClick={handleClose} />
                 <ModalBody>
                     {errors && <UnorderedList mb={3} color="red.500">
@@ -133,4 +127,4 @@ function EventForm({ isOpen, onOpen, onClose }) {
     )
 }
 
-export default EventForm;
+export default EventUpdateForm;

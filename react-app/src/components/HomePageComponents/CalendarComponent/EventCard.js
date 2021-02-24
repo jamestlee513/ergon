@@ -1,7 +1,7 @@
 import { Box, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import { calculateEventCardHeight, determineEventCardTime } from '../../../services/util';
-import EventForm from './EventForm';
+import EventUpdateForm from './EventUpdateForm';
 
 function EventCard({ event, calendarStart, calendarEnd }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -15,7 +15,11 @@ function EventCard({ event, calendarStart, calendarEnd }) {
         user_id: userId
     } = event;
 
-    const 
+    const handleUpdateClick = e => {
+        e.stopPropagation();
+        console.log(event)
+        onOpen();
+    }
 
     return (
         <>
@@ -33,14 +37,14 @@ function EventCard({ event, calendarStart, calendarEnd }) {
                 w="83%"
                 border="1px"
                 borderColor="gray.200"
-                onClick={onOpen}
+                onClick={handleUpdateClick}
                 _hover={{
                     cursor: "pointer"
                 }}
             >
                 {title}
             </Box>
-            <EventForm isOpen={isOpen} onOpen={onOpen} onClose={onClose} updateEvent={event}/>
+            <EventUpdateForm isOpen={isOpen} onOpen={onOpen} onClose={onClose} event={event} />
         </>
     )
 }
