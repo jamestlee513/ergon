@@ -20,10 +20,6 @@ function CalendarFrame() {
     const events = useSelector(state => state.events);
 
     useEffect(() => {
-        (async () => {
-            await dispatch(getEvents(currentUser.id));
-        })();
-
         const interval = setInterval(() => {
             setTimePercent(calculateTimePercent(START_TIME, END_TIME, getCurrentTimeNumber()));
         }, 1000)
@@ -32,6 +28,11 @@ function CalendarFrame() {
         }
     }, []);
 
+    useEffect(() => {
+        (async () => {
+            dispatch(getEvents(currentUser.id));
+        })();
+    }, []);
 
     let times = [];
     for (let i = START_TIME; i <= END_TIME; i++) {

@@ -48,8 +48,7 @@ function EventUpdateForm({ isOpen, onOpen, onClose, event }) {
         e.stopPropagation();
         setEventDeleteLoading(true);
 
-
-        await dispatch(deleteEvent(event.id));
+        await dispatch(deleteEvent(event.id, currentUser.id));
         onClose();
         setEventDeleteLoading(false);
     }

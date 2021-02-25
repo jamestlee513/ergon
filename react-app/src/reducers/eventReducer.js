@@ -63,17 +63,19 @@ export const getEvents = (userId) => async dispatch => {
     return data.events;
 }
 
-export const deleteEvent = eventId => async dispatch => {
+export const deleteEvent = (eventId, userId) => async dispatch => {
     const res = await fetch('/api/events/', {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            event_id: eventId
+            event_id: eventId,
+            user_id: userId
         })
     });
     const data = await res.json();
+    console.log(data);
     dispatch(loadEvents(data.events));
     return data.events;
 }
