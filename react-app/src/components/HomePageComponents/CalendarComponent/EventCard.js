@@ -17,7 +17,6 @@ function EventCard({ event, calendarStart, calendarEnd }) {
 
     const handleUpdateClick = e => {
         e.stopPropagation();
-        console.log(event)
         onOpen();
     }
 
@@ -28,6 +27,7 @@ function EventCard({ event, calendarStart, calendarEnd }) {
                 ml="15%"
                 mr="2%"
                 p={2}
+                pt="2px"
                 borderRadius="md"
                 fontSize="12px"
                 position="absolute"
@@ -38,6 +38,7 @@ function EventCard({ event, calendarStart, calendarEnd }) {
                 border="1px"
                 borderColor="gray.200"
                 onClick={handleUpdateClick}
+                overflow="hidden"
                 _hover={{
                     cursor: "pointer"
                 }}

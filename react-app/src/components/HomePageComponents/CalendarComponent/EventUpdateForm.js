@@ -1,6 +1,7 @@
 import { Modal, ModalOverlay, ModalHeader, ModalCloseButton, UnorderedList, FormControl, InputGroup, Box, Input, Select, Divider, Flex, ModalContent, ModalBody, ListItem, Button } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { deleteEvent, updateEvent } from '../../../reducers/eventReducer';
 import { dateTimeToInputTime, getCurrentTimeNumber } from '../../../services/util';
 
 function EventUpdateForm({ isOpen, onOpen, onClose, event }) {
@@ -10,20 +11,16 @@ function EventUpdateForm({ isOpen, onOpen, onClose, event }) {
     const [title, setTitle] = useState(event.title);
     const [description, setDescription] = useState(event.description);
     const [startTime, setStartTime] = useState(dateTimeToInputTime(event.start_time));
-    // const [startTime, setStartTime] = useState('05:00');
-    const [endTime, setEndTime] = useState(event.end_time);
+    const [endTime, setEndTime] = useState(dateTimeToInputTime(event.end_time));
     const [color, setColor] = useState(event.background_color);
     const [errors, setErrors] = useState([]);
     const [eventSubmitLoading, setEventSubmitLoading] = useState(false);
+    const [eventDeleteLoading, setEventDeleteLoading] = useState(false);
 
-    console.log(event);
 
-    const handleClose = () => {
-        onClose();
-    }
-
-    const handleSubmit = async e => {
+    const handleUpdate = async e => {
         e.preventDefault();
+        e.stopPropagation();
         // Front-end error handling
         if (endTime <= startTime) {
             setErrors(['End time cannot be before start time!']);
@@ -41,25 +38,33 @@ function EventUpdateForm({ isOpen, onOpen, onClose, event }) {
         endDateTime.setHours(endTimeSplit[0]);
         endDateTime.setMinutes(endTimeSplit[1]);
 
-        console.log(startDateTime);
-        console.log(endDateTime);
-
-        // await dispatch(postEvent(currentUser.id, title, startDateTime, endDateTime, description, color));
-        handleClose();
+        await dispatch(updateEvent(event.id, currentUser.id, title, startDateTime, endDateTime, description, color));
+        onClose();
         setEventSubmitLoading(false);
+    }
+
+    const handleDelete = async e => {
+        e.preventDefault();
+        e.stopPropagation();
+        setEventDeleteLoading(true);
+
+
+        await dispatch(deleteEvent(event.id));
+        onClose();
+        setEventDeleteLoading(false);
     }
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>{startTime}</ModalHeader>
-                <ModalCloseButton onClick={handleClose} />
+                <ModalHeader>Update Event</ModalHeader>
+                <ModalCloseButton onClick={onClose} />
                 <ModalBody>
                     {errors && <UnorderedList mb={3} color="red.500">
                         {errors.map((error, idx) => <ListItem key={idx}>{error}</ListItem>)}
                     </UnorderedList>}
-                    <form type="submit" onSubmit={handleSubmit}>
+                    <form type="submit">
                         <FormControl isRequired mb={2}>
                             <InputGroup display="flex" justifyContent="space-between" alignItems="center">
                                 <Box w="120px">Event title:</Box>
@@ -117,10 +122,11 @@ function EventUpdateForm({ isOpen, onOpen, onClose, event }) {
                             </InputGroup>
                         </FormControl>
                         <Divider mt={2} />
-                        <Flex width="100%" justifyContent="flex-end">
-                            <Button m={2} type="submit" isLoading={eventSubmitLoading}>Create event</Button>
-                        </Flex>
                     </form>
+                    <Flex width="100%" justifyContent="flex-end">
+                        <Button m={2} type="delete" onClick={handleDelete} isLoading={eventDeleteLoading}>Delete event</Button>
+                        <Button m={2} type="submit" onClick={handleUpdate}isLoading={eventSubmitLoading}>Update event</Button>
+                    </Flex>
                 </ModalBody>
             </ModalContent>
         </Modal>

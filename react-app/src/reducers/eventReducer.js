@@ -35,8 +35,44 @@ export const postEvent = (userId, title, startTime, endTime, description, backgr
     return data.event;
 }
 
+export const updateEvent = (eventId, userId, title, startTime, endTime, description, backgroundColor) => async dispatch => {
+    const res = await fetch('/api/events/', {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            event_id: eventId,
+            user_id: userId,
+            title,
+            start_time: startTime,
+            end_time: endTime,
+            description,
+            background_color: backgroundColor
+        })
+    });
+    const data = await res.json();
+    dispatch(loadEvents(data.events));
+    return data.events;
+}
+
 export const getEvents = (userId) => async dispatch => {
     const res = await fetch(`/api/events/${userId}`);
+    const data = await res.json();
+    dispatch(loadEvents(data.events));
+    return data.events;
+}
+
+export const deleteEvent = eventId => async dispatch => {
+    const res = await fetch('/api/events/', {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            event_id: eventId
+        })
+    });
     const data = await res.json();
     dispatch(loadEvents(data.events));
     return data.events;

@@ -103,6 +103,17 @@ export function dateTimeToInputTime(dateTime) {
     const timeString = new Date(dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     const timeMeridiemSplit = timeString.split(' ');
     const hourMinuteSplit = timeMeridiemSplit[0].split(':');
-    const [hour, minute, meridiem] = [parseInt(hourMinuteSplit[0], 10), parseInt(hourMinuteSplit[1], 10), timeMeridiemSplit[1]];
-    return "" + hour + minute + meridiem;
+    const [hours, minutes, meridiem] = [parseInt(hourMinuteSplit[0], 10), parseInt(hourMinuteSplit[1], 10), timeMeridiemSplit[1]];
+    
+    let inputTimeString = '';
+    if(meridiem === "PM") {
+        inputTimeString += (hours + 12)
+    } else {
+        if(hours < 10) inputTimeString += "0";
+        inputTimeString += hours;
+    }
+    inputTimeString += ":";
+    if(minutes < 10) inputTimeString += "0";
+    inputTimeString += minutes;
+    return inputTimeString;
 }
