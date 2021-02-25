@@ -45,6 +45,7 @@ function PomodoroTimer() {
         } else {
             clearInterval(timerInterval);
         }
+    // eslint-disable-next-line
     }, [isTimerOn])
 
     useEffect(() => {
@@ -52,6 +53,7 @@ function PomodoroTimer() {
         setTimer(WORKTIME);
         setBreakTimer(BREAKTIME);
         clearInterval(timerInterval);
+    // eslint-disable-next-line
     }, [isBreak])
 
     const handleReset = () => {

@@ -35,7 +35,7 @@ function PlaybarComponent() {
 
     useEffect(() => {
         setSongUrl(playlist[currentSongIdx].url);
-    }, [])
+    }, [currentSongIdx, playlist])
 
     useEffect(() => {
         if (ref.current) {

@@ -32,7 +32,7 @@ function CalendarFrame() {
         (async () => {
             dispatch(getEvents(currentUser.id));
         })();
-    }, []);
+    }, [currentUser.id, dispatch]);
 
     let times = [];
     for (let i = START_TIME; i <= END_TIME; i++) {

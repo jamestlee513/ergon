@@ -15,7 +15,7 @@ function TodoList() {
 
     useEffect(() => {
         dispatch(loadUserTodos(currentUser.id));
-    }, [currentUser])
+    }, [currentUser, dispatch])
 
     const handleClear = () => {
         dispatch(clearCheckedTodos(currentUser.id))

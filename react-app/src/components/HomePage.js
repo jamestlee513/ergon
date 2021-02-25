@@ -23,6 +23,7 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
             })
         }
         setIsFirstVisit(false);
+    // eslint-disable-next-line
     }, [])
 
     return (

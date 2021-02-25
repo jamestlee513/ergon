@@ -16,11 +16,6 @@ function MemoComponent() {
 
     useEffect(() => {
         (async () => {
-        })();
-    }, [])
-
-    useEffect(() => {
-        (async () => {
             const res = await dispatch(getMemo(currentUser.id));
             if (res.error) {
                 const secondRes = await dispatch(createMemo(currentUser.id));
@@ -29,7 +24,7 @@ function MemoComponent() {
                 setMemo(res.memo);
             }
         })();
-    }, [currentUser])
+    }, [currentUser, dispatch])
 
     useEffect(() => {
         setDisplaySaved(false);
@@ -41,7 +36,8 @@ function MemoComponent() {
             setIsTyping(false);
             clearInterval(interval);
         }
-    }, [isTyping])
+    // eslint-disable-next-line
+    }, [isTyping, currentUser.id, dispatch])
 
     useEffect(() => {
         if (!isChanging) {

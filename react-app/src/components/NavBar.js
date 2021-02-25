@@ -1,4 +1,4 @@
-import { Box, ButtonGroup, Flex, Heading, Icon, IconButton, Image, useColorMode, useToast } from '@chakra-ui/react';
+import { Box, Flex, Heading, IconButton, Image, useColorMode, useToast } from '@chakra-ui/react';
 import React from 'react';
 import { logout } from '../services/auth';
 import { NavLink, useHistory } from 'react-router-dom';
@@ -33,7 +33,6 @@ function NavBar() {
             align="center"
             padding="1.5rem"
             bg={colorMode === 'light' ? "linear-gradient(45deg, rgb(96, 147, 230) 0%, rgb(153, 192, 255) 100%)" : "linear-gradient(45deg, rgb(52, 91, 153) 0%, rgb(37, 45, 63) 100%)"}
-            color="white"
             w="100%"
             h="70px"
             color={colorMode === 'light' ? 'gray.800' : 'white'}

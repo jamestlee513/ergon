@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom"
 import { authenticate } from "./services/auth";
 import { Flex } from "@chakra-ui/react";
-import NavBar from "./components/NavBar";
 import HomePage from "./components/HomePage";
 import { addUser } from "./reducers/userReducer";
 import { useDispatch } from "react-redux";
@@ -22,6 +21,7 @@ function App() {
       }
       setLoaded(true);
     })();
+  // eslint-disable-next-line
   }, []);
 
   if (!loaded) {

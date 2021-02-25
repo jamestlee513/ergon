@@ -1,5 +1,5 @@
-import { Box, Button, Divider, Flex, FormControl, Input, InputGroup, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, UnorderedList } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import { Box, Button, Divider, Flex, FormControl, Input, InputGroup, ListItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, UnorderedList } from '@chakra-ui/react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postEvent } from '../../../reducers/eventReducer';
 

@@ -2,7 +2,7 @@ import { Modal, ModalOverlay, ModalHeader, ModalCloseButton, UnorderedList, Form
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteEvent, updateEvent } from '../../../reducers/eventReducer';
-import { dateTimeToInputTime, getCurrentTimeNumber } from '../../../services/util';
+import { dateTimeToInputTime } from '../../../services/util';
 
 function EventUpdateForm({ isOpen, onOpen, onClose, event }) {
 

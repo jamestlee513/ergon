@@ -18,7 +18,7 @@ function TodoItemForm({ setShowTodoForm }) {
         if(setShowTodoForm) {
             todoInput.current.focus();
         }
-    }, [setShowTodoForm])
+    }, [setShowTodoForm, todoInput])
 
     const createNewTodo = async e => {
         if (e.key === 'Enter') {

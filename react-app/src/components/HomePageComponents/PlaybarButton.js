@@ -1,5 +1,5 @@
 import { Box, useColorMode } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PreloadImage from 'react-preload-image';
 
 function PlaybarButton({ toggleFunction, lightSrc, darkSrc }) {

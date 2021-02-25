@@ -8,11 +8,11 @@ function EventCard({ event, calendarStart, calendarEnd }) {
 
     const {
         background_color: backgroundColor,
-        description,
+        // description,
         start_time: startTime,
         end_time: endTime,
         title,
-        user_id: userId
+        // user_id: userId
     } = event;
 
     const handleUpdateClick = e => {

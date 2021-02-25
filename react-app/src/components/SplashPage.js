@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useColorMode, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useColorMode, useDisclosure } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -28,6 +28,7 @@ function SplashPage() {
                 clearInterval(interval);
             }
         }
+    // eslint-disable-next-line
     }, [])
 
     if (currentUser.id) {
