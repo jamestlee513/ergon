@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Container, Flex, Grid, GridItem, useToast } from '@chakra-ui/react';
+import { Box, Container, Flex, Grid, GridItem, useColorMode, useToast } from '@chakra-ui/react';
 import PomodoroTimer from './HomePageComponents/PomodoroTimer';
 import TodoList from './HomePageComponents/TodoComponent/TodoList';
 import { useSelector } from 'react-redux';
@@ -14,6 +14,7 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
 
     const currentUser = useSelector(state => state.user)
     const toast = useToast();
+    const { colorMode } = useColorMode();
 
     useEffect(() => {
         if (currentUser.id && isFirstVisit) {
@@ -32,7 +33,7 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
             <Grid
                 h="100%"
                 w="100%"
-                gridTemplateColumns="8fr 6fr 3fr"
+                gridTemplateColumns="7fr 7fr 3fr"
                 gridTemplateRows="70px 5fr 400px 1fr"
             >
                 <GridItem colSpan={3}>
@@ -40,7 +41,7 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
                 </GridItem>
                 <GridItem colSpan={2} display="flex" justifyContent="center" alignItems="center">
                     <Flex
-                        backgroundColor="#ededed"
+                        backgroundColor={ colorMode === 'light' ? "#fafafa" : "rgba(212, 232, 255, 0.6)"}
                         justifyContent="center"
                         alignItems="center"
                         p={3}
@@ -54,27 +55,27 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
                     </Flex>
                 </GridItem>
                 <GridItem rowSpan={3}>
-                    <Container h="100%" w="100%" backgroundColor="#ededed">
+                    <Container h="100%" w="100%" backgroundColor={ colorMode === 'light' ? "#fafafa" : "rgba(212, 232, 255, 0.6)"} borderLeft="1px" borderLeftColor="gray.200">
                         <CalendarFrame />
                     </Container>
                 </GridItem>
-                <GridItem>
+                <GridItem display="flex" justifyContent="center" alignItems="center">
                     <Container
-                        backgroundColor="#ededed"
+                        backgroundColor={ colorMode === 'light' ? "#fafafa" : "rgba(212, 232, 255, 0.6)"}
                         m={2}
                         h="95%"
-                        w="95%"
+                        w="75%"
                         boxShadow="md"
                         borderRadius="md">
                         <TodoList />
                     </Container>
                 </GridItem>
-                <GridItem>
+                <GridItem display="flex" justifyContent="center" alignItems="center">
                     <Container
-                        backgroundColor="#ededed"
+                        backgroundColor={ colorMode === 'light' ? "#fafafa" : "rgba(212, 232, 255, 0.6)"}
                         m={2}
                         h="95%"
-                        w="95%"
+                        w="75%"
                         boxShadow="md"
                         borderRadius="md">
                         <MemoComponent />
@@ -85,7 +86,11 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
                         Friends (Coming soon!!!)
                 </Box>
                 </GridItem> */}
-                <GridItem colSpan={2} backgroundColor="#b8d3ff">
+                <GridItem 
+                    colSpan={2} 
+                    backgroundColor="#b8d3ff" 
+                    borderTop="1px"
+                    borderTopColor="gray.200">
                     {/* <Container w="100%" h="100%"> */}
                         <PlaybarComponent />
                     {/* </Container> */}
@@ -93,7 +98,7 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
             </Grid>
 
             <Box
-                background="linear-gradient(45deg, #d6edff 0%, #abdbff 100%)"
+                background={colorMode === 'light' ? "linear-gradient(45deg, #d6edff 0%, #abdbff 100%)" : "linear-gradient(45deg, rgb(52, 91, 153) 0%, rgb(37, 45, 63) 100%)"}
                 position="absolute"
                 zIndex="-3"
                 h="100vh"
