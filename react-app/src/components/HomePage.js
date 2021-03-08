@@ -41,7 +41,10 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
                 </GridItem>
                 <GridItem colSpan={2} display="flex" justifyContent="center" alignItems="center">
                     <Flex
-                        backgroundColor={ colorMode === 'light' ? "#fafafa" : "rgba(212, 232, 255, 0.6)"}
+                        backgroundColor={colorMode === 'light' ? "#fafafa" : "rgba(212, 232, 255, 0.6)"}
+                        style={{
+                            transition: "background-color .5s"
+                        }}
                         justifyContent="center"
                         alignItems="center"
                         p={3}
@@ -55,13 +58,16 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
                     </Flex>
                 </GridItem>
                 <GridItem rowSpan={3}>
-                    <Container h="100%" w="100%" backgroundColor={ colorMode === 'light' ? "#fafafa" : "rgba(212, 232, 255, 0.6)"} borderLeft="1px" borderLeftColor="gray.200">
+                    <Container h="100%" w="100%" backgroundColor={colorMode === 'light' ? "#fafafa" : "rgba(212, 232, 255, 0.6)"} borderLeft="1px" borderLeftColor="gray.200" style={{transition: "background-color .5s"}}>
                         <CalendarFrame />
                     </Container>
                 </GridItem>
                 <GridItem display="flex" justifyContent="center" alignItems="center">
                     <Container
-                        backgroundColor={ colorMode === 'light' ? "#fafafa" : "rgba(212, 232, 255, 0.6)"}
+                        backgroundColor={colorMode === 'light' ? "#fafafa" : "rgba(212, 232, 255, 0.6)"}
+                        style={{
+                            transition: "background-color .5s"
+                        }}
                         m={2}
                         h="95%"
                         w="75%"
@@ -72,7 +78,10 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
                 </GridItem>
                 <GridItem display="flex" justifyContent="center" alignItems="center">
                     <Container
-                        backgroundColor={ colorMode === 'light' ? "#fafafa" : "rgba(212, 232, 255, 0.6)"}
+                        backgroundColor={colorMode === 'light' ? "#fafafa" : "rgba(212, 232, 255, 0.6)"}
+                        style={{
+                            transition: "background-color .5s"
+                        }}
                         m={2}
                         h="95%"
                         w="75%"
@@ -81,24 +90,23 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
                         <MemoComponent />
                     </Container>
                 </GridItem>
-                {/* <GridItem>
-                    <Box p={2} ml={2} fontFamily={"Roboto, monospace"}>
-                        Friends (Coming soon!!!)
-                </Box>
-                </GridItem> */}
-                <GridItem 
-                    colSpan={2} 
-                    backgroundColor="#b8d3ff" 
+                <GridItem
+                    colSpan={2}
+                    backgroundColor={colorMode === 'light' ? "#b8d3ff" : "rgba(92, 130, 173, 0.6)"}
+                    style={{
+                        transition: "background-color .5s"
+                    }}
                     borderTop="1px"
                     borderTopColor="gray.200">
-                    {/* <Container w="100%" h="100%"> */}
-                        <PlaybarComponent />
-                    {/* </Container> */}
+                    <PlaybarComponent />
                 </GridItem>
             </Grid>
 
             <Box
                 background={colorMode === 'light' ? "linear-gradient(45deg, #d6edff 0%, #abdbff 100%)" : "linear-gradient(45deg, rgb(52, 91, 153) 0%, rgb(37, 45, 63) 100%)"}
+                style={{
+                    transition: "background-color .5s"
+                }}
                 position="absolute"
                 zIndex="-3"
                 h="100vh"

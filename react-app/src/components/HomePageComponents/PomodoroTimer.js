@@ -45,7 +45,7 @@ function PomodoroTimer() {
         } else {
             clearInterval(timerInterval);
         }
-    // eslint-disable-next-line
+        // eslint-disable-next-line
     }, [isTimerOn])
 
     useEffect(() => {
@@ -53,7 +53,7 @@ function PomodoroTimer() {
         setTimer(WORKTIME);
         setBreakTimer(BREAKTIME);
         clearInterval(timerInterval);
-    // eslint-disable-next-line
+        // eslint-disable-next-line
     }, [isBreak])
 
     const handleReset = () => {
@@ -66,29 +66,32 @@ function PomodoroTimer() {
     }
 
     return (
-        <Flex direction="column" align="center" justify="space-around" h="100%">
-            <Box
-                h="40%"
-                p={4}
-                fontSize="60pt"
-            >{isBreak ? secondsToTime(breakTimer) : secondsToTime(timer)}</Box>
-            <ReactPlayer
-                style={{ display: "none" }}
-                url="https://onlineclock.net/audio/options/default.mp3"
-                playing={isAlarm}
-                volume={0.035}
-                onEnded={() => setIsAlarm(false)}
-            >
-            </ReactPlayer>
-            <ButtonGroup>
-                <Button onClick={() => setIsTimerOn(true)}>Start</Button>
-                <Button onClick={() => setIsTimerOn(false)}>Pause</Button>
-                <Button onClick={handleReset}>Reset</Button>
-                <Button onClick={() => setIsBreak(prevState => !prevState)}>
-                    {isBreak ? "Work" : "Break"}
-                </Button>
-            </ButtonGroup>
-        </Flex >
+        <Box position="relative">
+            <Flex direction="column" align="center" justify="space-around" h="100%">
+                <Box fontFamily={"Roboto, monospace"} fontWeight="bold" h="1px">Pomodoro Timer</Box>
+                <Box
+                    h="30%"
+                    p={4}
+                    fontSize="60pt"
+                >{isBreak ? secondsToTime(breakTimer) : secondsToTime(timer)}</Box>
+                <ReactPlayer
+                    style={{ display: "none" }}
+                    url="https://onlineclock.net/audio/options/default.mp3"
+                    playing={isAlarm}
+                    volume={0.035}
+                    onEnded={() => setIsAlarm(false)}
+                >
+                </ReactPlayer>
+                <ButtonGroup>
+                    <Button onClick={() => setIsTimerOn(true)}>Start</Button>
+                    <Button onClick={() => setIsTimerOn(false)}>Pause</Button>
+                    <Button onClick={handleReset}>Reset</Button>
+                    <Button onClick={() => setIsBreak(prevState => !prevState)}>
+                        {isBreak ? "Work" : "Break"}
+                    </Button>
+                </ButtonGroup>
+            </Flex >
+        </Box>
     )
 }
 
