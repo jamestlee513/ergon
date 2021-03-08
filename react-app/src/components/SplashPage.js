@@ -46,7 +46,7 @@ function SplashPage() {
                 w="100vw"
             >
                 <Particles
-                    width="3000px"
+                    width="100%"
                     height="100%"
                     params={{
                         "particles": {
