@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Flex, IconButton, Stack, UnorderedList } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Flex, IconButton, Stack, UnorderedList, useColorMode } from '@chakra-ui/react';
 import { SmallAddIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
@@ -12,6 +12,7 @@ function TodoList() {
     const currentUser = useSelector(state => state.user);
     const todos = useSelector(state => state.todos);
     const [showTodoForm, setShowTodoForm] = useState(false);
+    const { colorMode } = useColorMode();
 
     useEffect(() => {
         dispatch(loadUserTodos(currentUser.id));
@@ -54,6 +55,21 @@ function TodoList() {
                 m={1}
                 overflow="auto"
                 h="100%"
+                css={{
+                    '&::-webkit-scrollbar': {
+                        width: '4px',
+                        border: colorMode === 'light' ? '' : '1px solid rgba(212, 212, 212, 0.3)',
+                        transition: "border 0.5s"
+                    },
+                    '&::-webkit-scrollbar-track': {
+                        boxShadow: colorMode === 'light' ? "inset 0 0 6px #dbdbdb" : "inset 0 0 6px rgba(0, 0, 0, 0.3)",
+                        transition: "border 0.5s"
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                        background: "rgba(212, 212, 212, 0.6)",
+                        borderRadius: '24px',
+                    }
+                }}
             >
                 {showTodoForm && <TodoItemForm setShowTodoForm={setShowTodoForm} />}
                 {todos.map(todoItem => <TodoItem
