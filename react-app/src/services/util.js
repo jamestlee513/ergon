@@ -69,7 +69,7 @@ export function getCurrentTimeNumber(dateTime) {
     const hour = parseInt(hourAndMin[0], 10);
     const min = parseInt(hourAndMin[1], 10);
     let timeNumber = hour + (min / 60);
-    if (timeComponents[1] === "PM") timeNumber += 12;
+    if (timeComponents[1] === "PM" && hour !== 12) timeNumber += 12;
     return timeNumber;
 }
 

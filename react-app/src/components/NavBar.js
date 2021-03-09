@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, IconButton, Image, useColorMode, useToast } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, IconButton, Image, useColorMode, useToast } from '@chakra-ui/react';
 import React from 'react';
 import { logout } from '../services/auth';
 import { NavLink, useHistory } from 'react-router-dom';
@@ -49,7 +49,16 @@ function NavBar() {
                 align="center"
                 w="20%"
             >
-                {currentUser.id && <NavLink to='/logout' onClick={handleLogOut}>Logout</NavLink>}
+                {currentUser.id &&
+                    <Button backgroundColor="transparent">
+                        <NavLink
+                            to='/logout'
+                            onClick={handleLogOut}
+                        >
+                            Logout
+                        </NavLink>
+                    </Button>
+                }
                 {/* <NavLink to='/settings'>Settings</NavLink> */}
                 <IconButton
                     onClick={toggleColorMode}
@@ -59,10 +68,16 @@ function NavBar() {
                         background: "gray.600"
                     }}
                 />
-                <Flex w="20%" justify="space-between">
-                    <a href="https://github.com/jamestlee513/ergon" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/jameslee97/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
-                    <a href="https://angel.co/u/james-lee-146" target="_blank" rel="noopener noreferrer"><i className="fab fa-angellist"></i></a>
+                <Flex w="20%" justify="space-between" mr={2}>
+                    <Button backgroundColor="transparent">
+                        <a href="https://github.com/jamestlee513/ergon" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
+                    </Button>
+                    <Button backgroundColor="transparent">
+                        <a href="https://www.linkedin.com/in/jameslee97/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
+                    </Button>
+                    {/* <Button backgroundColor="transparent">
+                        <a href="https://angel.co/u/james-lee-146" target="_blank" rel="noopener noreferrer"><i className="fab fa-angellist"></i></a>
+                    </Button> */}
                 </Flex>
             </Flex>
 
