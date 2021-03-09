@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, Divider, Flex, FormControl, Input, InputGroup, InputLeftElement, ListItem, Stack, UnorderedList, useToast } from '@chakra-ui/react'
 import { EmailIcon, InfoIcon, LockIcon } from '@chakra-ui/icons';
 import { signUp } from "../../services/auth";
+import { login } from "../../services/auth";
 import { addUser } from "../../reducers/userReducer";
 import { useDispatch } from "react-redux";
 
@@ -16,6 +17,7 @@ function SignUpForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [signupLoading, setSignupLoading] = useState(false);
+    const [demoLoading, setDemoLoading] = useState(false);
 
 
 
@@ -42,6 +44,25 @@ function SignUpForm() {
             setErrors(user.errors);
         }
         setSignupLoading(false);
+    }
+
+    const loginDemo = async e => {
+        e.preventDefault();
+        setDemoLoading(true);
+        const user = await login("demo@demo.com", "password");
+        if (!user.errors) {
+            dispatch(addUser(user));
+            toast({
+                title: "Login success.",
+                description: "Logged in as demo user!",
+                status: "success",
+                duration: "5000",
+                isClosable: true
+            })
+        } else {
+            setErrors(user.errors);
+        }
+        setDemoLoading(false);
     }
 
     return (
@@ -126,12 +147,23 @@ function SignUpForm() {
                             <Divider />
                             <Button
                                 p={2}
+                                mb={2}
                                 w="100%"
                                 type="submit"
                                 isLoading={signupLoading}
                             >
                                 Sign up
-                        </Button>
+                            </Button>
+                            <Button
+                                m={2}
+                                w="100%"
+                                type="submit"
+                                isLoading={demoLoading}
+                                onClick={loginDemo}
+                                backgroundColor="orange.300"
+                            >
+                                Log in as demo user
+                            </Button>
                         </Stack>
                     </Flex>
                 </form>

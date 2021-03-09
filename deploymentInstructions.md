@@ -55,4 +55,5 @@
 
 Easy script cpy pasta:
 
-heroku container:login && heroku container:push web -a ergon-app && heroku container:release web -a ergon-app && heroku run -a ergon-app flask db upgrade && heroku run -a ergon-app flask db upgrade
+heroku container:login && heroku container:push web -a ergon-app && heroku container:release web -a ergon-app 
+&& heroku run -a ergon-app flask db upgrade && heroku run -a ergon-app flask db upgrade

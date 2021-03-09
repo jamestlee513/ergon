@@ -167,7 +167,7 @@ function PlaybarComponent() {
                             />}
                     </Flex>
                 </Flex> : (
-                    <Box>
+                    <Box ml="5%">
                         Loading...
                     </Box>
                 )}

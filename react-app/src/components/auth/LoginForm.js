@@ -112,6 +112,7 @@ function LoginForm() {
                                 type="submit"
                                 isLoading={demoLoading}
                                 onClick={loginDemo}
+                                backgroundColor="orange.300"
                             >
                                 Log in as demo user
                             </Button>
