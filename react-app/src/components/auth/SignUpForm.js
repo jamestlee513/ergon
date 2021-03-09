@@ -49,7 +49,15 @@ function SignUpForm() {
     const loginDemo = async e => {
         e.preventDefault();
         setDemoLoading(true);
+        
+        const firstDemo = localStorage.getItem('firstDemo');
+        if (!firstDemo) {
+            await fetch('/api/users/demo_reset', { method: 'PUT' })
+            localStorage.setItem('firstDemo', true);
+        }
+        
         const user = await login("demo@demo.com", "password");
+
         if (!user.errors) {
             dispatch(addUser(user));
             toast({
@@ -161,6 +169,9 @@ function SignUpForm() {
                                 isLoading={demoLoading}
                                 onClick={loginDemo}
                                 backgroundColor="orange.300"
+                                _hover={{
+                                    backgroundColor: "orange.600"
+                                }}
                             >
                                 Log in as demo user
                             </Button>

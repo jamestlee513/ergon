@@ -18,13 +18,6 @@ export const login = async (email, password) => {
       password
     })
   });
-
-  if (email === "demo@demo.com") {
-    const demoRes = await fetch('/api/users/demo_reset', {
-      method: 'PUT'
-    })
-  }
-
   return await response.json();
 }
 
