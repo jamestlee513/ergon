@@ -57,9 +57,11 @@ function CalendarFrame() {
                 <Flex position="absolute" width="100%" height="100%" direction="row" justify="flex-end">
                     <Box position="absolute" w="87%" borderBottom="1px red solid" top={timePercent} />
                 </Flex>
-                {events.map(event =>
-                    <EventCard isOpen={isOpen} onOpen={onOpen} onClose={onClose} key={event.id} event={event} calendarStart={START_TIME} calendarEnd={END_TIME} />
-                )}
+                <Flex mt="3%" mb="3%" position="relative" h="100%">
+                    {events.map(event =>
+                        <EventCard isOpen={isOpen} onOpen={onOpen} onClose={onClose} key={event.id} event={event} calendarStart={START_TIME} calendarEnd={END_TIME} />
+                    )}
+                </Flex>
             </Flex>
             <EventForm isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
         </>

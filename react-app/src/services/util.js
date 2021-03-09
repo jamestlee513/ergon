@@ -48,6 +48,7 @@ export function digitHourToString(digitHour) {
     if (typeof digitHour !== 'number' || digitHour > 24 || digitHour < 0) {
         throw new Error('Invalid digitHour!');
     }
+    if(digitHour === 24) return "12AM"
     let meridiem = "AM";
     if (digitHour > 11) {
         meridiem = "PM";
