@@ -118,13 +118,13 @@ function HomePage({ isFirstVisit, setIsFirstVisit }) {
                     params={{
                         "particles": {
                             "number": {
-                                "value": 80,
+                                "value": colorMode === 'light' ? 50 : 90,
                                 "density": {
                                     "enable": false
                                 }
                             },
                             "size": {
-                                "value": 2
+                                "value": colorMode === 'light' ? 6 : 2
                             },
                             "move": {
                                 "direction": "up",
